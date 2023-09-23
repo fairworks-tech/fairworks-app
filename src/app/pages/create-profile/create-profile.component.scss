@@ -1,0 +1,36 @@
+
+.stepper-container {
+  position: relative;
+  display: flex;
+  .stepper-nav {
+    position: relative;
+    display: flex;
+    width: 40%;
+  }
+  .stepper-content {
+    position: relative;
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+  }
+  .stepper-controls {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    .left {
+      display: flex;
+      width: 50%;
+    }
+    .right {
+      display: flex;
+      width: 50%;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.profiling {
+  position: relative;
+  display: block;
+  width: 100%;
+}

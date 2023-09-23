@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Default Browser CSS Reset */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// App Styles
+.fw-page-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+  //font-family: 'Roboto Mono', monospace;
+  color: #48495F;
+}
+.fw-content-area {
+	padding: 24px;
+}
+
+// Forms
+.fw-form-section {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.fw-form-element {
+	position: relative;
+	display: flex;
+	margin: 0 0 24px 0;
+	font-size: 16px;
+	line-height: 32px;
+	font-weight: 300;
+	label {
+		display: flex;
+		width: 50%;
+	}
+	input {
+		border: none;
+		border-bottom: 1px solid #9e9e9e;
+		outline: none;
+		width: 100%;
+		font-size: 16px;
+		line-height: 32px;
+		font-weight: 300;
+		color: #48495F;
+		&:focus {
+			border-bottom: 1px solid #121212;
+		}
+	}
+}
+
+// Buttons
+.fw-form-btn {
+	position: relative;
+	display: inline-block;
+	background: transparent;
+  border: 1px solid #48495F;
+  border-radius: 4px;
+  padding: 6px 24px;
+  font-size: 16px;
+  line-height: 32px;
+  cursor: pointer;
+}

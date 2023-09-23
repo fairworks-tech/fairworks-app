@@ -1,0 +1,101 @@
+<div class="fw-page-container">
+
+  <div class="fw-content-area">
+
+    <div class="stepper-container">
+      <div class="stepper-nav">
+
+      </div>
+      <div class="stepper-content">
+
+        <form [formGroup]="profiling">
+          <!-- step 1 -->
+          <section class="fw-form-section" formGroupName="userInfo" *ngIf="stepper.currentStep===1">
+            <div class="fw-form-element">
+              <label for="firstname">First Name</label>
+              <input id="firstname" type="text" formControlName="firstName">
+            </div>
+            
+            <div class="fw-form-element">
+              <label for="lastname">Last Name</label>
+              <input id="lastname" type="text" formControlName="lastName">
+            </div>
+            
+            <div class="fw-form-element">
+              <label for="email">Email</label>
+              <input id="email" type="text" formControlName="email">
+            </div>
+
+            <div class="fw-form-element">
+              <label for="password">Password</label>
+              <input id="password" type="password" formControlName="password">
+            </div>
+
+            <div class="fw-form-element">
+              <label for="repassword">Confirm Password</label>
+              <input id="repassword" type="password" formControlName="rePassword">
+            </div>
+          </section>
+
+          <!-- step 2 -->
+          <section class="fw-form-section" formArrayName="userExp" *ngIf="stepper.currentStep===2">
+            <div *ngFor="let userExpItem of experienceFormGroup.controls; let i=index" [formGroupName]="i">
+              <div class="fw-form-element">
+                <label for="jobTitle">Job Title</label>
+                <input id="jobTitle" type="text" formControlName="jobTitle">
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="organisation">organisation</label>
+                <input id="organisation" type="text" formControlName="organisation">
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="from">From</label>
+                <input id="from" type="text" formControlName="from">
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="to">To</label>
+                <input id="to" type="text" formControlName="to">
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="summary">Summary</label>
+                <textarea id="summary" formControlName="summary"></textarea>
+              </div>
+
+              <button (click)="removeExp(i)">Remove</button>
+            </div>
+
+            <button (click)="addExp()">Add</button>
+          </section>
+
+          <!-- step 3 -->
+          <section class="fw-form-section" *ngIf="stepper.currentStep===3">
+
+          </section>
+
+          <!-- step 4 -->
+          <section class="fw-form-section" *ngIf="stepper.currentStep===4">
+
+          </section>
+        </form>
+
+        <div class="stepper-controls">
+          <div class="left">
+            <button class="fw-form-btn" *ngIf="stepper.currentStep!==1">Previous</button>
+          </div>
+          <div class="right">
+            <button class="fw-form-btn" *ngIf="stepper.currentStep!==4" (click)="save()">Next</button>
+            <button class="fw-form-btn" *ngIf="stepper.currentStep===4" (click)="submit()">Finish</button>
+          </div>
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
