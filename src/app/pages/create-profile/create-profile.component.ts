@@ -71,7 +71,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     });
 
     this.expList = this.profiling.get('userExpForm') as FormArray;
-    this.eduList = this.profiling.get('userEduFrom') as FormArray; 
+    this.eduList = this.profiling.get('userEduForm') as FormArray; 
   }
 
   initExpForm(): FormGroup {
@@ -106,8 +106,10 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
       institution: ['', [Validators.required]],
       degree: ['', Validators.required],
       specialization: ['', Validators.required],
-      eduStartDate: ['', [Validators.required]],
-      eduEndDate: ['', Validators.required],
+      eduStartMonth: ['', [Validators.required]],
+      eduStartYear: ['', [Validators.required]],
+      eduEndMonth: ['', Validators.required],
+      eduEndYear: ['', Validators.required],
       grade: ['', Validators.required],
       activities: ['', Validators.required],
       description: ['', Validators.required]

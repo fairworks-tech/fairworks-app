@@ -53,48 +53,57 @@ table {
 * {
 	box-sizing: border-box;
 }
+// Variables
+$highlight-blue: #5576F9;
+
 // Typography
+%typo-common {
+  font-weight: 500;
+	margin-bottom: 1rem;
+}
 h1 {
 	font-size: 2.25rem;
 	line-height: 2.75rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	@extend %typo-common;
 }
 h2 {
 	font-size: 2rem;
 	line-height: 2.5rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	@extend %typo-common;
 }
 h3 {
 	font-size: 1.75rem;
 	line-height: 2.25rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	@extend %typo-common;
 }
 h4 {
 	font-size: 1.5rem;
 	line-height: 2rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	@extend %typo-common;
 }
 h5 {
 	font-size: 1.25rem;
 	line-height: 2rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	@extend %typo-common;
 }
 h6 {
 	font-size: 1.125rem;
 	line-height: 1.75rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	@extend %typo-common;
 }
 p {
 	font-size: 0.875rem;
 	line-height: 1.5rem;
 	margin-bottom: 1rem;
 }
+// Utils
+.hero {
+	color: #B9BAF9;
+}
+.m-b-1_5x {
+	margin-bottom: 1.5rem;
+}
+
 // App Styles
 .fw-page-container {
   width: 100%;
@@ -124,7 +133,7 @@ p {
 	}
 	input {
 		border: none;
-		border-bottom: 1px solid #9e9e9e;
+		border-bottom: 1px solid #8B889E;
 		outline: none;
 		width: 100%;
 		max-width: 420px;
@@ -138,14 +147,22 @@ p {
 		width: 100%;
 		max-width: 420px;
   	height: 100px;
-  	border: 1px solid #9e9e9e;
+  	border: 1px solid #8B889E;
+		outline: none;
+		&:focus {
+			border: 1px solid #121212;
+		}
 	}
 	select {
 		border: none;
 		background: none;
-		border-bottom: 1px solid #9e9e9e;
+		border-bottom: 1px solid #8B889E;
 		width: 100%;
 		max-width: 420px;
+		outline: none;
+		&:focus {
+			border-bottom: 1px solid #121212;
+		}
 	}
 }
 .fw-grouped-inputs {

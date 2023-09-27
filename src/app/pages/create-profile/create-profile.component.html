@@ -11,7 +11,7 @@
         <form [formGroup]="profiling">
           <!-- step 1 -->
           <section class="fw-form-section" formGroupName="userLoginInfo" *ngIf="stepper.currentStep===1">
-            <h4>Create Account</h4>
+            <h4 class="m-b-1_5x">Create Account</h4>
             <div class="fw-form-element">
               <label for="email">Email</label>
               <input id="email" type="text" formControlName="email">
@@ -30,7 +30,7 @@
 
           <!-- step 2 -->
           <section class="fw-form-section" formGroupName="userInfo" *ngIf="stepper.currentStep===2">
-            <h4>Personal Information</h4>
+            <h4 class="m-b-1_5x">Personal Information</h4>
             <div class="fw-form-element">
               <label for="firstname">First Name</label>
               <input id="firstname" type="text" formControlName="firstName">
@@ -63,7 +63,7 @@
 
           <!-- step 3 -->
           <section class="fw-form-section" formArrayName="userExpForm" *ngIf="stepper.currentStep===3">
-            <h4>Work Experience</h4>
+            <h4 class="m-b-1_5x">Work Experience</h4>
             <p>Please list your work experience, starting with the most recent.</p>
             <div *ngFor="let userExpItem of experienceFormGroup.controls; let i=index" [formGroupName]="i">
               <div class="fw-section-head">
@@ -147,7 +147,7 @@
 
           <!-- step 4 -->
           <section class="fw-form-section" formArrayName="userEduForm" *ngIf="stepper.currentStep===4">
-            <h4>Education</h4>
+            <h4 class="m-b-1_5x">Educational Qualification</h4>
             <p>Please list your education, starting with the most recent.</p>
             <div *ngFor="let userEduItem of educationFormGroup.controls; let j=index" [formGroupName]="j">
               <div class="fw-section-head">
@@ -171,12 +171,42 @@
 
               <div class="fw-form-element">
                 <label for="eduStartDate">Start Date</label>
-                <input id="eduStartDate" type="text" formControlName="eduStartDate">
+                <div class="fw-grouped-inputs">
+                  <div class="fw-input-month">
+                    <select formControlName="eduStartMonth">
+                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
+                        {{month.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fw-input-year">
+                    <select formControlName="eduStartYear">
+                      <option [ngValue]="item" *ngFor="let item of yearRange">
+                        {{item}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div class="fw-form-element">
-                <label for="eduEndDate">End Date</label>
-                <input id="eduEndDate" type="text" formControlName="eduEndDate">
+                <label for="eduEndDate">Completion Date</label>
+                <div class="fw-grouped-inputs">
+                  <div class="fw-input-month">
+                    <select formControlName="eduEndMonth">
+                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
+                        {{month.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fw-input-year">
+                    <select formControlName="eduEndYear">
+                      <option [ngValue]="item" *ngFor="let item of yearRange">
+                        {{item}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div class="fw-form-element">
