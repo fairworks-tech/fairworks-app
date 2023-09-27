@@ -10,17 +10,8 @@
 
         <form [formGroup]="profiling">
           <!-- step 1 -->
-          <section class="fw-form-section" formGroupName="userInfo" *ngIf="stepper.currentStep===1">
-            <div class="fw-form-element">
-              <label for="firstname">First Name</label>
-              <input id="firstname" type="text" formControlName="firstName">
-            </div>
-            
-            <div class="fw-form-element">
-              <label for="lastname">Last Name</label>
-              <input id="lastname" type="text" formControlName="lastName">
-            </div>
-            
+          <section class="fw-form-section" formGroupName="userLoginInfo" *ngIf="stepper.currentStep===1">
+            <h4>Create Account</h4>
             <div class="fw-form-element">
               <label for="email">Email</label>
               <input id="email" type="text" formControlName="email">
@@ -38,56 +29,177 @@
           </section>
 
           <!-- step 2 -->
-          <section class="fw-form-section" formArrayName="userExp" *ngIf="stepper.currentStep===2">
+          <section class="fw-form-section" formGroupName="userInfo" *ngIf="stepper.currentStep===2">
+            <h4>Personal Information</h4>
+            <div class="fw-form-element">
+              <label for="firstname">First Name</label>
+              <input id="firstname" type="text" formControlName="firstName">
+            </div>
+            
+            <div class="fw-form-element">
+              <label for="lastname">Last Name</label>
+              <input id="lastname" type="text" formControlName="lastName">
+            </div>
+
+            <div class="fw-form-element">
+              <label for="city">City</label>
+              <input id="city" type="text" formControlName="city">
+            </div>
+
+            <div class="fw-form-element">
+              <label for="country">Country</label>
+              <select id="country" formControlName="country">
+                <option [ngValue]="countryItem" *ngFor="let countryItem of countryList">
+                  {{countryItem.countryName}}
+                </option>
+              </select>
+            </div>
+
+            <div class="fw-form-element">
+              <label for="phone">Phone</label>
+              <input id="phone" type="text" formControlName="phone">
+            </div>
+          </section>
+
+          <!-- step 3 -->
+          <section class="fw-form-section" formArrayName="userExpForm" *ngIf="stepper.currentStep===3">
+            <h4>Work Experience</h4>
+            <p>Please list your work experience, starting with the most recent.</p>
             <div *ngFor="let userExpItem of experienceFormGroup.controls; let i=index" [formGroupName]="i">
+              <div class="fw-section-head">
+                <h6>Experience {{i+1}}</h6>
+                <button class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
+              </div>
+
               <div class="fw-form-element">
                 <label for="jobTitle">Job Title</label>
                 <input id="jobTitle" type="text" formControlName="jobTitle">
               </div>
   
               <div class="fw-form-element">
-                <label for="organisation">organisation</label>
+                <label for="organisation">Company</label>
                 <input id="organisation" type="text" formControlName="organisation">
               </div>
-  
+
               <div class="fw-form-element">
-                <label for="from">From</label>
-                <input id="from" type="text" formControlName="from">
-              </div>
-  
-              <div class="fw-form-element">
-                <label for="to">To</label>
-                <input id="to" type="text" formControlName="to">
-              </div>
-  
-              <div class="fw-form-element">
-                <label for="summary">Summary</label>
-                <textarea id="summary" formControlName="summary"></textarea>
+                <label for="location">Location</label>
+                <input id="location" type="text" formControlName="location">
               </div>
 
-              <button (click)="removeExp(i)">Remove</button>
+              <div class="fw-form-element">
+                <label for="locationType">Location Type</label>
+                <select id="locationType" formControlaName="locationType">
+                  <option value="-1">Please select</option>
+                  <option value="on-site">On-site</option>
+                  <option value="hybrid">Hybrid</option>
+                  <option value="remote">Remote</option>
+                </select>
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="jobStartDate">Start Date</label>
+                <div class="fw-grouped-inputs">
+                  <div class="fw-input-month">
+                    <select formControlName="jobStartMonth">
+                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
+                        {{month.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fw-input-year">
+                    <select formControlName="jobStartYear">
+                      <option [ngValue]="item" *ngFor="let item of yearRange">
+                        {{item}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="jobEndDate">End Date</label>
+                <div class="fw-grouped-inputs">
+                  <div class="fw-input-month">
+                    <select formControlName="jobEndMonth">
+                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
+                        {{month.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fw-input-year">
+                    <select formControlName="jobEndYear">
+                      <option [ngValue]="item" *ngFor="let item of yearRange">
+                        {{item}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="fw-form-element">
+                <label for="jobDesc">Description</label>
+                <textarea id="jobDesc" formControlName="jobDesc"></textarea>
+              </div>
             </div>
 
-            <button (click)="addExp()">Add</button>
-          </section>
-
-          <!-- step 3 -->
-          <section class="fw-form-section" *ngIf="stepper.currentStep===3">
-
+            <button (click)="addExp()">Add Another Experience</button>
           </section>
 
           <!-- step 4 -->
-          <section class="fw-form-section" *ngIf="stepper.currentStep===4">
+          <section class="fw-form-section" formArrayName="userEduForm" *ngIf="stepper.currentStep===4">
+            <h4>Education</h4>
+            <p>Please list your education, starting with the most recent.</p>
+            <div *ngFor="let userEduItem of educationFormGroup.controls; let j=index" [formGroupName]="j">
+              <div class="fw-section-head">
+                <h6>Education {{j+1}}</h6>
+                <button class="fw-form-action-remove" (click)="removeExp(j)">Remove</button>
+              </div>
+              <div class="fw-form-element">
+                <label for="institution">School / University</label>
+                <input id="institution" type="text" formControlName="institution">
+              </div>
 
+              <div class="fw-form-element">
+                <label for="degree">Degree</label>
+                <input id="degree" type="text" formControlName="degree">
+              </div>
+
+              <div class="fw-form-element">
+                <label for="specialization">Field of study</label>
+                <input id="specialization" type="text" formControlName="specialization">
+              </div>
+
+              <div class="fw-form-element">
+                <label for="eduStartDate">Start Date</label>
+                <input id="eduStartDate" type="text" formControlName="eduStartDate">
+              </div>
+
+              <div class="fw-form-element">
+                <label for="eduEndDate">End Date</label>
+                <input id="eduEndDate" type="text" formControlName="eduEndDate">
+              </div>
+
+              <div class="fw-form-element">
+                <label for="grade">Grade</label>
+                <input id="grade" type="text" formControlName="grade">
+              </div>
+
+              <div class="fw-form-element">
+                <label for="activities">Activities</label>
+                <textarea id="activities" formControlName="activities"></textarea>
+              </div>
+            </div>
+
+            <button (click)="addEdu()">Add</button>
           </section>
         </form>
 
         <div class="stepper-controls">
           <div class="left">
-            <button class="fw-form-btn" *ngIf="stepper.currentStep!==1">Previous</button>
+            <button class="fw-form-btn" *ngIf="stepper.currentStep!==1" (click)="gotoPrev()">Previous</button>
           </div>
           <div class="right">
-            <button class="fw-form-btn" *ngIf="stepper.currentStep!==4" (click)="save()">Next</button>
+            <button class="fw-form-btn" *ngIf="stepper.currentStep!==4" (click)="gotoNext()">Next</button>
             <button class="fw-form-btn" *ngIf="stepper.currentStep===4" (click)="submit()">Finish</button>
           </div>
         </div>

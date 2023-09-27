@@ -49,18 +49,63 @@ table {
 	border-spacing: 0;
 }
 
+
+* {
+	box-sizing: border-box;
+}
+// Typography
+h1 {
+	font-size: 2.25rem;
+	line-height: 2.75rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+h2 {
+	font-size: 2rem;
+	line-height: 2.5rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+h3 {
+	font-size: 1.75rem;
+	line-height: 2.25rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+h4 {
+	font-size: 1.5rem;
+	line-height: 2rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+h5 {
+	font-size: 1.25rem;
+	line-height: 2rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+h6 {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+p {
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	margin-bottom: 1rem;
+}
 // App Styles
 .fw-page-container {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
-  //font-family: 'Roboto Mono', monospace;
+	font-family: 'Inter', sans-serif;
   color: #48495F;
 }
 .fw-content-area {
-	padding: 24px;
+	padding: 24px 0;
 }
 
 // Forms
@@ -73,26 +118,60 @@ table {
 	position: relative;
 	display: flex;
 	margin: 0 0 24px 0;
-	font-size: 16px;
-	line-height: 32px;
-	font-weight: 300;
 	label {
 		display: flex;
-		width: 50%;
+		width: 240px;
 	}
 	input {
 		border: none;
 		border-bottom: 1px solid #9e9e9e;
 		outline: none;
 		width: 100%;
-		font-size: 16px;
-		line-height: 32px;
-		font-weight: 300;
+		max-width: 420px;
+		padding: 0 10px;
 		color: #48495F;
 		&:focus {
 			border-bottom: 1px solid #121212;
 		}
 	}
+	textarea {
+		width: 100%;
+		max-width: 420px;
+  	height: 100px;
+  	border: 1px solid #9e9e9e;
+	}
+	select {
+		border: none;
+		background: none;
+		border-bottom: 1px solid #9e9e9e;
+		width: 100%;
+		max-width: 420px;
+	}
+}
+.fw-grouped-inputs {
+	position: relative;
+	display: flex;
+	width: 100%;
+	max-width: 420px;
+}
+.fw-input-month {
+	position: relative;
+  width: calc(50% - 12px);
+  margin-right: 12px;
+}
+.fw-input-year {
+	position: relative;
+	width: calc(50% - 12px);
+	margin-left: 12px;
+}
+.fw-section-head {
+	position: relative;
+}
+.fw-form-action-remove {
+	border: none;
+	position: absolute;
+	top: 0;
+	right: 112px;
 }
 
 // Buttons

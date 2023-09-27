@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { FW_COUNTRIES } from 'src/app/config/fw.countries';
+
 @Component({
   selector: 'app-create-profile',
   templateUrl: './create-profile.component.html',
@@ -10,6 +12,24 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
 
   public profiling!: FormGroup;
   public expList!: FormArray;
+  public eduList!: FormArray;
+  public countryList: any;
+  public startYear = new Date().getFullYear();
+  public yearRange: any = [];
+  public monthRange: any = [
+    {id:'01', name:'January'}, 
+    {id:'02', name:'February'}, 
+    {id:'03', name:'March'},
+    {id:'04', name:'April'},
+    {id:'05', name:'May'}, 
+    {id:'06', name:'June'}, 
+    {id:'07', name:'July'},
+    {id:'08', name:'August'},
+    {id:'09', name:'September'},
+    {id:'10', name:'October'},
+    {id:'11', name:'November'},
+    {id:'12', name:'December'}
+  ];
 
   stepper = {
     currentStep: 1,
@@ -20,43 +40,52 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder
   ) { 
-
+    this.countryList = FW_COUNTRIES;
   }
 
   ngOnInit(): void {
+    this.setYearRange();
+
     this.profiling = this.fb.group({
+      userLoginInfo: this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [
+          Validators.required,
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+        ]],
+        rePassword: ['', [
+          Validators.required, 
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+        ]],
+      }),
       userInfo: this.fb.group({
         firstName: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', [Validators.required, Validators.minLength(2)]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [
-            Validators.required,
-            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-          ]
-        ],
-        rePassword: ['', [
-            Validators.required, 
-            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-          ]
-        ]
+        city: ['', [Validators.required]],
+        country: ['', [Validators.required]],
+        phoneCode: ['', [Validators.required]],
+        phone: ['', [Validators.required]]
       }),
-      userExp: this.fb.array([this.initExpForm()])
+      userExpForm: this.fb.array([this.initExpForm()]),
+      userEduForm: this.fb.array([this.initEduForm()]),
     });
 
-    this.expList = this.profiling.get('userExp') as FormArray;
+    this.expList = this.profiling.get('userExpForm') as FormArray;
+    this.eduList = this.profiling.get('userEduFrom') as FormArray; 
   }
-
-  // userExp(): FormArray {
-  //   return this.profiling.get('userExp') as FormArray
-  // }
 
   initExpForm(): FormGroup {
     return this.fb.group({
       jobTitle: ['', [Validators.required]],
+      jobType: ['', Validators.required],
       organisation: ['', [Validators.required]],
-      from: ['', [Validators.required]],
-      to: ['', [Validators.required]],
-      summary: ['', [Validators.required]]
+      location: ['', Validators.required],
+      locationType: ['', Validators.required],
+      jobStartMonth: ['', [Validators.required]],
+      jobStartYear: ['', [Validators.required]],
+      jobEndMonth: ['', [Validators.required]],
+      jobEndYear: ['', [Validators.required]],
+      jobDesc: ['', [Validators.required]]
     });
   }
 
@@ -69,12 +98,51 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
 
   get experienceFormGroup() {
-    return this.profiling.get('userExp') as FormArray;
+    return this.profiling.get('userExpForm') as FormArray;
+  }
+
+  initEduForm(): FormGroup {
+    return this.fb.group({
+      institution: ['', [Validators.required]],
+      degree: ['', Validators.required],
+      specialization: ['', Validators.required],
+      eduStartDate: ['', [Validators.required]],
+      eduEndDate: ['', Validators.required],
+      grade: ['', Validators.required],
+      activities: ['', Validators.required],
+      description: ['', Validators.required]
+    })
+  }
+
+  addEdu() {
+    this.eduList.push(this.initEduForm());
+  }
+
+  removeEdu(index: number) {
+    this.eduList.removeAt(index);
+  }
+
+  get educationFormGroup() {
+    return this.profiling.get('userEduForm') as FormArray;
+  }
+
+  setYearRange() {
+    for (let i = 0; i < 100; i++) {
+      this.yearRange.push(this.startYear - i);
+    }
   }
 
   save() {
     console.log(this.profiling.value);
+  }
+
+  gotoNext() {
+    this.save();
     this.stepper.currentStep = this.stepper.currentStep + 1;
+  }
+
+  gotoPrev() {
+    this.stepper.currentStep = this.stepper.currentStep - 1;
   }
 
   submit() {
