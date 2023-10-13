@@ -54,12 +54,16 @@ table {
 	box-sizing: border-box;
 }
 // Variables
+$prime-green: #47d7ac;
+$prime-green-high: #23e3aa;
 $highlight-blue: #5576F9;
+$head-black: #333333;
 
 // Typography
 %typo-common {
   font-weight: 500;
 	margin-bottom: 1rem;
+	color: $head-black;
 }
 h1 {
 	font-size: 2.25rem;
@@ -122,6 +126,9 @@ p {
 	position: relative;
 	display: block;
 	width: 100%;
+	.fw-form-section-footer {
+		margin-bottom: 1rem;
+	}
 }
 .fw-form-element {
 	position: relative;
@@ -130,6 +137,8 @@ p {
 	label {
 		display: flex;
 		width: 240px;
+		line-height: 32px;
+		height: 32px;
 	}
 	input {
 		border: none;
@@ -137,7 +146,8 @@ p {
 		outline: none;
 		width: 100%;
 		max-width: 420px;
-		padding: 0 10px;
+		line-height: 32px;
+		height: 32px;
 		color: #48495F;
 		&:focus {
 			border-bottom: 1px solid #121212;
@@ -192,14 +202,41 @@ p {
 }
 
 // Buttons
-.fw-form-btn {
+%form-btn-common {
 	position: relative;
 	display: inline-block;
-	background: transparent;
-  border: 1px solid #48495F;
-  border-radius: 4px;
+	border-radius: 20px;
+	font-size: 14px;
+  line-height: 24px;
+	cursor: pointer;
+}
+.fw-form-prime-btn {
+	@extend %form-btn-common;
+	border: none;
+	background-color: $prime-green;
+	color: #13294b;
   padding: 6px 24px;
-  font-size: 16px;
-  line-height: 32px;
-  cursor: pointer;
+	&:hover, &:focus {
+		background-color: $prime-green-high;
+	}
+}
+.fw-form-btn {
+	@extend %form-btn-common;
+	border: none;
+	background-color: #13294B;
+	color: #FFFFFF;
+  padding: 6px 24px;
+	&:hover, &:focus {
+		background-color: #2e2d71;
+	}
+}
+.fw-form-sec-btn {
+	@extend %form-btn-common;
+	border: 1px solid #13294B;
+	background-color: #FFFFFF;
+	color: #13294B;
+	padding: 4px 16px;
+	&:hover, &:focus {
+		border-color: #2e2d71;
+	}
 }

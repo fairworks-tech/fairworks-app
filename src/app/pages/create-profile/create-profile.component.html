@@ -142,7 +142,10 @@
               </div>
             </div>
 
-            <button (click)="addExp()">Add Another Experience</button>
+            <div class="fw-form-section-footer">
+              <button class="fw-form-sec-btn" (click)="addExp()">Add Another</button>
+            </div>
+
           </section>
 
           <!-- step 4 -->
@@ -152,7 +155,7 @@
             <div *ngFor="let userEduItem of educationFormGroup.controls; let j=index" [formGroupName]="j">
               <div class="fw-section-head">
                 <h6>Education {{j+1}}</h6>
-                <button class="fw-form-action-remove" (click)="removeExp(j)">Remove</button>
+                <button class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
               </div>
               <div class="fw-form-element">
                 <label for="institution">School / University</label>
@@ -219,8 +222,10 @@
                 <textarea id="activities" formControlName="activities"></textarea>
               </div>
             </div>
-
-            <button (click)="addEdu()">Add</button>
+            
+            <div class="fw-form-section-footer">
+              <button class="fw-form-sec-btn" (click)="addEdu()">Add Another</button>
+            </div>
           </section>
         </form>
 
@@ -230,10 +235,9 @@
           </div>
           <div class="right">
             <button class="fw-form-btn" *ngIf="stepper.currentStep!==4" (click)="gotoNext()">Next</button>
-            <button class="fw-form-btn" *ngIf="stepper.currentStep===4" (click)="submit()">Finish</button>
+            <button class="fw-form-prime-btn" *ngIf="stepper.currentStep===4" (click)="submit()">Finish</button>
           </div>
         </div>
-        
 
       </div>
     </div>
