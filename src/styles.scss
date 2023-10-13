@@ -157,29 +157,30 @@ p {
 		line-height: 32px;
 		height: 32px;
 	}
-	input {
-		@extend %fw-form-el-common;
-		line-height: 32px;
-		height: 32px;
-		color: #48495F;
-		&:focus {
-			border: 1px solid #121212;
-		}
+}
+.fw-form-input {
+	@extend %fw-form-el-common;
+	line-height: 32px;
+	height: 32px;
+	color: #48495F;
+	&:focus {
+		border: 1px solid #121212;
 	}
-	textarea {
-		@extend %fw-form-el-common;
-  	height: 100px;
-		&:focus {
-			border: 1px solid #121212;
-		}
+}
+.fw-form-textarea {
+	@extend %fw-form-el-common;
+	height: 100px;
+	&:focus {
+		border: 1px solid #121212;
 	}
-	select {
-		@extend %fw-form-el-common;
-		background: transparent;
-		outline: none;
-		&:focus {
-			border: 1px solid #121212;
-		}
+}
+.fw-form-select {
+	@extend %fw-form-el-common;
+	line-height: 32px;
+	height: 32px;
+	background: transparent;
+	&:focus {
+		border: 1px solid #121212;
 	}
 }
 .fw-grouped-inputs {

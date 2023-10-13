@@ -14,17 +14,17 @@
             <h4 class="m-b-1_5x">Create Account</h4>
             <div class="fw-form-element">
               <label for="email">Email</label>
-              <input id="email" type="text" formControlName="email">
+              <input class="fw-form-input" id="email" type="text" formControlName="email">
             </div>
 
             <div class="fw-form-element">
               <label for="password">Password</label>
-              <input id="password" type="password" formControlName="password">
+              <input class="fw-form-input" id="password" type="password" formControlName="password">
             </div>
 
             <div class="fw-form-element">
               <label for="repassword">Confirm Password</label>
-              <input id="repassword" type="password" formControlName="rePassword">
+              <input class="fw-form-input" id="repassword" type="password" formControlName="rePassword">
             </div>
           </section>
 
@@ -33,22 +33,22 @@
             <h4 class="m-b-1_5x">Personal Information</h4>
             <div class="fw-form-element">
               <label for="firstname">First Name</label>
-              <input id="firstname" type="text" formControlName="firstName">
+              <input class="fw-form-input" id="firstname" type="text" formControlName="firstName">
             </div>
             
             <div class="fw-form-element">
               <label for="lastname">Last Name</label>
-              <input id="lastname" type="text" formControlName="lastName">
+              <input class="fw-form-input" id="lastname" type="text" formControlName="lastName">
             </div>
 
             <div class="fw-form-element">
               <label for="city">City</label>
-              <input id="city" type="text" formControlName="city">
+              <input class="fw-form-input" id="city" type="text" formControlName="city">
             </div>
 
             <div class="fw-form-element">
               <label for="country">Country</label>
-              <select id="country" formControlName="country">
+              <select class="fw-form-select" id="country" formControlName="country">
                 <option [ngValue]="countryItem" *ngFor="let countryItem of countryList">
                   {{countryItem.countryName}}
                 </option>
@@ -57,7 +57,7 @@
 
             <div class="fw-form-element">
               <label for="phone">Phone</label>
-              <input id="phone" type="text" formControlName="phone">
+              <input class="fw-form-input" id="phone" type="text" formControlName="phone">
             </div>
           </section>
 
@@ -73,22 +73,22 @@
 
               <div class="fw-form-element">
                 <label for="jobTitle">Job Title</label>
-                <input id="jobTitle" type="text" formControlName="jobTitle">
+                <input class="fw-form-input" id="jobTitle" type="text" formControlName="jobTitle">
               </div>
   
               <div class="fw-form-element">
                 <label for="organisation">Company</label>
-                <input id="organisation" type="text" formControlName="organisation">
+                <input class="fw-form-input" id="organisation" type="text" formControlName="organisation">
               </div>
 
               <div class="fw-form-element">
                 <label for="location">Location</label>
-                <input id="location" type="text" formControlName="location">
+                <input class="fw-form-input" id="location" type="text" formControlName="location">
               </div>
 
               <div class="fw-form-element">
                 <label for="locationType">Location Type</label>
-                <select id="locationType" formControlaName="locationType">
+                <select class="fw-form-select" id="locationType" formControlaName="locationType">
                   <option value="-1">Please select</option>
                   <option value="on-site">On-site</option>
                   <option value="hybrid">Hybrid</option>
@@ -100,14 +100,14 @@
                 <label for="jobStartDate">Start Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
-                    <select formControlName="jobStartMonth">
+                    <select class="fw-form-select" formControlName="jobStartMonth">
                       <option [ngValue]="month.id" *ngFor="let month of monthRange">
                         {{month.name}}
                       </option>
                     </select>
                   </div>
                   <div class="fw-input-year">
-                    <select formControlName="jobStartYear">
+                    <select class="fw-form-select" formControlName="jobStartYear">
                       <option [ngValue]="item" *ngFor="let item of yearRange">
                         {{item}}
                       </option>
@@ -120,14 +120,14 @@
                 <label for="jobEndDate">End Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
-                    <select formControlName="jobEndMonth">
+                    <select class="fw-form-select" formControlName="jobEndMonth">
                       <option [ngValue]="month.id" *ngFor="let month of monthRange">
                         {{month.name}}
                       </option>
                     </select>
                   </div>
                   <div class="fw-input-year">
-                    <select formControlName="jobEndYear">
+                    <select class="fw-form-select" formControlName="jobEndYear">
                       <option [ngValue]="item" *ngFor="let item of yearRange">
                         {{item}}
                       </option>
@@ -138,7 +138,7 @@
   
               <div class="fw-form-element">
                 <label for="jobDesc">Description</label>
-                <textarea id="jobDesc" formControlName="jobDesc"></textarea>
+                <textarea class="fw-form-textarea" id="jobDesc" formControlName="jobDesc"></textarea>
               </div>
             </div>
 
@@ -159,31 +159,31 @@
               </div>
               <div class="fw-form-element">
                 <label for="institution">School / University</label>
-                <input id="institution" type="text" formControlName="institution">
+                <input class="fw-form-input" id="institution" type="text" formControlName="institution">
               </div>
 
               <div class="fw-form-element">
                 <label for="degree">Degree</label>
-                <input id="degree" type="text" formControlName="degree">
+                <input class="fw-form-input" id="degree" type="text" formControlName="degree">
               </div>
 
               <div class="fw-form-element">
                 <label for="specialization">Field of study</label>
-                <input id="specialization" type="text" formControlName="specialization">
+                <input class="fw-form-input" id="specialization" type="text" formControlName="specialization">
               </div>
 
               <div class="fw-form-element">
                 <label for="eduStartDate">Start Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
-                    <select formControlName="eduStartMonth">
+                    <select class="fw-form-select" formControlName="eduStartMonth">
                       <option [ngValue]="month.id" *ngFor="let month of monthRange">
                         {{month.name}}
                       </option>
                     </select>
                   </div>
                   <div class="fw-input-year">
-                    <select formControlName="eduStartYear">
+                    <select class="fw-form-select" formControlName="eduStartYear">
                       <option [ngValue]="item" *ngFor="let item of yearRange">
                         {{item}}
                       </option>
@@ -196,14 +196,14 @@
                 <label for="eduEndDate">Completion Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
-                    <select formControlName="eduEndMonth">
+                    <select class="fw-form-select" formControlName="eduEndMonth">
                       <option [ngValue]="month.id" *ngFor="let month of monthRange">
                         {{month.name}}
                       </option>
                     </select>
                   </div>
                   <div class="fw-input-year">
-                    <select formControlName="eduEndYear">
+                    <select class="fw-form-select" formControlName="eduEndYear">
                       <option [ngValue]="item" *ngFor="let item of yearRange">
                         {{item}}
                       </option>
@@ -214,12 +214,12 @@
 
               <div class="fw-form-element">
                 <label for="grade">Grade</label>
-                <input id="grade" type="text" formControlName="grade">
+                <input class="fw-form-input" id="grade" type="text" formControlName="grade">
               </div>
 
               <div class="fw-form-element">
                 <label for="activities">Activities</label>
-                <textarea id="activities" formControlName="activities"></textarea>
+                <textarea class="fw-form-textarea" id="activities" formControlName="activities"></textarea>
               </div>
             </div>
             
