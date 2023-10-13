@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 // pages
 import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
 
-// shared
 
+// shared
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateProfileComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

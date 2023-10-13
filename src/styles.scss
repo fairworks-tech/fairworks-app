@@ -111,9 +111,8 @@ p {
 
 // App Styles
 .fw-page-container {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
+	position: relative;
+	top: 70px;
 	font-size: 15px;
 	line-height: 28px;
 	font-family: 'Inter', sans-serif;
@@ -121,6 +120,10 @@ p {
   //color: #48495F;
 }
 .fw-content-area {
+	position: relative;
+	width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
 	padding: 24px 0;
 }
 
@@ -209,6 +212,7 @@ p {
   background: #FFFFFF;
   border-radius: 20px;
   padding: 0 8px;
+	cursor: pointer;
 }
 
 // Buttons
