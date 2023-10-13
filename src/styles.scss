@@ -57,7 +57,8 @@ table {
 $prime-green: #47d7ac;
 $prime-green-high: #23e3aa;
 $highlight-blue: #5576F9;
-$head-black: #333333;
+$head-black: #000000;
+$border-common: #D9DEE2;
 
 // Typography
 %typo-common {
@@ -113,19 +114,35 @@ p {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-	font-size: 14px;
+	font-size: 15px;
+	line-height: 28px;
 	font-family: 'Inter', sans-serif;
-  color: #48495F;
+	color: #555555;
+  //color: #48495F;
 }
 .fw-content-area {
 	padding: 24px 0;
 }
 
 // Forms
+%fw-form-el-common {
+	border: 1px solid $border-common;
+	border-radius: 3px;
+	outline: none;
+	width: 100%;
+	max-width: 420px;
+	padding-left: 12px;
+}
 .fw-form-section {
 	position: relative;
 	display: block;
 	width: 100%;
+	.fw-form-section-head {
+		position: relative;
+	}
+	.fw-form-section-title {
+		color: #5a5878;
+	}
 	.fw-form-section-footer {
 		margin-bottom: 1rem;
 	}
@@ -141,37 +158,27 @@ p {
 		height: 32px;
 	}
 	input {
-		border: none;
-		border-bottom: 1px solid #8B889E;
-		outline: none;
-		width: 100%;
-		max-width: 420px;
+		@extend %fw-form-el-common;
 		line-height: 32px;
 		height: 32px;
 		color: #48495F;
 		&:focus {
-			border-bottom: 1px solid #121212;
+			border: 1px solid #121212;
 		}
 	}
 	textarea {
-		width: 100%;
-		max-width: 420px;
+		@extend %fw-form-el-common;
   	height: 100px;
-  	border: 1px solid #8B889E;
-		outline: none;
 		&:focus {
 			border: 1px solid #121212;
 		}
 	}
 	select {
-		border: none;
-		background: none;
-		border-bottom: 1px solid #8B889E;
-		width: 100%;
-		max-width: 420px;
+		@extend %fw-form-el-common;
+		background: transparent;
 		outline: none;
 		&:focus {
-			border-bottom: 1px solid #121212;
+			border: 1px solid #121212;
 		}
 	}
 }
@@ -191,14 +198,16 @@ p {
 	width: calc(50% - 12px);
 	margin-left: 12px;
 }
-.fw-section-head {
-	position: relative;
-}
 .fw-form-action-remove {
-	border: none;
 	position: absolute;
-	top: 0;
-	right: 112px;
+  top: 0;
+  right: 112px;
+  border: 1px solid #13294B;
+  font-size: 12px;
+  line-height: 20px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 0 8px;
 }
 
 // Buttons

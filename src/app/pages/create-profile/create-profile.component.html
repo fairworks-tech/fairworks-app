@@ -66,8 +66,8 @@
             <h4 class="m-b-1_5x">Work Experience</h4>
             <p>Please list your work experience, starting with the most recent.</p>
             <div *ngFor="let userExpItem of experienceFormGroup.controls; let i=index" [formGroupName]="i">
-              <div class="fw-section-head">
-                <h6>Experience {{i+1}}</h6>
+              <div class="fw-form-section-head">
+                <h6 class="fw-form-section-title">Experience {{i+1}}</h6>
                 <button class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
               </div>
 
@@ -153,8 +153,8 @@
             <h4 class="m-b-1_5x">Educational Qualification</h4>
             <p>Please list your education, starting with the most recent.</p>
             <div *ngFor="let userEduItem of educationFormGroup.controls; let j=index" [formGroupName]="j">
-              <div class="fw-section-head">
-                <h6>Education {{j+1}}</h6>
+              <div class="fw-form-section-head">
+                <h6 class="fw-form-section-title">Education {{j+1}}</h6>
                 <button class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
               </div>
               <div class="fw-form-element">
