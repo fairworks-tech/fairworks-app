@@ -53,18 +53,21 @@ table {
 * {
 	box-sizing: border-box;
 }
+
 // Variables
-$prime-green: #47d7ac;
-$prime-green-high: #23e3aa;
-$highlight-blue: #5576F9;
-$head-black: #000000;
+$prime-blue: #0058A3;
+$prime-blue-high: #004F93;
 $border-common: #D9DEE2;
+$text-head-black: #000000;
+$text-standard: #555555;
+
+
 
 // Typography
 %typo-common {
   font-weight: 500;
 	margin-bottom: 1rem;
-	color: $head-black;
+	color: $text-head-black;
 }
 h1 {
 	font-size: 2.25rem;
@@ -101,6 +104,7 @@ p {
 	line-height: 1.5rem;
 	margin-bottom: 1rem;
 }
+
 // Utils
 .hero {
 	color: #B9BAF9;
@@ -112,11 +116,11 @@ p {
 // App Styles
 .fw-page-container {
 	position: relative;
-	top: 70px;
+	top: 72px;
 	font-size: 15px;
 	line-height: 28px;
 	font-family: 'Inter', sans-serif;
-	color: #555555;
+	color: $text-standard;
   //color: #48495F;
 }
 .fw-content-area {
@@ -128,14 +132,6 @@ p {
 }
 
 // Forms
-%fw-form-el-common {
-	border: 1px solid $border-common;
-	border-radius: 3px;
-	outline: none;
-	width: 100%;
-	max-width: 420px;
-	padding-left: 12px;
-}
 .fw-form-section {
 	position: relative;
 	display: block;
@@ -143,14 +139,11 @@ p {
 	.fw-form-section-head {
 		position: relative;
 	}
-	.fw-form-section-title {
-		color: #5a5878;
-	}
 	.fw-form-section-footer {
 		margin-bottom: 1rem;
 	}
 }
-.fw-form-element {
+.fw-form-el-wrap {
 	position: relative;
 	display: flex;
 	margin: 0 0 24px 0;
@@ -160,6 +153,19 @@ p {
 		line-height: 32px;
 		height: 32px;
 	}
+	.fw-form-el {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		max-width: 420px;
+	}
+}
+%fw-form-el-common {
+	border: 1px solid $border-common;
+	border-radius: 3px;
+	outline: none;
+	padding-left: 12px;
+	width: 100%;
 }
 .fw-form-input {
 	@extend %fw-form-el-common;
@@ -172,7 +178,7 @@ p {
 }
 .fw-form-textarea {
 	@extend %fw-form-el-common;
-	height: 100px;
+	min-height: 100px;
 	&:focus {
 		border: 1px solid #121212;
 	}
@@ -202,6 +208,16 @@ p {
 	width: calc(50% - 12px);
 	margin-left: 12px;
 }
+.fw-input-phonecode {
+	position: relative;
+	width: calc(25% - 12px);
+	margin-right: 12px;
+}
+.fw-input-phonenum {
+	position: relative;
+	width: calc(75% - 12px);
+	margin-left: 12px;
+}
 .fw-form-action-remove {
 	position: absolute;
   top: 0;
@@ -213,6 +229,10 @@ p {
   border-radius: 20px;
   padding: 0 8px;
 	cursor: pointer;
+}
+.fw-form-helper-text {
+	font-size: 11px;
+	line-height: 18px;
 }
 
 // Buttons
@@ -227,11 +247,11 @@ p {
 .fw-form-prime-btn {
 	@extend %form-btn-common;
 	border: none;
-	background-color: $prime-green;
-	color: #13294b;
+	background-color: $prime-blue;
+	color: #FFFFFF;
   padding: 6px 24px;
 	&:hover, &:focus {
-		background-color: $prime-green-high;
+		background-color: $prime-blue-high;
 	}
 }
 .fw-form-btn {

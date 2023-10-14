@@ -2,63 +2,85 @@
 <div class="fw-page-container">
 
   <div class="fw-content-area">
-
     <div class="stepper-container">
       <div class="stepper-nav">
 
       </div>
       <div class="stepper-content">
-
         <form [formGroup]="profiling">
           <!-- step 1 -->
           <section class="fw-form-section" formGroupName="userLoginInfo" *ngIf="stepper.currentStep===1">
             <h4 class="m-b-1_5x">Create Account</h4>
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="email">Email</label>
-              <input class="fw-form-input" id="email" type="text" formControlName="email">
+              <div class="fw-form-el">
+                <input class="fw-form-input" id="email" type="text" formControlName="email">
+              </div>
             </div>
 
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="password">Password</label>
-              <input class="fw-form-input" id="password" type="password" formControlName="password">
+              <div class="fw-form-el">
+                <input class="fw-form-input" id="password" type="password" formControlName="password">
+                <div class="fw-form-helper-text">
+                  <span>Min 8 and max 20 characters. At least one lowercase, uppercase, number and any of the following special character .</span>
+                </div>
+              </div>
             </div>
 
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="repassword">Confirm Password</label>
-              <input class="fw-form-input" id="repassword" type="password" formControlName="rePassword">
+              <div class="fw-form-el">
+                <input class="fw-form-input" id="repassword" type="password" formControlName="rePassword">
+              </div>
             </div>
           </section>
 
           <!-- step 2 -->
           <section class="fw-form-section" formGroupName="userInfo" *ngIf="stepper.currentStep===2">
             <h4 class="m-b-1_5x">Personal Information</h4>
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="firstname">First Name</label>
-              <input class="fw-form-input" id="firstname" type="text" formControlName="firstName">
+              <div class="fw-form-el">
+                <input class="fw-form-input" id="firstname" type="text" formControlName="firstName">
+              </div>
             </div>
             
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="lastname">Last Name</label>
-              <input class="fw-form-input" id="lastname" type="text" formControlName="lastName">
+              <div class="fw-form-el">
+                <input class="fw-form-input" id="lastname" type="text" formControlName="lastName">
+              </div>
             </div>
 
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="city">City</label>
-              <input class="fw-form-input" id="city" type="text" formControlName="city">
+              <div class="fw-form-el">
+                <input class="fw-form-input" id="city" type="text" formControlName="city">
+              </div>
             </div>
 
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="country">Country</label>
-              <select class="fw-form-select" id="country" formControlName="country">
-                <option [ngValue]="countryItem" *ngFor="let countryItem of countryList">
-                  {{countryItem.countryName}}
-                </option>
-              </select>
+              <div class="fw-form-el">
+                <select class="fw-form-select" id="country" formControlName="country">
+                  <option [ngValue]="countryItem" *ngFor="let countryItem of countryList">
+                    {{countryItem.countryName}}
+                  </option>
+                </select>
+              </div>
             </div>
 
-            <div class="fw-form-element">
+            <div class="fw-form-el-wrap">
               <label for="phone">Phone</label>
-              <input class="fw-form-input" id="phone" type="text" formControlName="phone">
+              <div class="fw-grouped-inputs">
+                <div class="fw-input-phonecode">
+                  
+                </div>
+                <div class="fw-input-phonenum">
+                  <input class="fw-form-input" id="phone" type="text" formControlName="phone">
+                </div>
+              </div>
             </div>
           </section>
 
@@ -68,36 +90,44 @@
             <p>Please list your work experience, starting with the most recent.</p>
             <div *ngFor="let userExpItem of experienceFormGroup.controls; let i=index" [formGroupName]="i">
               <div class="fw-form-section-head">
-                <h6 class="fw-form-section-title">Experience {{i+1}}</h6>
-                <button class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
+                <h6>Experience {{i+1}}</h6>
+                <button *ngIf="i!==0" class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="jobTitle">Job Title</label>
-                <input class="fw-form-input" id="jobTitle" type="text" formControlName="jobTitle">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="jobTitle" type="text" formControlName="jobTitle">
+                </div>
               </div>
   
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="organisation">Company</label>
-                <input class="fw-form-input" id="organisation" type="text" formControlName="organisation">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="organisation" type="text" formControlName="organisation">
+                </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="location">Location</label>
-                <input class="fw-form-input" id="location" type="text" formControlName="location">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="location" type="text" formControlName="location">
+                </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="locationType">Location Type</label>
-                <select class="fw-form-select" id="locationType" formControlaName="locationType">
-                  <option value="-1">Please select</option>
-                  <option value="on-site">On-site</option>
-                  <option value="hybrid">Hybrid</option>
-                  <option value="remote">Remote</option>
-                </select>
+                <div class="fw-form-el">
+                  <select class="fw-form-select" id="locationType" formControlaName="locationType">
+                    <option value="-1">Please select</option>
+                    <option value="on-site">On-site</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="remote">Remote</option>
+                  </select>
+                </div>
               </div>
   
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="jobStartDate">Start Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
@@ -117,7 +147,7 @@
                 </div>
               </div>
   
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="jobEndDate">End Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
@@ -137,9 +167,11 @@
                 </div>
               </div>
   
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="jobDesc">Description</label>
-                <textarea class="fw-form-textarea" id="jobDesc" formControlName="jobDesc"></textarea>
+                <div class="fw-form-el">
+                  <textarea class="fw-form-textarea" id="jobDesc" formControlName="jobDesc"></textarea>
+                </div>
               </div>
             </div>
 
@@ -155,25 +187,31 @@
             <p>Please list your education, starting with the most recent.</p>
             <div *ngFor="let userEduItem of educationFormGroup.controls; let j=index" [formGroupName]="j">
               <div class="fw-form-section-head">
-                <h6 class="fw-form-section-title">Education {{j+1}}</h6>
-                <button class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
+                <h6>Education {{j+1}}</h6>
+                <button *ngIf="j!==0" class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
               </div>
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="institution">School / University</label>
-                <input class="fw-form-input" id="institution" type="text" formControlName="institution">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="institution" type="text" formControlName="institution">
+                </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="degree">Degree</label>
-                <input class="fw-form-input" id="degree" type="text" formControlName="degree">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="degree" type="text" formControlName="degree">
+                </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="specialization">Field of study</label>
-                <input class="fw-form-input" id="specialization" type="text" formControlName="specialization">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="specialization" type="text" formControlName="specialization">
+                </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="eduStartDate">Start Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
@@ -193,7 +231,7 @@
                 </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="eduEndDate">Completion Date</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
@@ -213,14 +251,18 @@
                 </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="grade">Grade</label>
-                <input class="fw-form-input" id="grade" type="text" formControlName="grade">
+                <div class="fw-form-el">
+                  <input class="fw-form-input" id="grade" type="text" formControlName="grade">
+                </div>
               </div>
 
-              <div class="fw-form-element">
+              <div class="fw-form-el-wrap">
                 <label for="activities">Activities</label>
-                <textarea class="fw-form-textarea" id="activities" formControlName="activities"></textarea>
+                <div class="fw-form-el">
+                  <textarea class="fw-form-textarea" id="activities" formControlName="activities"></textarea>
+                </div>  
               </div>
             </div>
             
@@ -242,7 +284,6 @@
 
       </div>
     </div>
-
   </div>
 
 </div>
