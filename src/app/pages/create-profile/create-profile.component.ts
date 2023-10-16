@@ -37,6 +37,10 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     status: 'clean' //clean, progress, complete
   }
 
+  helperText = {
+    'password': 'Min 8 and max 20 characters. At least one lowercase, uppercase, number and any of the following special character @%+\/’!#$^?:,(){}[]~-_.'
+  }
+
   constructor(
     private fb: FormBuilder
   ) { 

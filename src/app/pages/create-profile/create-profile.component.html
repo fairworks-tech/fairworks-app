@@ -23,7 +23,7 @@
               <div class="fw-form-el">
                 <input class="fw-form-input" id="password" type="password" formControlName="password">
                 <div class="fw-form-helper-text">
-                  <span>Min 8 and max 20 characters. At least one lowercase, uppercase, number and any of the following special character .</span>
+                  <span [innerHTML]="helperText.password"></span>
                 </div>
               </div>
             </div>
