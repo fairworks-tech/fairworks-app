@@ -1,7 +1,7 @@
 export const FW_COUNTRIES = [
   {
     countryCode: "AF",
-    countryName: "Afghanistan  ",
+    countryName: "Afghanistan",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -25,7 +25,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "AS",
-    countryName: "American Samoa ",
+    countryName: "American Samoa",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -57,7 +57,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "AQ",
-    countryName: "Antarctica ",
+    countryName: "Antarctica",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -65,7 +65,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "AG",
-    countryName: "Antigua And Barbuda ",
+    countryName: "Antigua And Barbuda",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -89,7 +89,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "AW",
-    countryName: "Aruba ",
+    countryName: "Aruba",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -169,7 +169,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "BZ",
-    countryName: "Belize ",
+    countryName: "Belize",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -193,7 +193,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "BT",
-    countryName: "Bhutan ",
+    countryName: "Bhutan",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -233,7 +233,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "BV",
-    countryName: "Bouvet Island ",
+    countryName: "Bouvet Island",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -249,7 +249,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "IO",
-    countryName: "British Indian Ocean Territory ",
+    countryName: "British Indian Ocean Territory",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -273,7 +273,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "BF",
-    countryName: "Burkina Faso ",
+    countryName: "Burkina Faso",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -281,7 +281,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "BI",
-    countryName: "Burundi ",
+    countryName: "Burundi",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -313,7 +313,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "CV",
-    countryName: "Cape Verde ",
+    countryName: "Cape Verde",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -329,7 +329,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "CF",
-    countryName: "Central African Republic ",
+    countryName: "Central African Republic",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -337,7 +337,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "TD",
-    countryName: "Chad ",
+    countryName: "Chad",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -353,7 +353,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "CX",
-    countryName: "Christmas Island ",
+    countryName: "Christmas Island",
     currency: "Australian Dollar",
     currencyCode: "AUD",
     currencySymbol: "$",
@@ -361,7 +361,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "CC",
-    countryName: "Cocos (Keeling) Islands ",
+    countryName: "Cocos (Keeling) Islands",
     currency: "Australian Dollar",
     currencyCode: "AUD",
     currencySymbol: "$",
@@ -377,7 +377,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "KM",
-    countryName: "Comoros ",
+    countryName: "Comoros",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -393,7 +393,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "CD",
-    countryName: "Congo, The Democratic Republic Of The ",
+    countryName: "Congo, The Democratic Republic Of The",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -401,7 +401,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "CK",
-    countryName: "Cook Islands ",
+    countryName: "Cook Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -473,7 +473,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "DJ",
-    countryName: "Djibouti ",
+    countryName: "Djibouti",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -481,7 +481,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "DM",
-    countryName: "Dominica ",
+    countryName: "Dominica",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -529,7 +529,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GQ",
-    countryName: "Equatorial Guinea ",
+    countryName: "Equatorial Guinea",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -537,7 +537,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "ER",
-    countryName: "Eritrea ",
+    countryName: "Eritrea",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -561,7 +561,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "FK",
-    countryName: "Falkland Islands (Malvinas) ",
+    countryName: "Falkland Islands (Malvinas)",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -601,7 +601,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GF",
-    countryName: "French Guiana ",
+    countryName: "French Guiana",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -625,7 +625,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GA",
-    countryName: "Gabon ",
+    countryName: "Gabon",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -633,7 +633,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GM",
-    countryName: "Gambia ",
+    countryName: "Gambia",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -689,7 +689,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GD",
-    countryName: "Grenada ",
+    countryName: "Grenada",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -721,7 +721,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GG",
-    countryName: "Guernsey ",
+    countryName: "Guernsey",
     currency: "British Pound",
     currencyCode: "GBP",
     currencySymbol: "£",
@@ -729,7 +729,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GN",
-    countryName: "Guinea ",
+    countryName: "Guinea",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -737,7 +737,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GW",
-    countryName: "Guinea-Bissau ",
+    countryName: "Guinea-Bissau",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -745,7 +745,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GY",
-    countryName: "Guyana ",
+    countryName: "Guyana",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -753,7 +753,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "HT",
-    countryName: "Haiti ",
+    countryName: "Haiti",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -761,7 +761,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "HM",
-    countryName: "Heard Island And Mcdonald Islands ",
+    countryName: "Heard Island And Mcdonald Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -825,7 +825,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "IQ",
-    countryName: "Iraq ",
+    countryName: "Iraq",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -841,7 +841,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "IM",
-    countryName: "Isle Of Man ",
+    countryName: "Isle Of Man",
     currency: "British Pound",
     currencyCode: "GBP",
     currencySymbol: "£",
@@ -881,7 +881,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "JE",
-    countryName: "Jersey ",
+    countryName: "Jersey",
     currency: "British Pound",
     currencyCode: "GBP",
     currencySymbol: "£",
@@ -913,7 +913,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "KI",
-    countryName: "Kiribati ",
+    countryName: "Kiribati",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -945,7 +945,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "LA",
-    countryName: "Lao People'S Democratic Republic ",
+    countryName: "Lao People'S Democratic Republic",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -969,7 +969,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "LS",
-    countryName: "Lesotho ",
+    countryName: "Lesotho",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -977,7 +977,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "LR",
-    countryName: "Liberia ",
+    countryName: "Liberia",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1033,7 +1033,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MG",
-    countryName: "Madagascar ",
+    countryName: "Madagascar",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1041,7 +1041,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MW",
-    countryName: "Malawi ",
+    countryName: "Malawi",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1057,7 +1057,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MV",
-    countryName: "Maldives ",
+    countryName: "Maldives",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1065,7 +1065,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "ML",
-    countryName: "Mali ",
+    countryName: "Mali",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1081,7 +1081,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MH",
-    countryName: "Marshall Islands ",
+    countryName: "Marshall Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1097,7 +1097,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MR",
-    countryName: "Mauritania ",
+    countryName: "Mauritania",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1129,7 +1129,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "FM",
-    countryName: "Micronesia, Federated States Of ",
+    countryName: "Micronesia, Federated States Of",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1161,7 +1161,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MS",
-    countryName: "Montserrat ",
+    countryName: "Montserrat",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1185,7 +1185,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MM",
-    countryName: "Myanmar ",
+    countryName: "Myanmar",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1201,7 +1201,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "NR",
-    countryName: "Nauru ",
+    countryName: "Nauru",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1225,7 +1225,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "NC",
-    countryName: "New Caledonia ",
+    countryName: "New Caledonia",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1249,7 +1249,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "NE",
-    countryName: "Niger ",
+    countryName: "Niger",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1265,7 +1265,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "NU",
-    countryName: "Niue ",
+    countryName: "Niue",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1273,7 +1273,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "NF",
-    countryName: "Norfolk Island ",
+    countryName: "Norfolk Island",
     currency: "Australian Dollar",
     currencyCode: "AUD",
     currencySymbol: "$",
@@ -1289,7 +1289,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MP",
-    countryName: "Northern Mariana Islands ",
+    countryName: "Northern Mariana Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1321,7 +1321,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "PW",
-    countryName: "Palau ",
+    countryName: "Palau",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1377,7 +1377,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "PN",
-    countryName: "Pitcairn ",
+    countryName: "Pitcairn",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1449,7 +1449,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "BL",
-    countryName: "Saint Barthélemy ",
+    countryName: "Saint Barthélemy",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1457,7 +1457,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "SH",
-    countryName: "Saint Helena ",
+    countryName: "Saint Helena",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1465,7 +1465,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "KN",
-    countryName: "Saint Kitts And Nevis ",
+    countryName: "Saint Kitts And Nevis",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1473,7 +1473,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "LC",
-    countryName: "Saint Lucia ",
+    countryName: "Saint Lucia",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1481,7 +1481,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "MF",
-    countryName: "Saint Martin ",
+    countryName: "Saint Martin",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1489,7 +1489,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "PM",
-    countryName: "Saint Pierre And Miquelon ",
+    countryName: "Saint Pierre And Miquelon",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1497,7 +1497,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "VC",
-    countryName: "Saint Vincent And The Grenadines ",
+    countryName: "Saint Vincent And The Grenadines",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1505,7 +1505,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "WS",
-    countryName: "Samoa ",
+    countryName: "Samoa",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1521,7 +1521,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "ST",
-    countryName: "Sao Tome And Principe ",
+    countryName: "Sao Tome And Principe",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1553,7 +1553,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "SC",
-    countryName: "Seychelles ",
+    countryName: "Seychelles",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1561,7 +1561,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "SL",
-    countryName: "Sierra Leone ",
+    countryName: "Sierra Leone",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1593,7 +1593,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "SB",
-    countryName: "Solomon Islands ",
+    countryName: "Solomon Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1617,7 +1617,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "GS",
-    countryName: "South Georgia And The South Sandwich Islands ",
+    countryName: "South Georgia And The South Sandwich Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1649,7 +1649,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "SD",
-    countryName: "Sudan ",
+    countryName: "Sudan",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1665,7 +1665,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "SJ",
-    countryName: "Svalbard And Jan Mayen ",
+    countryName: "Svalbard And Jan Mayen",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1745,7 +1745,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "TL",
-    countryName: "Timor-Leste ",
+    countryName: "Timor-Leste",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1753,7 +1753,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "TG",
-    countryName: "Togo ",
+    countryName: "Togo",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1761,7 +1761,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "TK",
-    countryName: "Tokelau ",
+    countryName: "Tokelau",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1811,7 +1811,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "TC",
-    countryName: "Turks And Caicos Islands ",
+    countryName: "Turks And Caicos Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1819,7 +1819,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "TV",
-    countryName: "Tuvalu ",
+    countryName: "Tuvalu",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1869,7 +1869,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "UM",
-    countryName: "United States Minor Outlying Islands ",
+    countryName: "United States Minor Outlying Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1941,7 +1941,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "WF",
-    countryName: "Wallis And Futuna ",
+    countryName: "Wallis And Futuna",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1973,7 +1973,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "ZM",
-    countryName: "Zambia ",
+    countryName: "Zambia",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1989,7 +1989,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "AX",
-    countryName: "Åland Islands ",
+    countryName: "Åland Islands",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",

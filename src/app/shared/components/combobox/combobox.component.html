@@ -5,6 +5,6 @@
 >
 <ul class="fw-combobox-list" *ngIf="listActive">
   <li class="fw-combobox-item" *ngFor="let item of filteredList" (click)="onSelect(item)">
-    {{item.countryName}}
+    {{renderText(item)}}
   </li>
 </ul>

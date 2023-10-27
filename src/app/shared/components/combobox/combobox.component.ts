@@ -18,7 +18,11 @@ export class ComboboxComponent implements ControlValueAccessor {
   val: any;
 
   @Input() dataOptions: any;
-  @Input() dataKey: any;
+  @Input() dataKey: string;
+
+  renderText(item:any) {
+    return item[this.dataKey];
+  }
 
   comboElOnFocus(event: any) {
     this.listActive = true;
