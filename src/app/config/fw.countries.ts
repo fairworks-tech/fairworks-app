@@ -1280,14 +1280,6 @@ export const FW_COUNTRIES = [
     region: "APAC"
   },
   {
-    countryCode: "KP",
-    countryName: "North Korea",
-    currency: "U.S.Dollar",
-    currencyCode: "USD",
-    currencySymbol: "$",
-    region: "APAC"
-  },
-  {
     countryCode: "MP",
     countryName: "Northern Mariana Islands",
     currency: "U.S.Dollar",
@@ -1900,14 +1892,6 @@ export const FW_COUNTRIES = [
     region: "APAC"
   },
   {
-    countryCode: "VA",
-    countryName: "Vatican City State",
-    currency: "Euro",
-    currencyCode: "EUR",
-    currencySymbol: "€",
-    region: "EMEA"
-  },
-  {
     countryCode: "VE",
     countryName: "Venezuela",
     currency: "U.S.Dollar",
@@ -1917,7 +1901,7 @@ export const FW_COUNTRIES = [
   },
   {
     countryCode: "VN",
-    countryName: "Viet Nam",
+    countryName: "Vietnam",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -1958,14 +1942,6 @@ export const FW_COUNTRIES = [
   {
     countryCode: "YE",
     countryName: "Yemen",
-    currency: "U.S.Dollar",
-    currencyCode: "USD",
-    currencySymbol: "$",
-    region: "EMEA"
-  },
-  {
-    countryCode: "YU",
-    countryName: "Yugoslavia",
     currency: "U.S.Dollar",
     currencyCode: "USD",
     currencySymbol: "$",

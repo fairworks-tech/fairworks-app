@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FW_COUNTRIES } from 'src/app/config/fw.countries';
+import { FW_PHONECODES } from 'src/app/config/fw.phonecodes';
 
 @Component({
   selector: 'app-create-profile',
@@ -14,6 +15,8 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   public expList!: FormArray;
   public eduList!: FormArray;
   public countryList: any;
+  public phoneCodeList: any;
+  public selectedCountry: any;
   public startYear = new Date().getFullYear();
   public yearRange: any = [];
   public monthRange: any = [
@@ -46,6 +49,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) { 
     this.countryList = FW_COUNTRIES;
+    this.phoneCodeList = FW_PHONECODES;
   }
 
   ngOnInit(): void {
@@ -79,9 +83,9 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     this.eduList = this.profiling.get('userEduForm') as FormArray; 
   }
 
-  get country() {
-    return this.profiling.get('userInfo')?.get('country');
-  }
+  // get country() {
+  //   return this.profiling.get('userInfo')?.get('country');
+  // }
 
   initExpForm(): FormGroup {
     return this.fb.group({
@@ -164,6 +168,18 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     
   }
+
+  // phone code selection
+  selectedCodeItem:any = null;
+  showCodeOptions: boolean = false;
+
+  
+
+  selectCode(item: any) {
+    this.selectedCodeItem = item;
+    this.showCodeOptions = false;
+  }
+  
   
 }
 

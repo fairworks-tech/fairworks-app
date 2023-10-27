@@ -35,3 +35,41 @@
   display: block;
   width: 100%;
 }
+
+
+.phonecodeSelect {
+  position: relative;
+  border: 1px solid #D9DEE2;
+  border-radius: 3px;
+  outline: none;
+  padding: 0 6px;
+  width: 100%;
+  line-height: 32px;
+  height: 32px;
+  color: #48495F; 
+}
+.phonecodeOptions {
+  position: absolute;
+  top: 32px;
+  border: 1px solid #D9DEE2;
+  border-radius: 3px;
+  max-height: 200px;
+  overflow-y: scroll;
+  z-index: 99;
+  li {
+    position: relative;
+    line-height: 32px;
+    height: 32px;
+    color: #48495F; 
+    padding: 0 6px;
+    &:hover, &:focus {
+      cursor: pointer;
+      background-color: #D9DEE2;
+    }
+  }
+}
+.flagImg {
+  img {
+    height: 18px;
+  }
+}

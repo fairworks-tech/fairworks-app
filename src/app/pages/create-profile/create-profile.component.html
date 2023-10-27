@@ -65,8 +65,7 @@
               <div class="fw-form-el">
                 <fw-combobox formControlName="country"
                   [dataOptions]="countryList"
-                  [displayKey]="'countryName'"
-                  [valueKey]="'countryCode'"
+                  [dataKey]="'countryName'"
                 >  
                 </fw-combobox>
               </div>
@@ -76,7 +75,30 @@
               <label for="phone">Phone</label>
               <div class="fw-grouped-inputs">
                 <div class="fw-input-phonecode">
-                  
+                  <select class="fw-form-select" name="phoneCode" id="phoneCode" formControlName="phoneCode">
+                    <option *ngFor="let item of phoneCodeList" [value]="item.dial">
+                      {{item.dial}}
+                    </option>
+                  </select>
+                  <!-- 
+                  // Future scope: The below code is to show phone codes along with the country flags
+                  <div class="phonecodeSelect">
+                    <div *ngIf="selectedCodeItem!==undefined && selectedCodeItem!==null">
+                      <span class="flagImg">
+                        <img src="assets/flags/{{selectedCodeItem.countryCode | lowercase}}.svg" alt="selectedCodeItem.countryCode">
+                      </span>
+                      {{selectedCodeItem.dial}}
+                    </div>
+                  </div>
+                  <ul class="phonecodeOptions" *ngIf="showCodeOptions">
+                    <li *ngFor="let item of phoneCodeList" (click)="selectCode(item)">
+                      <span class="flagImg">
+                        <img src="assets/flags/{{item.countryCode | lowercase}}.svg" alt="{{item.countryName}}">
+                      </span>
+                      {{item.dial}}
+                    </li>
+                  </ul> 
+                  -->
                 </div>
                 <div class="fw-input-phonenum">
                   <input class="fw-form-input" id="phone" type="text" formControlName="phone">
