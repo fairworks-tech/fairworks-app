@@ -63,11 +63,11 @@
             <div class="fw-form-el-wrap">
               <label for="country">Country</label>
               <div class="fw-form-el">
-                <select class="fw-form-select" id="country" formControlName="country">
-                  <option [ngValue]="countryItem" *ngFor="let countryItem of countryList">
-                    {{countryItem.countryName}}
-                  </option>
-                </select>
+                <fw-combobox formControlName="country"
+                  [dataOptions]="countryList"
+                  [dataKey]="'countryName'"
+                >  
+                </fw-combobox>
               </div>
             </div>
 

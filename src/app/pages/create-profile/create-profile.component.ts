@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FW_COUNTRIES } from 'src/app/config/fw.countries';
@@ -42,6 +42,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    private elRef: ElementRef,
     private fb: FormBuilder
   ) { 
     this.countryList = FW_COUNTRIES;
@@ -76,6 +77,10 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
 
     this.expList = this.profiling.get('userExpForm') as FormArray;
     this.eduList = this.profiling.get('userEduForm') as FormArray; 
+  }
+
+  get country() {
+    return this.profiling.get('userInfo')?.get('country');
   }
 
   initExpForm(): FormGroup {
@@ -151,6 +156,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     this.stepper.currentStep = this.stepper.currentStep - 1;
   }
 
+
   submit() {
 
   }
@@ -160,3 +166,4 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
   
 }
+

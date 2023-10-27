@@ -11,12 +11,14 @@ import { CreateProfileComponent } from './pages/create-profile/create-profile.co
 
 // shared
 import { HeaderComponent } from './shared/components/header/header.component';
+import { ComboboxComponent } from './shared/components/combobox/combobox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateProfileComponent,
     HeaderComponent,
+    ComboboxComponent
   ],
   imports: [
     BrowserModule,
