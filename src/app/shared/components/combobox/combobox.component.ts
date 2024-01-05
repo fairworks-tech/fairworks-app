@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'fw-combobox',
   templateUrl: './combobox.component.html',
-  styleUrls: ['./combobox.component.scss'],
+  styleUrl: './combobox.component.scss',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     multi: true,

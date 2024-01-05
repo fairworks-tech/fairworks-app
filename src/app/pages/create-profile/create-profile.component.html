@@ -84,7 +84,7 @@
                     </option>
                   </select>
                   <!-- 
-                  // Future scope: The below code is to show phone codes along with the country flags
+                  Future scope: The below code is to show phone codes along with the country flags
                   <div class="phonecodeSelect">
                     <div *ngIf="selectedCodeItem!==undefined && selectedCodeItem!==null">
                       <span class="flagImg">
@@ -117,7 +117,9 @@
             <div *ngFor="let userExpItem of experienceFormGroup.controls; let i=index" [formGroupName]="i">
               <div class="fw-form-section-head">
                 <h6>Experience {{i+1}}</h6>
-                <button *ngIf="i!==0" class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
+                @if (i!==0) {
+                  <button class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
+                }
               </div>
 
               <div class="fw-form-el-wrap">
@@ -158,16 +160,20 @@
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
                     <select class="fw-form-select" formControlName="jobStartMonth">
-                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
-                        {{month.name}}
-                      </option>
+                      @for (month of monthRange; track $index) {
+                        <option [ngValue]="month.id">
+                          {{month.name}}
+                        </option>
+                      }
                     </select>
                   </div>
                   <div class="fw-input-year">
                     <select class="fw-form-select" formControlName="jobStartYear">
-                      <option [ngValue]="item" *ngFor="let item of yearRange">
-                        {{item}}
-                      </option>
+                      @for (year of yearRange; track $index) {
+                        <option [ngValue]="year">
+                          {{year}}
+                        </option>
+                      }
                     </select>
                   </div>
                 </div>
@@ -178,16 +184,20 @@
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
                     <select class="fw-form-select" formControlName="jobEndMonth">
-                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
-                        {{month.name}}
-                      </option>
+                      @for (month of monthRange; track $index) {
+                        <option [ngValue]="month.id">
+                          {{month.name}}
+                        </option>
+                      }
                     </select>
                   </div>
                   <div class="fw-input-year">
                     <select class="fw-form-select" formControlName="jobEndYear">
-                      <option [ngValue]="item" *ngFor="let item of yearRange">
-                        {{item}}
-                      </option>
+                      @for (year of yearRange; track $index) {
+                        <option [ngValue]="year">
+                          {{year}}
+                        </option>
+                      }
                     </select>
                   </div>
                 </div>
@@ -214,7 +224,9 @@
             <div *ngFor="let userEduItem of educationFormGroup.controls; let j=index" [formGroupName]="j">
               <div class="fw-form-section-head">
                 <h6>Education {{j+1}}</h6>
-                <button *ngIf="j!==0" class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
+                @if (j!==0) {
+                  <button class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
+                }
               </div>
               <div class="fw-form-el-wrap">
                 <label for="institution">School / University</label>
@@ -242,16 +254,20 @@
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
                     <select class="fw-form-select" formControlName="eduStartMonth">
-                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
-                        {{month.name}}
-                      </option>
+                      @for (month of monthRange; track $index) {
+                        <option [ngValue]="month.id">
+                          {{month.name}}
+                        </option>
+                      }
                     </select>
                   </div>
                   <div class="fw-input-year">
                     <select class="fw-form-select" formControlName="eduStartYear">
-                      <option [ngValue]="item" *ngFor="let item of yearRange">
-                        {{item}}
-                      </option>
+                      @for (year of yearRange; track $index) {
+                        <option [ngValue]="year">
+                          {{year}}
+                        </option>
+                      }
                     </select>
                   </div>
                 </div>
@@ -262,16 +278,20 @@
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-month">
                     <select class="fw-form-select" formControlName="eduEndMonth">
-                      <option [ngValue]="month.id" *ngFor="let month of monthRange">
-                        {{month.name}}
-                      </option>
+                      @for (month of monthRange; track $index) {
+                        <option [ngValue]="month.id">
+                          {{month.name}}
+                        </option>
+                      }
                     </select>
                   </div>
                   <div class="fw-input-year">
                     <select class="fw-form-select" formControlName="eduEndYear">
-                      <option [ngValue]="item" *ngFor="let item of yearRange">
-                        {{item}}
-                      </option>
+                      @for (year of yearRange; track $index) {
+                        <option [ngValue]="year">
+                          {{year}}
+                        </option>
+                      }
                     </select>
                   </div>
                 </div>
@@ -300,11 +320,19 @@
 
         <div class="stepper-controls">
           <div class="left">
-            <button class="fw-form-btn" *ngIf="stepper.currentStep!==1" (click)="gotoPrev()">Previous</button>
+            @if (stepper.currentStep!==1) {
+              <button class="fw-form-btn" (click)="gotoPrev()">Previous</button>
+            }
+            
           </div>
           <div class="right">
-            <button class="fw-form-btn" *ngIf="stepper.currentStep!==4" (click)="gotoNext()">Next</button>
-            <button class="fw-form-prime-btn" *ngIf="stepper.currentStep===4" (click)="submit()">Finish</button>
+            @if (stepper.currentStep===4) {
+              <button class="fw-form-prime-btn" (click)="submit()">Finish</button>
+            }
+            @else {
+              <!-- Except step 4 -->
+              <button class="fw-form-btn" (click)="gotoNext()">Next</button>
+            }
           </div>
         </div>
 
