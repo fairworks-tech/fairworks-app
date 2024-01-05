@@ -160,21 +160,26 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     this.stepper.currentStep = this.stepper.currentStep - 1;
   }
 
-
   submit() {
-
+    console.log(this.profiling.value);
   }
 
   ngOnDestroy(): void {
     
   }
 
-  // phone code selection
+  isUserExists() {
+    
+  }
+
+
+
+  /**
+   * The below code for future purpose and it is half-baked
+   * The below code is to show the country phone code along with flags
+   */
   selectedCodeItem:any = null;
   showCodeOptions: boolean = false;
-
-  
-
   selectCode(item: any) {
     this.selectedCodeItem = item;
     this.showCodeOptions = false;
