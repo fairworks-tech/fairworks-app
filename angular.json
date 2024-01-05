@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fairworks-app:build:production"
+              "buildTarget": "fairworks-app:build:production"
             },
             "development": {
-              "browserTarget": "fairworks-app:build:development"
+              "buildTarget": "fairworks-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fairworks-app:build"
+            "buildTarget": "fairworks-app:build"
           }
         },
         "test": {
