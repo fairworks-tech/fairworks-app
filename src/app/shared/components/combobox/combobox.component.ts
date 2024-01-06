@@ -15,7 +15,7 @@ export class ComboboxComponent implements ControlValueAccessor {
 
   listActive = false;
   filteredList:any = [];
-  val: any;
+  result: any;
 
   @Input() dataOptions: any;
   @Input() dataKey: string;
@@ -47,17 +47,17 @@ export class ComboboxComponent implements ControlValueAccessor {
   
   // this method sets the value programmatically
   writeValue(value: any) { 
-    this.value = value;
+    this.selectedItem = value;
   }
 
-  onChange: any = () => {} 
+  onChange: any = () => {}
   
   onTouch: any = () => {}
 
-  set value(val: any) {
+  set selectedItem(val: any) {
     // this value is updated by programmatic changes 
-    if (val !== undefined && this.val !== val) {
-      this.val = val
+    if (val !== undefined && this.result !== val) {
+      this.result = val
       this.onChange(val)
       this.onTouch(val)
     }

@@ -49,22 +49,25 @@ table {
 	border-spacing: 0;
 }
 
-
-* {
-	box-sizing: border-box;
-}
-
 // Variables
+$prime-green: #26890d;
+$prime-green-high: #43b02a;
 $prime-blue: #0058A3;
 $prime-blue-high: #004F93;
 $border-common: #D9DEE2;
 $text-head-black: #000000;
 $text-standard: #555555;
+$status-modal: #CDFDC3;
 
-
+* {
+	box-sizing: border-box;
+	font-family: 'Inter', sans-serif;
+	color: $text-standard;
+  //color: #48495F;
+}
 
 // Typography
-%typo-common {
+%typohead-common {
   font-weight: 500;
 	margin-bottom: 1rem;
 	color: $text-head-black;
@@ -72,37 +75,44 @@ $text-standard: #555555;
 h1 {
 	font-size: 2.25rem;
 	line-height: 2.75rem;
-	@extend %typo-common;
+	@extend %typohead-common;
 }
 h2 {
 	font-size: 2rem;
 	line-height: 2.5rem;
-	@extend %typo-common;
+	@extend %typohead-common;
 }
 h3 {
 	font-size: 1.75rem;
 	line-height: 2.25rem;
-	@extend %typo-common;
+	@extend %typohead-common;
 }
 h4 {
 	font-size: 1.5rem;
 	line-height: 2rem;
-	@extend %typo-common;
+	@extend %typohead-common;
 }
 h5 {
 	font-size: 1.25rem;
 	line-height: 2rem;
-	@extend %typo-common;
+	@extend %typohead-common;
 }
 h6 {
 	font-size: 1.125rem;
 	line-height: 1.75rem;
-	@extend %typo-common;
+	@extend %typohead-common;
 }
 p {
 	font-size: 0.875rem;
 	line-height: 1.5rem;
 	margin-bottom: 1rem;
+}
+.text-sm {
+	font-size: 11px;
+	line-height: 18px;
+}
+.text-error {
+	color: #fa5252;
 }
 
 // Utils
@@ -119,9 +129,6 @@ p {
 	top: 72px;
 	font-size: 15px;
 	line-height: 28px;
-	font-family: 'Inter', sans-serif;
-	color: $text-standard;
-  //color: #48495F;
 }
 .fw-content-area {
 	position: relative;
@@ -230,10 +237,6 @@ p {
   padding: 0 8px;
 	cursor: pointer;
 }
-.fw-form-helper-text {
-	font-size: 11px;
-	line-height: 18px;
-}
 
 // Buttons
 %form-btn-common {
@@ -245,6 +248,16 @@ p {
 	cursor: pointer;
 }
 .fw-form-prime-btn {
+	@extend %form-btn-common;
+	border: none;
+	background-color: $prime-green;
+	color: #FFFFFF;
+  padding: 6px 24px;
+	&:hover, &:focus {
+		background-color: $prime-green-high;
+	}
+}
+.fw-form-blue-btn {
 	@extend %form-btn-common;
 	border: none;
 	background-color: $prime-blue;
@@ -264,7 +277,7 @@ p {
 		background-color: #2e2d71;
 	}
 }
-.fw-form-sec-btn {
+.fw-form-section-btn {
 	@extend %form-btn-common;
 	border: 1px solid #13294B;
 	background-color: #FFFFFF;
@@ -272,5 +285,26 @@ p {
 	padding: 4px 16px;
 	&:hover, &:focus {
 		border-color: #2e2d71;
+	}
+}
+
+
+.fw-status-modal-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, 0.85);
+	z-index: 9999;
+	.inner {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 24px;
+		max-width: 540px;
+		background-color: $status-modal;
+		border-radius: 1rem;
 	}
 }

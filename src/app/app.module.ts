@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 // pages
 import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
 
-
 // shared
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ComboboxComponent } from './shared/components/combobox/combobox.component';
