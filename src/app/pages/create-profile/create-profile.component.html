@@ -205,8 +205,8 @@
                     <div class="fw-grouped-inputs">
                       <div class="fw-input-month">
                         <select class="fw-form-select" formControlName="jobStartMonth">
-                          @for (month of monthRange; track $index) {
-                            <option [ngValue]="month.id">
+                          @for (month of monthRange; track month) {
+                            <option [value]="month.id">
                               {{month.name}}
                             </option>
                           }
@@ -214,8 +214,8 @@
                       </div>
                       <div class="fw-input-year">
                         <select class="fw-form-select" formControlName="jobStartYear">
-                          @for (year of yearRange; track $index) {
-                            <option [ngValue]="year">
+                          @for (year of yearRange; track year) {
+                            <option [value]="year">
                               {{year}}
                             </option>
                           }
@@ -229,8 +229,8 @@
                     <div class="fw-grouped-inputs">
                       <div class="fw-input-month">
                         <select class="fw-form-select" formControlName="jobEndMonth">
-                          @for (month of monthRange; track $index) {
-                            <option [ngValue]="month.id">
+                          @for (month of monthRange; track month) {
+                            <option [value]="month.id">
                               {{month.name}}
                             </option>
                           }
@@ -238,8 +238,8 @@
                       </div>
                       <div class="fw-input-year">
                         <select class="fw-form-select" formControlName="jobEndYear">
-                          @for (year of yearRange; track $index) {
-                            <option [ngValue]="year">
+                          @for (year of yearRange; track year) {
+                            <option [value]="year">
                               {{year}}
                             </option>
                           }

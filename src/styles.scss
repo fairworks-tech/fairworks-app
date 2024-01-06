@@ -186,6 +186,8 @@ p {
 .fw-form-textarea {
 	@extend %fw-form-el-common;
 	min-height: 100px;
+	padding: 12px;
+	font-size: 13px;
 	&:focus {
 		border: 1px solid #121212;
 	}
