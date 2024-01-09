@@ -31,6 +31,16 @@ export class ComboboxComponent implements ControlValueAccessor {
 
   comboElOnKeyup(event: any) {
     this.listActive = true;
+
+    // ToDo: Keyboard events to access combo dropdown options
+    if (event.key === 'Enter') {
+
+    } else if (event.key === 'ArrowUp') {
+
+    } else if (event.key === 'ArrowDown') {
+
+    }
+
     if (event?.target?.value != "") {
       this.filteredList = this.dataOptions.filter((obj: any) => {
         return obj[this.dataKey].toLowerCase().includes(event.target.value.toLowerCase());

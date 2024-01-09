@@ -5,6 +5,7 @@ import { UtilService } from 'src/app/shared/services/utils.service';
 
 import { FW_COUNTRIES } from 'src/app/config/fw.countries';
 import { FW_PHONECODES } from 'src/app/config/fw.phonecodes';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-create-profile',
@@ -17,6 +18,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   public expList!: FormArray;
   public eduList!: FormArray;
   public countryList: any;
+  public phoneCodeData: any;
   public phoneCodeList: any;
   public selectedCountry: any;
   public startYear = new Date().getFullYear();
@@ -64,6 +66,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
       state: 'clean' //clean, complete
     }
   }
+  userInfoForm: any;
 
   public isFormValueInvalid = {
     email: false,
@@ -83,6 +86,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
 
   helperText = {
     'password': 'Min 8 and max 20 characters. At least one lowercase, uppercase, number and any of the following special character !@#$%^&*',
+    'endDate': 'If this is your current job, provide the expected end date.',
     'completionDate': 'If you are currently pursuing, provide the expected completion date.'
   }
 
@@ -95,7 +99,8 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     public _util: UtilService
   ) { 
     this.countryList = FW_COUNTRIES;
-    this.phoneCodeList = FW_PHONECODES;
+    this.phoneCodeData = FW_PHONECODES;
+    this.phoneCodeList = [...new Set(FW_PHONECODES.map((item:any) => item['dial']))];
   }
 
   ngOnInit(): void {
@@ -120,19 +125,17 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     });
 
     this.expList = this.profiling.get('userExpForm') as FormArray;
-    this.eduList = this.profiling.get('userEduForm') as FormArray; 
-
-    // this.expList.valueChanges
-    //   .subscribe(values => {
-    //     if (value['require_formatting'] === 'yes' && this.form.get('formatting_type')) {
-    //       this.form.removeControl('formatting_type', myFormControl);
-    //     }
-    //   });
+    this.eduList = this.profiling.get('userEduForm') as FormArray;
+    this.userInfoForm = this.profiling.get('userInfo') as FormGroup;
+    
+    this.userInfoForm.controls['country'].valueChanges.subscribe((change: any) => {
+      this.phoneCodeData.filter((o: any) => {
+        if (o['countryName'] === change) {
+          this.userInfoForm.controls['phoneCode'].setValue(o.dial);
+        }
+      })
+    });
   }
-
-  // get country() {
-  //   return this.profiling.get('userInfo')?.get('country');
-  // }
 
   initExpForm(): FormGroup {
     return this.fb.group({
@@ -168,10 +171,9 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
       specialization: ['', Validators.required],
       eduStartMonth: ['', [Validators.required]],
       eduStartYear: ['', [Validators.required]],
-      eduEndMonth: ['', Validators.required],
-      eduEndYear: ['', Validators.required],
-      grade: ['', Validators.required],
-      activities: ['', Validators.required]
+      eduEndMonth: ['', [Validators.required]],
+      eduEndYear: ['', [Validators.required]],
+      grade: ['', [Validators.required]]
     })
   }
 
@@ -193,7 +195,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  gotoNext(stepNumber: Number) {
+  gotoNext() {
     // Step1 - Form validation
     if (this.stepper.currentStep===1 && this.profiling.controls['userLoginInfo'].touched) {
       this.processStep1();
@@ -227,23 +229,21 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
         console.log(this.profiling);
         this.stepper.currentStep = this.stepper.currentStep + 1;
       }
-    } else {
-      if (!this.profiling.value.userLoginInfo.password.match('^(?=.*[A-Z])')) {
-        this.isFormValueInvalid.password = true;
-        this.hasFormError.password="At least uppercase letter.";
-      } else if (!this.profiling.value.userLoginInfo.password.match('(?=.*[a-z])')) {
-        this.isFormValueInvalid.password = true;
-        this.hasFormError.password="At least one lowercase letter.";
-      } else if (!this.profiling.value.userLoginInfo.password.match('(.*[0-9].*)')) {
-        this.isFormValueInvalid.password = true;
-        this.hasFormError.password="At least one digit.";
-      } else if (!this.profiling.value.userLoginInfo.password.match('(?=.*[!@#$%^&*])')) {
-        this.isFormValueInvalid.password = true;
-        this.hasFormError.password="At least one special character.";
-      } else if (!this.profiling.value.userLoginInfo.password.match('.{8,}')) {
-        this.isFormValueInvalid.password = true;
-        this.hasFormError.password="At least 8 characters long.";
-      }
+    } else if (!this.profiling.value.userLoginInfo.password.match('^(?=.*[A-Z])')) {
+      this.isFormValueInvalid.password = true;
+      this.hasFormError.password="At least uppercase letter.";
+    } else if (!this.profiling.value.userLoginInfo.password.match('(?=.*[a-z])')) {
+      this.isFormValueInvalid.password = true;
+      this.hasFormError.password="At least one lowercase letter.";
+    } else if (!this.profiling.value.userLoginInfo.password.match('(.*[0-9].*)')) {
+      this.isFormValueInvalid.password = true;
+      this.hasFormError.password="At least one digit.";
+    } else if (!this.profiling.value.userLoginInfo.password.match('(?=.*[!@#$%^&*])')) {
+      this.isFormValueInvalid.password = true;
+      this.hasFormError.password="At least one special character.";
+    } else if (!this.profiling.value.userLoginInfo.password.match('.{8,}')) {
+      this.isFormValueInvalid.password = true;
+      this.hasFormError.password="At least 8 characters long.";
     }
   }
 

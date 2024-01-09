@@ -310,3 +310,65 @@ p {
 		border-radius: 1rem;
 	}
 }
+
+
+
+
+
+
+
+.fw-checkbox {
+  position: absolute;
+  opacity: 0;
+	top: 4px;
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+		width: 100%;
+  }
+  & + label:before {
+		content: '';
+		margin-top: 4px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 20px;
+    height: 20px;
+		border: 1px solid $border-common;
+		border-radius: 3px;
+  }
+  &:hover + label:before,
+	&:focus + label:before {
+    border: 1px solid $prime-blue;
+  }
+  &:checked + label:before {
+    background: $prime-blue;
+		border: 1px solid $prime-blue;
+  }
+  &:disabled + label {
+    color: #b8b8b8;
+    cursor: auto;
+  }
+  &:disabled + label:before {
+    box-shadow: none;
+    background: #ddd;
+  }
+  &:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 14px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 
+      2px 0 0 white,
+      4px 0 0 white,
+      4px -2px 0 white,
+      4px -4px 0 white,
+      4px -6px 0 white,
+      4px -8px 0 white;
+    transform: rotate(45deg);
+  }
+}

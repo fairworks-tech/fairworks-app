@@ -18,7 +18,7 @@
                   <input class="fw-form-input" id="email" type="text" formControlName="email" (blur)="isEmailExists()">
                   @if (isFormValueInvalid.email) {
                     <div class="text-sm text-error">
-                      <span>{{hasFormError.email}}</span>
+                      {{hasFormError.email}}
                     </div>
                   }
                 </div>
@@ -37,9 +37,7 @@
                     <span [innerHTML]="helperText.password"></span>
                   </div>
                   @if (isFormValueInvalid.password) {
-                    <div class="text-sm text-error">
-                      <span>{{hasFormError.password}}</span>
-                    </div>
+                    <div class="text-sm text-error">{{hasFormError.password}}</div>
                   }
                 </div>
               </div>
@@ -49,9 +47,7 @@
                 <div class="fw-form-el">
                   <input class="fw-form-input" id="repassword" type="password" formControlName="rePassword">
                   @if (isFormValueInvalid.rePassword) {
-                    <div class="text-sm text-error">
-                      <span>{{hasFormError.rePassword}}</span>
-                    </div>
+                    <div class="text-sm text-error">{{hasFormError.rePassword}}</div>
                   }
                 </div>
               </div>
@@ -109,29 +105,10 @@
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-phonecode">
                     <select class="fw-form-select" name="phoneCode" id="phoneCode" formControlName="phoneCode">
-                      <option *ngFor="let item of phoneCodeList" [value]="item.dial">
-                        {{item.dial}}
-                      </option>
+                      @for (code of phoneCodeList; track code) {
+                        <option [value]="code">{{code}}</option>
+                      }
                     </select>
-                    <!-- 
-                    Future scope: The below code is to show phone codes along with the country flags
-                    <div class="phonecodeSelect">
-                      <div *ngIf="selectedCodeItem!==undefined && selectedCodeItem!==null">
-                        <span class="flagImg">
-                          <img src="assets/flags/{{selectedCodeItem.countryCode | lowercase}}.svg" alt="selectedCodeItem.countryCode">
-                        </span>
-                        {{selectedCodeItem.dial}}
-                      </div>
-                    </div>
-                    <ul class="phonecodeOptions" *ngIf="showCodeOptions">
-                      <li *ngFor="let item of phoneCodeList" (click)="selectCode(item)">
-                        <span class="flagImg">
-                          <img src="assets/flags/{{item.countryCode | lowercase}}.svg" alt="{{item.countryName}}">
-                        </span>
-                        {{item.dial}}
-                      </li>
-                    </ul> 
-                    -->
                   </div>
                   <div class="fw-input-phonenum">
                     <input class="fw-form-input" id="phone" type="text" formControlName="phone">
@@ -223,27 +200,32 @@
                       </div>
                     </div>
                   </div>
-      
+
                   <div class="fw-form-el-wrap">
                     <label for="jobEndDate">End Date</label>
-                    <div class="fw-grouped-inputs">
-                      <div class="fw-input-month">
-                        <select class="fw-form-select" formControlName="jobEndMonth">
-                          @for (month of monthRange; track month) {
-                            <option [value]="month.id">
-                              {{month.name}}
-                            </option>
-                          }
-                        </select>
+                    <div class="fw-form-el">
+                      <div class="fw-grouped-inputs">
+                        <div class="fw-input-month">
+                          <select class="fw-form-select" formControlName="jobEndMonth">
+                            @for (month of monthRange; track month) {
+                              <option [value]="month.id">
+                                {{month.name}}
+                              </option>
+                            }
+                          </select>
+                        </div>
+                        <div class="fw-input-year">
+                          <select class="fw-form-select" formControlName="jobEndYear">
+                            @for (year of yearRange; track year) {
+                              <option [value]="year">
+                                {{year}}
+                              </option>
+                            }
+                          </select>
+                        </div>
                       </div>
-                      <div class="fw-input-year">
-                        <select class="fw-form-select" formControlName="jobEndYear">
-                          @for (year of yearRange; track year) {
-                            <option [value]="year">
-                              {{year}}
-                            </option>
-                          }
-                        </select>
+                      <div class="text-sm">
+                        <span [innerHTML]="helperText.endDate"></span>
                       </div>
                     </div>
                   </div>
@@ -352,17 +334,10 @@
                   </div>
     
                   <div class="fw-form-el-wrap">
-                    <label for="grade">Grade</label>
+                    <label for="grade">Grade/GPA/CGPA</label>
                     <div class="fw-form-el">
                       <input class="fw-form-input" id="grade" type="text" formControlName="grade">
                     </div>
-                  </div>
-    
-                  <div class="fw-form-el-wrap">
-                    <label for="activities">Activities</label>
-                    <div class="fw-form-el">
-                      <textarea class="fw-form-textarea" id="activities" formControlName="activities"></textarea>
-                    </div>  
                   </div>
                 </div>
               }
@@ -383,11 +358,11 @@
           </div>
           <div class="right">
             @if (stepper.currentStep===stepper.maxStep) {
-              <button class="fw-form-prime-btn" (click)="gotoNext(stepper.currentStep)">Finish</button>
+              <button class="fw-form-prime-btn" (click)="gotoNext()">Finish</button>
             }
             @else {
               <!-- Except step 4 -->
-              <button class="fw-form-blue-btn" (click)="gotoNext(stepper.currentStep)">Next</button>
+              <button class="fw-form-blue-btn" (click)="gotoNext()">Next</button>
             }
           </div>
         </div>
