@@ -25,6 +25,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   public department: any;
 
   public companyListAuto: any;
+  public yearsOfExp: any;
   public salaryValLakhs: any;
   public salaryValThousands: any;
   public salaryYears: any;
@@ -34,6 +35,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.yearsOfExp = this.structYearsOfExp();
     this.salaryValLakhs = this.structSalLakhs();
     this.salaryValThousands = this.structSalThousands();
     this.salaryYears = this.structSalaryYears();
@@ -41,8 +43,11 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
     this.salaryDetailing = this.fb.group({
       company: ["", [Validators.required]],
       jobTitle: ["", [Validators.required]],
-      employmentType: ["", [Validators.required]],
       totalExp: ["", [Validators.required]],
+      gender: ["", [Validators.required]],
+      employmentType: ["", [Validators.required]],
+      officeLocation: ["", [Validators.required]],
+      department: ["", [Validators.required]],
       fixedSalaryLakhs: ["", [Validators.required]],
       fixedSalaryThousands: ["", [Validators.required]],
       variableSalaryLakhs: ["", [Validators.required]],
@@ -51,46 +56,69 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
       salaryYear: ["", [Validators.required]],
       lastIncrement: ["", [Validators.required]],
       lastIncrementYear: ["", [Validators.required]],
-      gender: ["", [Validators.required]],
-      officeLocation: ["", [Validators.required]],
-      department: ["", [Validators.required]],
     });
   }
 
+  structYearsOfExp() {
+    const yearsStruct = [{ val: 0, text: "Fresher" }];
+    for (let i = 1; i <= 30; i++) {
+      yearsStruct.push({
+        val: i,
+        text: `${i} year${i > 1 ? "s" : ""}`,
+      });
+    }
+    return yearsStruct;
+  }
+
   structSalLakhs() {
-    let amountStruct = [];
+    const amountStruct = [];
     for (let i = 0; i < 100; i++) {
-      let val = i === 0 || i === 1 ? i + " Lakh" : i + " Lakhs";
-      amountStruct.push(val);
+      amountStruct.push({
+        val: i * 100000,
+        text: `${i} Lakh${i === 1 ? "" : "s"}`,
+      });
     }
     for (let i = 1; i <= 5; i += 0.1) {
-      let val = parseFloat(i.toFixed(1)) + " Cr";
-      amountStruct.push(val);
+      const roundedValue = parseFloat(i.toFixed(1));
+      amountStruct.push({
+        val: roundedValue * 10000000,
+        text: `${roundedValue} Cr`,
+      });
     }
     return amountStruct;
   }
 
   structSalThousands() {
-    let amountStruct = [];
-    for (let i = 5; i < 100; i += 5) {
-      let val = i + " Thousands";
-      amountStruct.push(val);
-    }
-    return amountStruct;
+    return Array.from({ length: 19 }, (_, i) => {
+      const val = (i + 1) * 5000;
+      return { val, text: `${(i + 1) * 5} Thousands` };
+    });
   }
 
   structSalaryYears() {
-    let yearsStruct = [];
     const currentYear = new Date().getFullYear();
-    for (let i = currentYear; i > currentYear - 6; i--) {
-      let val = i;
-      yearsStruct.push(val);
-    }
-    return yearsStruct;
+    return Array.from({ length: 6 }, (_, i) => currentYear - i);
+  }
+
+  processData(data: any) {
+    const {
+      fixedSalaryLakhs,
+      fixedSalaryThousands,
+      variableSalaryLakhs,
+      variableSalaryThousands,
+      ...rest
+    } = data;
+    const finalData = {
+      ...rest,
+      fixedSalary: parseInt(fixedSalaryLakhs) + parseInt(fixedSalaryThousands),
+      variableSalary:
+        parseInt(variableSalaryLakhs) + parseInt(variableSalaryThousands),
+    };
+    console.log(finalData);
   }
 
   submit() {
-    console.log(this.salaryDetailing.value);
+    this.processData(this.salaryDetailing.value);
   }
 
   ngOnDestroy(): void {}

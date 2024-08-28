@@ -1,280 +1,303 @@
 <fw-header></fw-header>
 <div class="fw-page-container">
   <div class="fw-content-area-mini">
-    <form [formGroup]="salaryDetailing">
-      <section class="fw-form-section">
-        <div class="fw-form-el-wrap-vertical">
-          <label for="company">Company</label>
-          <div class="fw-form-el">
-            <fw-combobox
-              formControlName="company"
-              [dataOptions]="companyListAuto"
-              [dataKey]="'companyName'"
-            >
-            </fw-combobox>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
+    <div class="apex-panel">
+      <div class="apex-header heed">
+        <span>Your personal information will remain 100% confidential</span>
+      </div>
+      <div class="apex-body">
+        <form [formGroup]="salaryDetailing">
+          <section class="fw-form-section">
             <div class="fw-form-el-wrap-vertical">
-              <label for="jobTitle">Job Title</label>
+              <label for="company">Company</label>
               <div class="fw-form-el">
-                <input
-                  class="fw-form-input"
-                  id="jobTitle"
-                  type="text"
-                  formControlName="jobTitle"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="fw-form-el-wrap-vertical">
-              <label for="totalExp">Total Years of Experience</label>
-              <div class="fw-form-el">
-                <input
-                  class="fw-form-input"
-                  id="totalExp"
-                  type="text"
-                  formControlName="totalExp"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label for="gender">Gender</label>
-          <div class="fw-form-el">
-            <div class="fw-tabler">
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="male"
-                  value="male"
-                  name="gender"
-                  formControlName="gender"
-                />
-                <label class="tabler-button" for="male">Male</label>
-              </div>
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="female"
-                  value="female"
-                  name="gender"
-                  formControlName="gender"
-                />
-                <label class="tabler-button" for="male">Female</label>
-              </div>
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="other-gender"
-                  value="other-gender"
-                  name="gender"
-                  formControlName="gender"
-                />
-                <label class="tabler-button" for="other-gender">Other</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label for="employmentType">Employment</label>
-          <div class="fw-form-el">
-            <div class="fw-tabler">
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="full-time"
-                  value="full-time"
-                  name="employmentType"
-                  formControlName="employmentType"
-                />
-                <label class="tabler-button" for="full-time">Full Time</label>
-              </div>
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="part-time"
-                  value="part-time"
-                  name="employmentType"
-                  formControlName="employmentType"
-                />
-                <label class="tabler-button" for="part-time">Part Time</label>
-              </div>
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="contractual"
-                  value="contractual"
-                  name="employmentType"
-                  formControlName="employmentType"
-                />
-                <label class="tabler-button" for="contractual"
-                  >Contractual</label
+                <fw-combobox
+                  formControlName="company"
+                  [dataOptions]="companyListAuto"
+                  [dataKey]="'companyName'"
                 >
-              </div>
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="intern"
-                  value="intern"
-                  name="employmentType"
-                  formControlName="employmentType"
-                />
-                <label class="tabler-button" for="intern">Intern</label>
-              </div>
-              <div class="tabler-item">
-                <input
-                  type="radio"
-                  class="tabler-input"
-                  id="freelancer"
-                  value="freelancer"
-                  name="employmentType"
-                  formControlName="employmentType"
-                />
-                <label class="tabler-button" for="freelancer">Freelancer</label>
+                </fw-combobox>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="fw-form-el-wrap-vertical">
+                  <label for="jobTitle">Job Title</label>
+                  <div class="fw-form-el">
+                    <input
+                      class="fw-form-input"
+                      id="jobTitle"
+                      type="text"
+                      formControlName="jobTitle"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="fw-form-el-wrap-vertical">
+                  <label for="totalExp">Total work experience</label>
+                  <div class="fw-form-el">
+                    <select
+                      class="fw-form-select"
+                      id="totalExp"
+                      formControlName="totalExp"
+                    >
+                      @for (item of yearsOfExp; track item) {
+                        <option [value]="item.val">{{ item.text }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="fw-form-el-wrap-vertical">
-              <label for="officeLocation">Office Location</label>
+              <label for="gender">Gender</label>
+              <div class="fw-form-el">
+                <div class="fw-tabler">
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="male"
+                      value="male"
+                      name="gender"
+                      formControlName="gender"
+                    />
+                    <label class="tabler-button" for="male">Male</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="female"
+                      value="female"
+                      name="gender"
+                      formControlName="gender"
+                    />
+                    <label class="tabler-button" for="male">Female</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="other-gender"
+                      value="other-gender"
+                      name="gender"
+                      formControlName="gender"
+                    />
+                    <label class="tabler-button" for="other-gender"
+                      >Other</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fw-form-el-wrap-vertical">
+              <label for="employmentType">Employment</label>
+              <div class="fw-form-el">
+                <div class="fw-tabler">
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="full-time"
+                      value="full-time"
+                      name="employmentType"
+                      formControlName="employmentType"
+                    />
+                    <label class="tabler-button" for="full-time"
+                      >Full Time</label
+                    >
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="part-time"
+                      value="part-time"
+                      name="employmentType"
+                      formControlName="employmentType"
+                    />
+                    <label class="tabler-button" for="part-time"
+                      >Part Time</label
+                    >
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="contractual"
+                      value="contractual"
+                      name="employmentType"
+                      formControlName="employmentType"
+                    />
+                    <label class="tabler-button" for="contractual"
+                      >Contractual</label
+                    >
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="intern"
+                      value="intern"
+                      name="employmentType"
+                      formControlName="employmentType"
+                    />
+                    <label class="tabler-button" for="intern">Intern</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="freelancer"
+                      value="freelancer"
+                      name="employmentType"
+                      formControlName="employmentType"
+                    />
+                    <label class="tabler-button" for="freelancer"
+                      >Freelancer</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="fw-form-el-wrap-vertical">
+                  <label for="officeLocation">Office Location</label>
+                  <div class="fw-form-el">
+                    <input
+                      class="fw-form-input"
+                      id="officeLocation"
+                      type="text"
+                      formControlName="officeLocation"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="fw-form-el-wrap-vertical">
+                  <label for="department">Department</label>
+                  <div class="fw-form-el">
+                    <input
+                      class="fw-form-input"
+                      id="department"
+                      type="text"
+                      formControlName="department"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fw-form-el-wrap-vertical">
+              <label>Fixed Salary</label>
+              <div class="fw-form-el-wrap">
+                <div class="fw-form-el">
+                  <select
+                    class="fw-form-select"
+                    formControlName="fixedSalaryLakhs"
+                  >
+                    <option value="" disabled selected>Select Lakhs</option>
+                    @for (item of salaryValLakhs; track item) {
+                      <option [value]="item.val">{{ item.text }}</option>
+                    }
+                  </select>
+                </div>
+                <div class="fw-form-el">
+                  <select
+                    class="fw-form-select"
+                    formControlName="fixedSalaryThousands"
+                  >
+                    <option value="" disabled selected>Thousands</option>
+                    @for (item of salaryValThousands; track item) {
+                      <option [value]="item.val">{{ item.text }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="fw-form-el-wrap-vertical">
+              <label>Variable Salary</label>
+              <div class="fw-form-el-wrap">
+                <div class="fw-form-el">
+                  <select
+                    class="fw-form-select"
+                    formControlName="variableSalaryLakhs"
+                  >
+                    <option value="" disabled selected>Select Lakhs</option>
+                    @for (item of salaryValLakhs; track item) {
+                      <option [value]="item.val">{{ item.text }}</option>
+                    }
+                  </select>
+                </div>
+                <div class="fw-form-el">
+                  <select
+                    class="fw-form-select"
+                    formControlName="variableSalaryThousands"
+                  >
+                    <option value="" disabled selected>Thousands</option>
+                    @for (item of salaryValThousands; track item) {
+                      <option [value]="item.val">{{ item.text }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="fw-form-el-wrap-vertical">
+              <label for="hasStocks">Stocks</label>
               <div class="fw-form-el">
                 <input
                   class="fw-form-input"
-                  id="officeLocation"
+                  id="hasStocks"
                   type="text"
-                  formControlName="officeLocation"
+                  formControlName="hasStocks"
                 />
               </div>
             </div>
-          </div>
-          <div class="col">
             <div class="fw-form-el-wrap-vertical">
-              <label for="department">Department</label>
+              <label for="salaryYear">Which year’s salary is it?</label>
               <div class="fw-form-el">
-                <input
-                  class="fw-form-input"
-                  id="department"
-                  type="text"
-                  formControlName="department"
-                />
+                <select class="fw-form-select" formControlName="salaryYear">
+                  <option value="" disabled selected>Salary Year</option>
+                  @for (val of salaryYears; track val) {
+                    <option [value]="val">{{ val }}</option>
+                  }
+                </select>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label>Fixed Salary</label>
-          <div class="fw-form-el-wrap">
-            <div class="fw-form-el">
-              <select class="fw-form-select" formControlName="fixedSalaryLakhs">
-                <option value="" disabled selected>Select Lakhs</option>
-                @for (val of salaryValLakhs; track val) {
-                  <option [value]="val">{{ val }}</option>
-                }
-              </select>
+            <div class="fw-form-el-wrap-vertical">
+              <label>Last Increment</label>
+              <div class="fw-form-el-wrap">
+                <div class="fw-form-el">
+                  <input
+                    class="fw-form-input"
+                    id="lastIncrement"
+                    type="text"
+                    formControlName="lastIncrement"
+                    placeholder="Enter in %"
+                  />
+                </div>
+                <div class="fw-form-el">
+                  <select
+                    class="fw-form-select"
+                    formControlName="lastIncrementYear"
+                  >
+                    <option value="" disabled selected>
+                      Year of Increment
+                    </option>
+                    @for (val of salaryYears; track val) {
+                      <option [value]="val">{{ val }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
             </div>
-            <div class="fw-form-el">
-              <select
-                class="fw-form-select"
-                formControlName="fixedSalaryThousands"
-              >
-                <option value="" disabled selected>Thousands</option>
-                @for (val of salaryValThousands; track val) {
-                  <option [value]="val">{{ val }}</option>
-                }
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label>Variable Salary</label>
-          <div class="fw-form-el-wrap">
-            <div class="fw-form-el">
-              <select
-                class="fw-form-select"
-                formControlName="variableSalaryLakhs"
-              >
-                <option value="" disabled selected>Select Lakhs</option>
-                @for (val of salaryValLakhs; track val) {
-                  <option [value]="val">{{ val }}</option>
-                }
-              </select>
-            </div>
-            <div class="fw-form-el">
-              <select
-                class="fw-form-select"
-                formControlName="variableSalaryThousands"
-              >
-                <option value="" disabled selected>Thousands</option>
-                @for (val of salaryValThousands; track val) {
-                  <option [value]="val">{{ val }}</option>
-                }
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label for="hasStocks">Stocks</label>
-          <div class="fw-form-el">
-            <input
-              class="fw-form-input"
-              id="hasStocks"
-              type="text"
-              formControlName="hasStocks"
-            />
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label for="salaryYear">Which year’s salary is it?</label>
-          <div class="fw-form-el">
-            <select class="fw-form-select" formControlName="salaryYear">
-              <option value="" disabled selected>Salary Year</option>
-              @for (val of salaryYears; track val) {
-                <option [value]="val">{{ val }}</option>
-              }
-            </select>
-          </div>
-        </div>
-        <div class="fw-form-el-wrap-vertical">
-          <label>Last Increment</label>
-          <div class="fw-form-el-wrap">
-            <div class="fw-form-el">
-              <input
-                class="fw-form-input"
-                id="lastIncrement"
-                type="text"
-                formControlName="lastIncrement"
-                placeholder="Enter in %"
-              />
-            </div>
-            <div class="fw-form-el">
-              <select
-                class="fw-form-select"
-                formControlName="lastIncrementYear"
-              >
-                <option value="" disabled selected>Year of Increment</option>
-                @for (val of salaryYears; track val) {
-                  <option [value]="val">{{ val }}</option>
-                }
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-    </form>
-
-    <button class="fw-form-prime-btn" (click)="submit()">Submit</button>
+          </section>
+        </form>
+        <button class="fw-form-prime-btn" (click)="submit()">Submit</button>
+      </div>
+      <div class="apex-footer"></div>
+    </div>
   </div>
 </div>

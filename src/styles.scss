@@ -710,7 +710,7 @@ p {
 .fw-content-area-mini {
   position: relative;
   width: 100%;
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 24px 0;
 }
@@ -1003,5 +1003,19 @@ p {
       border-color: #2285f6;
       color: #2285f6;
     }
+  }
+}
+
+.apex-panel {
+  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: #ffffff;
+  .apex-header {
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  .apex-body {
+    padding: 1rem;
+  }
+  .apex-footer {
   }
 }
