@@ -29,6 +29,17 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   public salaryValLakhs: any;
   public salaryValThousands: any;
   public salaryYears: any;
+  public showStockFields = false;
+
+  public isFormValueInvalid: any = {
+    company: false,
+    jobTitle: false,
+    totalExp: false,
+    gender: false,
+    employmentType: false,
+    officeLocation: false,
+    department: false,
+  };
 
   constructor(private fb: FormBuilder) {
     this.companyListAuto = FW_COMPANIES;
@@ -53,12 +64,38 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
       variableSalaryLakhs: ["", [Validators.required]],
       variableSalaryThousands: ["", [Validators.required]],
       hasStocks: ["", [Validators.required]],
+      stockValLakhs: [""],
+      stockValThousands: [""],
+      stockVestingPeriod: [""],
       salaryYear: ["", [Validators.required]],
       lastIncrement: ["", [Validators.required]],
       lastIncrementYear: ["", [Validators.required]],
     });
+
+    this.salaryDetailing.controls["hasStocks"].valueChanges.subscribe((x) => {
+      if (x === "no" || x === "not-aware") {
+        this.showStockFields = false;
+        this.salaryDetailing.get("stockValLakhs")?.clearValidators();
+        this.salaryDetailing.get("stockValLakhs")?.updateValueAndValidity();
+        this.salaryDetailing.get("stockValThousands")?.clearValidators();
+        this.salaryDetailing.get("stockValThousands")?.updateValueAndValidity();
+        this.salaryDetailing.get("stockVestingPeriod")?.clearValidators();
+        this.salaryDetailing.get("stockVestingPeriod")?.updateValueAndValidity();
+      } else {
+        this.showStockFields = true;
+        this.salaryDetailing.get("stockValLakhs")?.setValidators([Validators.required]);
+        this.salaryDetailing.get("stockValLakhs")?.updateValueAndValidity();
+        this.salaryDetailing.get("stockValThousands")?.setValidators([Validators.required]);
+        this.salaryDetailing.get("stockValThousands")?.updateValueAndValidity();
+        this.salaryDetailing.get("stockVestingPeriod")?.setValidators([Validators.required]);
+        this.salaryDetailing.get("stockVestingPeriod")?.updateValueAndValidity();
+      }
+    });
   }
 
+  /**
+   * Generate the dropdown options for - Total work experience
+   */
   structYearsOfExp() {
     const yearsStruct = [{ val: 0, text: "Fresher" }];
     for (let i = 1; i <= 30; i++) {
@@ -70,6 +107,9 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
     return yearsStruct;
   }
 
+  /**
+   * Generate the dropdown options for - Fixed Salary & Variable Salary : Lakhs field
+   */
   structSalLakhs() {
     const amountStruct = [];
     for (let i = 0; i < 100; i++) {
@@ -88,6 +128,9 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
     return amountStruct;
   }
 
+  /**
+   * Generate the dropdown options for - Fixed Salary & Variable Salary : Thousands field
+   */
   structSalThousands() {
     return Array.from({ length: 19 }, (_, i) => {
       const val = (i + 1) * 5000;
@@ -95,30 +138,49 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Generate the dropdown options for - Salary year & Year of Increment
+   */
   structSalaryYears() {
     const currentYear = new Date().getFullYear();
     return Array.from({ length: 6 }, (_, i) => currentYear - i);
   }
 
+  validateFormData() {
+    const controlsToValidate = [
+      "company",
+      "jobTitle",
+      "totalExp",
+      "gender",
+      "employmentType",
+      "officeLocation",
+      "department",
+    ];
+
+    controlsToValidate.forEach((controlName) => {
+      if (this.salaryDetailing.controls[controlName].status === "INVALID") {
+        this.isFormValueInvalid[controlName] = true;
+      }
+    });
+  }
+
   processData(data: any) {
-    const {
-      fixedSalaryLakhs,
-      fixedSalaryThousands,
-      variableSalaryLakhs,
-      variableSalaryThousands,
-      ...rest
-    } = data;
+    const { fixedSalaryLakhs, fixedSalaryThousands, variableSalaryLakhs, variableSalaryThousands, ...rest } = data;
     const finalData = {
       ...rest,
       fixedSalary: parseInt(fixedSalaryLakhs) + parseInt(fixedSalaryThousands),
-      variableSalary:
-        parseInt(variableSalaryLakhs) + parseInt(variableSalaryThousands),
+      variableSalary: parseInt(variableSalaryLakhs) + parseInt(variableSalaryThousands),
     };
     console.log(finalData);
   }
 
   submit() {
-    this.processData(this.salaryDetailing.value);
+    this.validateFormData();
+    if (this.salaryDetailing.valid) {
+      this.processData(this.salaryDetailing.value);
+    } else {
+      console.error("Form values are invalid.");
+    }
   }
 
   ngOnDestroy(): void {}

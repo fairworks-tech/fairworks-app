@@ -1,6 +1,7 @@
 <fw-header></fw-header>
-<div class="fw-page-container">
+<div class="fw-page-container this-container">
   <div class="fw-content-area-mini">
+    <h1>Share your salary, anonymously!</h1>
     <div class="apex-panel">
       <div class="apex-header heed">
         <span>Your personal information will remain 100% confidential</span>
@@ -11,42 +12,38 @@
             <div class="fw-form-el-wrap-vertical">
               <label for="company">Company</label>
               <div class="fw-form-el">
-                <fw-combobox
-                  formControlName="company"
-                  [dataOptions]="companyListAuto"
-                  [dataKey]="'companyName'"
-                >
+                <fw-combobox formControlName="company" [dataOptions]="companyListAuto" [dataKey]="'companyName'">
                 </fw-combobox>
               </div>
+              @if (isFormValueInvalid["company"]) {
+                <div class="text-sm text-error">Company is required.</div>
+              }
             </div>
             <div class="row">
               <div class="col">
                 <div class="fw-form-el-wrap-vertical">
                   <label for="jobTitle">Job Title</label>
                   <div class="fw-form-el">
-                    <input
-                      class="fw-form-input"
-                      id="jobTitle"
-                      type="text"
-                      formControlName="jobTitle"
-                    />
+                    <input class="fw-form-input" id="jobTitle" type="text" formControlName="jobTitle" />
                   </div>
+                  @if (isFormValueInvalid["jobTitle"]) {
+                    <div class="text-sm text-error">Job Title is required.</div>
+                  }
                 </div>
               </div>
               <div class="col">
                 <div class="fw-form-el-wrap-vertical">
                   <label for="totalExp">Total work experience</label>
                   <div class="fw-form-el">
-                    <select
-                      class="fw-form-select"
-                      id="totalExp"
-                      formControlName="totalExp"
-                    >
+                    <select class="fw-form-select" id="totalExp" formControlName="totalExp">
                       @for (item of yearsOfExp; track item) {
                         <option [value]="item.val">{{ item.text }}</option>
                       }
                     </select>
                   </div>
+                  @if (isFormValueInvalid["totalExp"]) {
+                    <div class="text-sm text-error">Total work experience is required.</div>
+                  }
                 </div>
               </div>
             </div>
@@ -85,15 +82,16 @@
                       name="gender"
                       formControlName="gender"
                     />
-                    <label class="tabler-button" for="other-gender"
-                      >Other</label
-                    >
+                    <label class="tabler-button" for="other-gender"> Other </label>
                   </div>
                 </div>
               </div>
+              @if (isFormValueInvalid["gender"]) {
+                <div class="text-sm text-error">Gender is required.</div>
+              }
             </div>
             <div class="fw-form-el-wrap-vertical">
-              <label for="employmentType">Employment</label>
+              <label for="employmentType">Employment Type</label>
               <div class="fw-form-el">
                 <div class="fw-tabler">
                   <div class="tabler-item">
@@ -105,9 +103,7 @@
                       name="employmentType"
                       formControlName="employmentType"
                     />
-                    <label class="tabler-button" for="full-time"
-                      >Full Time</label
-                    >
+                    <label class="tabler-button" for="full-time">Full Time</label>
                   </div>
                   <div class="tabler-item">
                     <input
@@ -118,9 +114,7 @@
                       name="employmentType"
                       formControlName="employmentType"
                     />
-                    <label class="tabler-button" for="part-time"
-                      >Part Time</label
-                    >
+                    <label class="tabler-button" for="part-time">Part Time</label>
                   </div>
                   <div class="tabler-item">
                     <input
@@ -131,9 +125,7 @@
                       name="employmentType"
                       formControlName="employmentType"
                     />
-                    <label class="tabler-button" for="contractual"
-                      >Contractual</label
-                    >
+                    <label class="tabler-button" for="contractual">Contractual</label>
                   </div>
                   <div class="tabler-item">
                     <input
@@ -155,38 +147,63 @@
                       name="employmentType"
                       formControlName="employmentType"
                     />
-                    <label class="tabler-button" for="freelancer"
-                      >Freelancer</label
-                    >
+                    <label class="tabler-button" for="freelancer">Freelancer</label>
                   </div>
                 </div>
               </div>
+              @if (isFormValueInvalid["employmentType"]) {
+                <div class="text-sm text-error">Employment type is required.</div>
+              }
             </div>
             <div class="row">
               <div class="col">
                 <div class="fw-form-el-wrap-vertical">
                   <label for="officeLocation">Office Location</label>
                   <div class="fw-form-el">
-                    <input
-                      class="fw-form-input"
-                      id="officeLocation"
-                      type="text"
-                      formControlName="officeLocation"
-                    />
+                    <input class="fw-form-input" id="officeLocation" type="text" formControlName="officeLocation" />
                   </div>
+                  @if (isFormValueInvalid["officeLocation"]) {
+                    <div class="text-sm text-error">Office location is required.</div>
+                  }
                 </div>
               </div>
               <div class="col">
                 <div class="fw-form-el-wrap-vertical">
                   <label for="department">Department</label>
                   <div class="fw-form-el">
-                    <input
-                      class="fw-form-input"
-                      id="department"
-                      type="text"
-                      formControlName="department"
-                    />
+                    <select class="fw-form-select" formControlName="department">
+                      <optgroup label="Engineering - Software">
+                        <option value="Data Science">Data Science</option>
+                        <option value="DBA or Data warehousing">DBA or Data warehousing</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Software Development">Software Development</option>
+                        <option value="Product Management">Product Management</option>
+                        <option value="Project Management">Project Management</option>
+                        <option value="Quality Assurance and Testing">Quality Assurance and Testing</option>
+                        <option value="SRE">SRE</option>
+                      </optgroup>
+                      <optgroup label="Finance and Accounting">
+                        <option value="Accounting and Taxation">Accounting and Taxation</option>
+                        <option value="Audit and Control">Audit and Control</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Payroll and Transactions">Payroll and Transactions</option>
+                        <option value="Treasury">Treasury</option>
+                        <option value="Other-Finance">Other</option>
+                      </optgroup>
+                      <optgroup label="Human Resources">
+                        <option value="Compensation and Benefits">Compensation and Benefits</option>
+                        <option value="Employee Relations">Employee Relations</option>
+                        <option value="HR Business Advisory">HR Business Advisory</option>
+                        <option value="HR Operations">HR Operations</option>
+                        <option value="Recruitment and Talent Acquisition">Recruitment and Talent Acquisition</option>
+                        <option value="Branding">Branding</option>
+                        <option value="Other-HR">Other</option>
+                      </optgroup>
+                    </select>
                   </div>
+                  @if (isFormValueInvalid["department"]) {
+                    <div class="text-sm text-error">Department is required.</div>
+                  }
                 </div>
               </div>
             </div>
@@ -194,10 +211,7 @@
               <label>Fixed Salary</label>
               <div class="fw-form-el-wrap">
                 <div class="fw-form-el">
-                  <select
-                    class="fw-form-select"
-                    formControlName="fixedSalaryLakhs"
-                  >
+                  <select class="fw-form-select" formControlName="fixedSalaryLakhs">
                     <option value="" disabled selected>Select Lakhs</option>
                     @for (item of salaryValLakhs; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -205,10 +219,7 @@
                   </select>
                 </div>
                 <div class="fw-form-el">
-                  <select
-                    class="fw-form-select"
-                    formControlName="fixedSalaryThousands"
-                  >
+                  <select class="fw-form-select" formControlName="fixedSalaryThousands">
                     <option value="" disabled selected>Thousands</option>
                     @for (item of salaryValThousands; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -221,10 +232,7 @@
               <label>Variable Salary</label>
               <div class="fw-form-el-wrap">
                 <div class="fw-form-el">
-                  <select
-                    class="fw-form-select"
-                    formControlName="variableSalaryLakhs"
-                  >
+                  <select class="fw-form-select" formControlName="variableSalaryLakhs">
                     <option value="" disabled selected>Select Lakhs</option>
                     @for (item of salaryValLakhs; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -232,10 +240,7 @@
                   </select>
                 </div>
                 <div class="fw-form-el">
-                  <select
-                    class="fw-form-select"
-                    formControlName="variableSalaryThousands"
-                  >
+                  <select class="fw-form-select" formControlName="variableSalaryThousands">
                     <option value="" disabled selected>Thousands</option>
                     @for (item of salaryValThousands; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -245,16 +250,116 @@
               </div>
             </div>
             <div class="fw-form-el-wrap-vertical">
-              <label for="hasStocks">Stocks</label>
+              <label for="hasStocks">Receive any stock options?</label>
               <div class="fw-form-el">
-                <input
-                  class="fw-form-input"
-                  id="hasStocks"
-                  type="text"
-                  formControlName="hasStocks"
-                />
+                <div class="fw-tabler">
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="RSU"
+                      value="RSU"
+                      name="hasStocks"
+                      formControlName="hasStocks"
+                    />
+                    <label class="tabler-button" for="RSU">RSUs</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="ESOP"
+                      value="ESOP"
+                      name="hasStocks"
+                      formControlName="hasStocks"
+                    />
+                    <label class="tabler-button" for="ESOP">ESOPs</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="SAR"
+                      value="SAR"
+                      name="hasStocks"
+                      formControlName="hasStocks"
+                    />
+                    <label class="tabler-button" for="SAR">SARs</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="other-stocks"
+                      value="other-stocks"
+                      name="hasStocks"
+                      formControlName="hasStocks"
+                    />
+                    <label class="tabler-button" for="other-stocks"> Other </label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="not-aware"
+                      value="not-aware"
+                      name="hasStocks"
+                      formControlName="hasStocks"
+                    />
+                    <label class="tabler-button" for="not-aware">Not Aware</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="no"
+                      value="no"
+                      name="hasStocks"
+                      formControlName="hasStocks"
+                    />
+                    <label class="tabler-button" for="no">No Stocks</label>
+                  </div>
+                </div>
               </div>
             </div>
+
+            @if (showStockFields) {
+              <div class="fw-form-el-wrap-vertical">
+                <label>Stocks Value</label>
+                <div class="fw-form-el-wrap">
+                  <div class="fw-form-el">
+                    <select class="fw-form-select" formControlName="stockValLakhs">
+                      <option value="" disabled selected>Select Lakhs</option>
+                      @for (item of salaryValLakhs; track item) {
+                        <option [value]="item.val">{{ item.text }}</option>
+                      }
+                    </select>
+                  </div>
+                  <div class="fw-form-el">
+                    <select class="fw-form-select" formControlName="stockValThousands">
+                      <option value="" disabled selected>Thousands</option>
+                      @for (item of salaryValThousands; track item) {
+                        <option [value]="item.val">{{ item.text }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="fw-form-el-wrap-vertical">
+                <label>Vesting Period</label>
+                <div class="fw-form-el-wrap">
+                  <div class="fw-form-el">
+                    <select class="fw-form-select" formControlName="stockVestingPeriod">
+                      <option value="3 Years">3 Years</option>
+                      <option value="4 Years">4 Years</option>
+                      <option value="5 Years">5 Years</option>
+                      <option value="not-aware">Not Aware</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            }
+
             <div class="fw-form-el-wrap-vertical">
               <label for="salaryYear">Which year’s salary is it?</label>
               <div class="fw-form-el">
@@ -279,13 +384,8 @@
                   />
                 </div>
                 <div class="fw-form-el">
-                  <select
-                    class="fw-form-select"
-                    formControlName="lastIncrementYear"
-                  >
-                    <option value="" disabled selected>
-                      Year of Increment
-                    </option>
+                  <select class="fw-form-select" formControlName="lastIncrementYear">
+                    <option value="" disabled selected>Year of Increment</option>
                     @for (val of salaryYears; track val) {
                       <option [value]="val">{{ val }}</option>
                     }
@@ -297,7 +397,11 @@
         </form>
         <button class="fw-form-prime-btn" (click)="submit()">Submit</button>
       </div>
-      <div class="apex-footer"></div>
+      <div class="apex-footer">
+        <span class="text-sm">
+          By submitting I agree to the community guidelines, terms of use and privacy policy of Fairworks.in
+        </span>
+      </div>
     </div>
   </div>
 </div>
