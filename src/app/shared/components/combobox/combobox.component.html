@@ -1,15 +1,11 @@
-<input type="text" 
-  [(ngModel)]="result" 
-  (focus)="comboElOnFocus($event)" 
-  (keyup)="comboElOnKeyup($event)"
->
+<input type="text" [(ngModel)]="result" (focus)="comboElOnFocus($event)" (keyup)="comboElOnKeyup($event)" />
 
-@if (listActive) {
+@if (showComboboxOptions) {
   <ul class="fw-combobox-list">
     @for (item of filteredList; track item) {
       <li class="fw-combobox-item" (click)="onSelect(item)">
-        {{renderText(item)}}
+        {{ renderText(item) }}
       </li>
     }
-  </ul> 
+  </ul>
 }

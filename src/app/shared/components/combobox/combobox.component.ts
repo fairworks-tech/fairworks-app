@@ -1,44 +1,42 @@
-import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, forwardRef } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
-  selector: 'fw-combobox',
-  templateUrl: './combobox.component.html',
-  styleUrl: './combobox.component.scss',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    multi: true,
-    useExisting: forwardRef(() => ComboboxComponent)
-  }]
+  selector: "fw-combobox",
+  templateUrl: "./combobox.component.html",
+  styleUrl: "./combobox.component.scss",
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => ComboboxComponent),
+    },
+  ],
 })
 export class ComboboxComponent implements ControlValueAccessor {
-
-  listActive = false;
-  filteredList:any = [];
+  showComboboxOptions = false;
+  filteredList: any = [];
   result: any;
 
   @Input() dataOptions: any;
   @Input() dataKey: string;
 
-  renderText(item:any) {
+  renderText(item: any) {
     return item[this.dataKey];
   }
 
   comboElOnFocus(event: any) {
-    this.listActive = true;
+    this.showComboboxOptions = true;
     this.filteredList = this.dataOptions;
   }
 
   comboElOnKeyup(event: any) {
-    this.listActive = true;
+    this.showComboboxOptions = true;
 
     // ToDo: Keyboard events to access combo dropdown options
-    if (event.key === 'Enter') {
-
-    } else if (event.key === 'ArrowUp') {
-
-    } else if (event.key === 'ArrowDown') {
-
+    if (event.key === "Enter") {
+    } else if (event.key === "ArrowUp") {
+    } else if (event.key === "ArrowDown") {
     }
 
     if (event?.target?.value != "") {
@@ -52,24 +50,24 @@ export class ComboboxComponent implements ControlValueAccessor {
 
   onSelect(item: any) {
     this.writeValue(item[this.dataKey]);
-    this.listActive = false;
+    this.showComboboxOptions = false;
   }
-  
+
   // this method sets the value programmatically
-  writeValue(value: any) { 
+  writeValue(value: any) {
     this.selectedItem = value;
   }
 
-  onChange: any = () => {}
-  
-  onTouch: any = () => {}
+  onChange: any = () => {};
+
+  onTouch: any = () => {};
 
   set selectedItem(val: any) {
-    // this value is updated by programmatic changes 
+    // this value is updated by programmatic changes
     if (val !== undefined && this.result !== val) {
-      this.result = val
-      this.onChange(val)
-      this.onTouch(val)
+      this.result = val;
+      this.onChange(val);
+      this.onTouch(val);
     }
   }
 
@@ -77,10 +75,9 @@ export class ComboboxComponent implements ControlValueAccessor {
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  
+
   // upon touching the element, this method gets triggered
-  registerOnTouched(fn: any){ 
+  registerOnTouched(fn: any) {
     this.onTouch = fn;
   }
-
 }
