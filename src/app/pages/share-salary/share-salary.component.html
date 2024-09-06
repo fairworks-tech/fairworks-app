@@ -12,7 +12,7 @@
             <div class="fw-form-el-wrap-vertical">
               <label for="company">Company</label>
               <div class="fw-form-el">
-                <fw-combobox formControlName="company" [dataOptions]="companyListAuto" [dataKey]="'companyName'">
+                <fw-combobox formControlName="company" [dataOptions]="companySuggestions" [dataKey]="'companyName'">
                 </fw-combobox>
               </div>
               @if (isFormValueInvalid["company"]) {
@@ -369,28 +369,6 @@
                     <option [value]="val">{{ val }}</option>
                   }
                 </select>
-              </div>
-            </div>
-            <div class="fw-form-el-wrap-vertical">
-              <label>Last Increment</label>
-              <div class="fw-form-el-wrap">
-                <div class="fw-form-el">
-                  <input
-                    class="fw-form-input"
-                    id="lastIncrement"
-                    type="text"
-                    formControlName="lastIncrement"
-                    placeholder="Enter in %"
-                  />
-                </div>
-                <div class="fw-form-el">
-                  <select class="fw-form-select" formControlName="lastIncrementYear">
-                    <option value="" disabled selected>Year of Increment</option>
-                    @for (val of salaryYears; track val) {
-                      <option [value]="val">{{ val }}</option>
-                    }
-                  </select>
-                </div>
               </div>
             </div>
           </section>

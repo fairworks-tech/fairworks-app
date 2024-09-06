@@ -12,19 +12,17 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   public salaryDetailing: FormGroup;
   public company: any;
   public jobTitle: any;
-  public employmentType: any;
   public totalExp: any;
+  public gender: any;
+  public employmentType: any;
+  public officeLocation: any;
+  public department: any;
   public fixedSalary: any;
   public variableSalary: any;
   public hasStocks: any;
   public salaryYear: any;
-  public lastIncrement: any;
-  public lastIncrementYear: any;
-  public gender: any;
-  public officeLocation: any;
-  public department: any;
 
-  public companyListAuto: any;
+  public companySuggestions: any;
   public yearsOfExp: any;
   public salaryValLakhs: any;
   public salaryValThousands: any;
@@ -42,7 +40,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   };
 
   constructor(private fb: FormBuilder) {
-    this.companyListAuto = FW_COMPANIES;
+    this.companySuggestions = FW_COMPANIES;
   }
 
   ngOnInit(): void {
@@ -68,8 +66,6 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
       stockValThousands: [""],
       stockVestingPeriod: [""],
       salaryYear: ["", [Validators.required]],
-      lastIncrement: ["", [Validators.required]],
-      lastIncrementYear: ["", [Validators.required]],
     });
 
     this.salaryDetailing.controls["hasStocks"].valueChanges.subscribe((x) => {
@@ -164,7 +160,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
     });
   }
 
-  processData(data: any) {
+  processFormData(data: any) {
     const { fixedSalaryLakhs, fixedSalaryThousands, variableSalaryLakhs, variableSalaryThousands, ...rest } = data;
     const finalData = {
       ...rest,
@@ -177,7 +173,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   submit() {
     this.validateFormData();
     if (this.salaryDetailing.valid) {
-      this.processData(this.salaryDetailing.value);
+      this.processFormData(this.salaryDetailing.value);
     } else {
       console.error("Form values are invalid.");
     }
