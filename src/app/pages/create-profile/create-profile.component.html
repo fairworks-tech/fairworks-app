@@ -1,24 +1,21 @@
 <fw-header></fw-header>
 <div class="fw-page-container">
-
   <div class="fw-content-area">
     <div class="stepper-container">
-      <div class="stepper-nav">
-
-      </div>
+      <div class="stepper-nav"></div>
       <div class="stepper-content">
         <form [formGroup]="profiling">
           <!-- step 1 -->
-          @if (stepper.currentStep===1) {
+          @if (stepper.currentStep === 1) {
             <section class="fw-form-section" formGroupName="userLoginInfo">
               <h4 class="m-b-1_5x">Create Account</h4>
               <div class="fw-form-el-wrap">
                 <label for="email">Email</label>
                 <div class="fw-form-el">
-                  <input class="fw-form-input" id="email" type="text" formControlName="email" (blur)="isEmailExists()">
-                  @if (isFormValueInvalid.email) {
+                  <input class="fw-form-input" id="email" type="text" formControlName="email" (blur)="isValidEmail()" />
+                  @if (isStep1Invalid.email) {
                     <div class="text-sm text-error">
-                      {{hasFormError.email}}
+                      {{ hasStep1Error.email }}
                     </div>
                   }
                 </div>
@@ -28,121 +25,133 @@
                   }
                 </div>
               </div>
-  
+
               <div class="fw-form-el-wrap">
                 <label for="password">Password</label>
                 <div class="fw-form-el">
-                  <input class="fw-form-input" id="password" type="password" formControlName="password">
+                  <input class="fw-form-input" id="password" type="password" formControlName="password" />
                   <div class="text-sm">
                     <span [innerHTML]="helperText.password"></span>
                   </div>
-                  @if (isFormValueInvalid.password) {
-                    <div class="text-sm text-error">{{hasFormError.password}}</div>
+                  @if (isStep1Invalid.password) {
+                    <div class="text-sm text-error">{{ hasStep1Error.password }}</div>
                   }
                 </div>
               </div>
-  
+
               <div class="fw-form-el-wrap">
                 <label for="repassword">Confirm Password</label>
                 <div class="fw-form-el">
-                  <input class="fw-form-input" id="repassword" type="password" formControlName="rePassword">
-                  @if (isFormValueInvalid.rePassword) {
-                    <div class="text-sm text-error">{{hasFormError.rePassword}}</div>
+                  <input class="fw-form-input" id="repassword" type="password" formControlName="rePassword" />
+                  @if (isStep1Invalid.rePassword) {
+                    <div class="text-sm text-error">{{ hasStep1Error.rePassword }}</div>
                   }
                 </div>
               </div>
+
+              @if (fillStep1Error) {
+                <div class="text-sm text-error">
+                  Please fill the required information to create your account with us.
+                </div>
+              }
             </section>
           }
 
           <!-- step 2 -->
-          @if (stepper.currentStep===2) {
+          @if (stepper.currentStep === 2) {
             <section class="fw-form-section" formGroupName="userInfo">
               <h4 class="m-b-1_5x">Personal Information</h4>
               <div class="fw-form-el-wrap">
                 <label for="firstname">First Name</label>
                 <div class="fw-form-el">
-                  <input class="fw-form-input" id="firstname" type="text" formControlName="firstName">
-                  @if (isFormValueInvalid.firstName) {
+                  <input class="fw-form-input" id="firstname" type="text" formControlName="firstName" />
+                  @if (isStep2Invalid.firstName) {
                     <div class="text-sm text-error">
-                      <span>{{hasFormError.firstName}}</span>
+                      {{ hasStep2Error.firstName }}
                     </div>
                   }
                 </div>
               </div>
-              
+
               <div class="fw-form-el-wrap">
                 <label for="lastname">Last Name</label>
                 <div class="fw-form-el">
-                  <input class="fw-form-input" id="lastname" type="text" formControlName="lastName">
-                  @if (isFormValueInvalid.lastName) {
+                  <input class="fw-form-input" id="lastname" type="text" formControlName="lastName" />
+                  @if (isStep2Invalid.lastName) {
                     <div class="text-sm text-error">
-                      <span>{{hasFormError.lastName}}</span>
+                      {{ hasStep2Error.lastName }}
                     </div>
                   }
                 </div>
               </div>
-  
+
               <div class="fw-form-el-wrap">
                 <label for="city">City</label>
                 <div class="fw-form-el">
-                  <input class="fw-form-input" id="city" type="text" formControlName="city">
+                  <input class="fw-form-input" id="city" type="text" formControlName="city" />
+                  @if (isStep2Invalid.city) {
+                    <div class="text-sm text-error">
+                      {{ hasStep2Error.city }}
+                    </div>
+                  }
                 </div>
               </div>
-  
+
               <div class="fw-form-el-wrap">
                 <label for="country">Country</label>
                 <div class="fw-form-el">
-                  <fw-combobox formControlName="country"
-                    [dataOptions]="countryList"
-                    [dataKey]="'countryName'"
-                  >  
+                  <fw-combobox formControlName="country" [dataOptions]="countryList" [dataKey]="'countryName'">
                   </fw-combobox>
                 </div>
               </div>
-  
+
               <div class="fw-form-el-wrap">
                 <label for="phone">Phone</label>
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-phonecode">
                     <select class="fw-form-select" name="phoneCode" id="phoneCode" formControlName="phoneCode">
                       @for (code of phoneCodeList; track code) {
-                        <option [value]="code">{{code}}</option>
+                        <option [value]="code">{{ code }}</option>
                       }
                     </select>
                   </div>
                   <div class="fw-input-phonenum">
-                    <input class="fw-form-input" id="phone" type="text" formControlName="phone">
+                    <input class="fw-form-input" id="phone" type="text" formControlName="phone" />
                   </div>
                 </div>
               </div>
+
+              @if (fillStep2Error) {
+                <div class="text-sm text-error">Please provide your basic information to create your profile.</div>
+              }
             </section>
           }
 
           <!-- step 3 -->
-          @if (stepper.currentStep===3) {
+          @if (stepper.currentStep === 3) {
             <section class="fw-form-section" formArrayName="userExpForm">
               <h4 class="m-b-1_5x">Work Experience</h4>
               <p>Please list your work experience, starting with the most recent.</p>
-              @for (userExpItem of experienceFormGroup.controls; track userExpItem; let i=$index) {
+              @for (userExpItem of experienceFormGroup.controls; track userExpItem; let i = $index) {
                 <div [formGroupName]="i">
                   <div class="fw-form-section-head">
-                    <h6>Experience {{i+1}}</h6>
-                    @if (i!==0) {
+                    <h6>Experience {{ i + 1 }}</h6>
+                    @if (i !== 0) {
                       <button class="fw-form-action-remove" (click)="removeExp(i)">Remove</button>
                     }
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="jobTitle">Job Title</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="jobTitle" type="text" formControlName="jobTitle">
+                      <input class="fw-form-input" id="jobTitle" type="text" formControlName="jobTitle" />
                     </div>
                   </div>
-      
+
                   <div class="fw-form-el-wrap">
                     <label for="organisation">Company</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="organisation" type="text" formControlName="organisation">
+                      <input class="fw-form-input" id="organisation" type="text" formControlName="organisation" />
                     </div>
                   </div>
 
@@ -157,14 +166,14 @@
                       </select>
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="location">Location</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="location" type="text" formControlName="location">
+                      <input class="fw-form-input" id="location" type="text" formControlName="location" />
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="locationType">Location Type</label>
                     <div class="fw-form-el">
@@ -176,7 +185,7 @@
                       </select>
                     </div>
                   </div>
-      
+
                   <div class="fw-form-el-wrap">
                     <label for="jobStartDate">Start Date</label>
                     <div class="fw-grouped-inputs">
@@ -184,7 +193,7 @@
                         <select class="fw-form-select" formControlName="jobStartMonth">
                           @for (month of monthRange; track month) {
                             <option [value]="month.id">
-                              {{month.name}}
+                              {{ month.name }}
                             </option>
                           }
                         </select>
@@ -193,7 +202,7 @@
                         <select class="fw-form-select" formControlName="jobStartYear">
                           @for (year of yearRange; track year) {
                             <option [value]="year">
-                              {{year}}
+                              {{ year }}
                             </option>
                           }
                         </select>
@@ -209,7 +218,7 @@
                           <select class="fw-form-select" formControlName="jobEndMonth">
                             @for (month of monthRange; track month) {
                               <option [value]="month.id">
-                                {{month.name}}
+                                {{ month.name }}
                               </option>
                             }
                           </select>
@@ -218,7 +227,7 @@
                           <select class="fw-form-select" formControlName="jobEndYear">
                             @for (year of yearRange; track year) {
                               <option [value]="year">
-                                {{year}}
+                                {{ year }}
                               </option>
                             }
                           </select>
@@ -229,7 +238,7 @@
                       </div>
                     </div>
                   </div>
-      
+
                   <div class="fw-form-el-wrap">
                     <label for="jobDesc">Description</label>
                     <div class="fw-form-el">
@@ -238,48 +247,47 @@
                   </div>
                 </div>
               }
-  
+
               <div class="fw-form-section-footer">
                 <button class="fw-form-section-btn" (click)="addExp()">Add Another</button>
               </div>
-  
             </section>
-          }  
+          }
 
           <!-- step 4 -->
-          @if (stepper.currentStep===4) {
+          @if (stepper.currentStep === 4) {
             <section class="fw-form-section" formArrayName="userEduForm">
               <h4 class="m-b-1_5x">Educational Qualification</h4>
               <p>Please list your education, starting with the most recent.</p>
-              @for (userEduItem of educationFormGroup.controls; track userEduItem; let j=$index) {
+              @for (userEduItem of educationFormGroup.controls; track userEduItem; let j = $index) {
                 <div [formGroupName]="j">
                   <div class="fw-form-section-head">
-                    <h6>Education {{j+1}}</h6>
-                    @if (j!==0) {
+                    <h6>Education {{ j + 1 }}</h6>
+                    @if (j !== 0) {
                       <button class="fw-form-action-remove" (click)="removeEdu(j)">Remove</button>
                     }
                   </div>
                   <div class="fw-form-el-wrap">
                     <label for="institution">School / University</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="institution" type="text" formControlName="institution">
+                      <input class="fw-form-input" id="institution" type="text" formControlName="institution" />
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="degree">Degree</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="degree" type="text" formControlName="degree">
+                      <input class="fw-form-input" id="degree" type="text" formControlName="degree" />
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="specialization">Field of study</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="specialization" type="text" formControlName="specialization">
+                      <input class="fw-form-input" id="specialization" type="text" formControlName="specialization" />
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="eduStartDate">Start Date</label>
                     <div class="fw-grouped-inputs">
@@ -287,7 +295,7 @@
                         <select class="fw-form-select" formControlName="eduStartMonth">
                           @for (month of monthRange; track $index) {
                             <option [ngValue]="month.id">
-                              {{month.name}}
+                              {{ month.name }}
                             </option>
                           }
                         </select>
@@ -296,14 +304,14 @@
                         <select class="fw-form-select" formControlName="eduStartYear">
                           @for (year of yearRange; track $index) {
                             <option [ngValue]="year">
-                              {{year}}
+                              {{ year }}
                             </option>
                           }
                         </select>
                       </div>
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="eduEndDate">Completion Date</label>
                     <div class="fw-form-el">
@@ -312,7 +320,7 @@
                           <select class="fw-form-select" formControlName="eduEndMonth">
                             @for (month of monthRange; track $index) {
                               <option [ngValue]="month.id">
-                                {{month.name}}
+                                {{ month.name }}
                               </option>
                             }
                           </select>
@@ -321,7 +329,7 @@
                           <select class="fw-form-select" formControlName="eduEndYear">
                             @for (year of yearRange; track $index) {
                               <option [ngValue]="year">
-                                {{year}}
+                                {{ year }}
                               </option>
                             }
                           </select>
@@ -332,16 +340,16 @@
                       </div>
                     </div>
                   </div>
-    
+
                   <div class="fw-form-el-wrap">
                     <label for="grade">Grade/GPA/CGPA</label>
                     <div class="fw-form-el">
-                      <input class="fw-form-input" id="grade" type="text" formControlName="grade">
+                      <input class="fw-form-input" id="grade" type="text" formControlName="grade" />
                     </div>
                   </div>
                 </div>
               }
-              
+
               <div class="fw-form-section-footer">
                 <button class="fw-form-section-btn" (click)="addEdu()">Add Another</button>
               </div>
@@ -351,34 +359,32 @@
 
         <div class="stepper-controls">
           <div class="left">
-            @if (stepper.currentStep!==1) {
-              <button class="fw-form-btn" (click)="gotoPrev()">Previous</button>
+            @if (stepper.currentStep !== 1) {
+              <button class="fw-form-btn" (click)="reqToPrevStep()">Previous</button>
             }
-            
           </div>
           <div class="right">
-            @if (stepper.currentStep===stepper.maxStep) {
-              <button class="fw-form-prime-btn" (click)="gotoNext()">Finish</button>
-            }
-            @else {
+            @if (stepper.currentStep === stepper.maxStep) {
+              <button class="fw-form-prime-btn" (click)="reqToNextStep(stepper.currentStep)">Finish</button>
+            } @else {
               <!-- Except step 4 -->
-              <button class="fw-form-blue-btn" (click)="gotoNext()">Next</button>
+              <button class="fw-form-blue-btn" (click)="reqToNextStep(stepper.currentStep)">Next</button>
             }
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
 </div>
-
 
 @if (creatingProfile) {
   <div class="fw-status-modal-wrap">
     <section class="inner">
       <h2>You're almost done..!</h2>
-      <p>We are creating your profile. It will take a moment to create your profile. Please don't close the browser window until the status is completed.</p>
+      <p>
+        We are creating your profile. It will take a moment to create your profile. Please don't close the browser
+        window until the status is completed.
+      </p>
     </section>
   </div>
 }

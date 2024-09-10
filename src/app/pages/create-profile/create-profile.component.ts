@@ -67,21 +67,16 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   };
   userInfoForm: any;
 
-  public isFormValueInvalid = {
-    email: false,
-    password: false,
-    rePassword: false,
-    firstName: false,
-    lastName: false,
-  };
-
-  public hasFormError = {
-    email: "",
-    password: "",
-    rePassword: "",
-    firstName: "",
-    lastName: "",
-  };
+  public isStep1Invalid: any = {};
+  public hasStep1Error: any = {};
+  public fillStep1Error: boolean = false;
+  public isStep2Invalid: any = {};
+  public hasStep2Error: any = {};
+  public fillStep2Error: boolean = false;
+  public isStep3Invalid: any = {};
+  public hasStep3Error: any = {};
+  public isStep4Invalid: any = {};
+  public hasStep4Error: any = {};
 
   helperText = {
     password:
@@ -101,10 +96,14 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     this.countryList = FW_COUNTRIES;
     this.phoneCodeData = FW_PHONECODES;
     this.phoneCodeList = [...new Set(FW_PHONECODES.map((item: any) => item["dial"]))];
+    this.setYearRange();
   }
 
   ngOnInit(): void {
-    this.setYearRange();
+    this.resetStep1Errors();
+    this.resetStep2Errors();
+    this.resetStep3Errors();
+    this.resetStep4Errors();
 
     this.profiling = this.fb.group({
       userLoginInfo: this.fb.group({
@@ -212,99 +211,162 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  gotoNext() {
-    // Step1 - Form validation
-    if (this.stepper.currentStep === 1 && this.profiling.controls["userLoginInfo"].touched) {
-      this.processStep1();
-    }
+  processStep1() {
+    this.resetStep1Errors(); // Reset form errors
 
-    // Step2 - Form validation
-    if (this.stepper.currentStep === 2 && this.profiling.controls["userInfo"].touched) {
-      this.processStep2();
-    }
+    const userLoginInfo = this.profiling.value.userLoginInfo;
 
-    // Step3 - Form validation
-    if (this.stepper.currentStep === 3 && this.profiling.controls["userExpForm"].touched) {
-      this.processStep3();
-    }
+    // Check if email is valid first
+    this.isValidEmail();
 
-    // Step4 - Form validation
-    if (this.stepper.currentStep === 4 && this.profiling.controls["userEduForm"].touched) {
-      this.processStep4();
+    if (!this.profiling.controls["userLoginInfo"].valid) {
+      const passwordValidations = [
+        { regex: /^(?=.*[A-Z])/, error: "At least one uppercase letter." },
+        { regex: /(?=.*[a-z])/, error: "At least one lowercase letter." },
+        { regex: /(.*[0-9].*)/, error: "At least one digit." },
+        { regex: /(?=.*[!@#$%^&*])/, error: "At least one special character." },
+        { regex: /.{8,}/, error: "At least 8 characters long." },
+      ];
+
+      for (const validation of passwordValidations) {
+        if (!userLoginInfo.password.match(validation.regex)) {
+          this.setStep1Error("password", validation.error);
+          return;
+        }
+      }
+    } else if (userLoginInfo.password !== userLoginInfo.rePassword) {
+      this.setStep1Error("rePassword", "Passwords don't match");
+    } else {
+      console.log("Info from Step 1 - ", this.profiling);
+      this.stepper.currentStep += 1;
     }
   }
 
-  processStep1() {
-    this.isFormValueInvalid.email = false;
-    this.isFormValueInvalid.password = false;
-    this.isFormValueInvalid.rePassword = false;
-    if (this.profiling.controls["userLoginInfo"].valid) {
-      if (this.profiling.value.userLoginInfo.password !== this.profiling.value.userLoginInfo.rePassword) {
-        this.isFormValueInvalid.rePassword = true;
-        this.hasFormError.rePassword = "Passwords don't match";
-      } else {
-        console.log(this.profiling);
-        this.stepper.currentStep = this.stepper.currentStep + 1;
-      }
-    } else if (!this.profiling.value.userLoginInfo.password.match("^(?=.*[A-Z])")) {
-      this.isFormValueInvalid.password = true;
-      this.hasFormError.password = "At least uppercase letter.";
-    } else if (!this.profiling.value.userLoginInfo.password.match("(?=.*[a-z])")) {
-      this.isFormValueInvalid.password = true;
-      this.hasFormError.password = "At least one lowercase letter.";
-    } else if (!this.profiling.value.userLoginInfo.password.match("(.*[0-9].*)")) {
-      this.isFormValueInvalid.password = true;
-      this.hasFormError.password = "At least one digit.";
-    } else if (!this.profiling.value.userLoginInfo.password.match("(?=.*[!@#$%^&*])")) {
-      this.isFormValueInvalid.password = true;
-      this.hasFormError.password = "At least one special character.";
-    } else if (!this.profiling.value.userLoginInfo.password.match(".{8,}")) {
-      this.isFormValueInvalid.password = true;
-      this.hasFormError.password = "At least 8 characters long.";
+  isValidEmail() {
+    if (!this._util.isValidEmail(this.profiling.value.userLoginInfo.email)) {
+      this.checkingEmail = !this.checkingEmail;
+      this.setStep1Error("email", "Invalid Email");
+    } else {
+      this.isStep1Invalid["email"] = false;
+      this.hasStep1Error["email"] = null;
     }
+  }
+
+  // Helper method to reset form errors
+  resetStep1Errors() {
+    this.isStep1Invalid = {};
+    this.hasStep1Error = {};
+  }
+
+  // Helper method to set form error
+  setStep1Error(field: string, errorMessage: string) {
+    this.isStep1Invalid[field] = true;
+    this.hasStep1Error[field] = errorMessage;
   }
 
   processStep2() {
-    if (this.profiling.controls["userInfo"].valid) {
-      console.log(this.profiling);
-      this.stepper.currentStep = this.stepper.currentStep + 1;
-    } else {
+    const userInfo = this.profiling.value.userInfo;
+
+    if (!this.profiling.controls["userInfo"].valid) {
+      if (userInfo.firstName === "") {
+        this.setStep2Error("firstName", "Please enter a valid first name.");
+      }
+      if (userInfo.lastName === "") {
+        this.setStep2Error("lastName", "Please enter a valid last name.");
+      }
+      if (userInfo.city === "") {
+        this.setStep2Error("city", "Please enter a valid city name.");
+      }
       console.log(this.profiling);
       console.error("Invalid form values - step2");
+    } else {
+      console.log(this.profiling);
+      this.stepper.currentStep = this.stepper.currentStep + 1;
     }
+  }
+
+  resetStep2Errors() {
+    this.isStep2Invalid = {};
+    this.hasStep2Error = {};
+  }
+
+  setStep2Error(field: string, errorMessage: string) {
+    this.isStep2Invalid[field] = true;
+    this.hasStep2Error[field] = errorMessage;
   }
 
   processStep3() {
-    if (this.profiling.controls["userExpForm"].valid) {
-      console.log(this.profiling);
-      this.stepper.currentStep = this.stepper.currentStep + 1;
-    } else {
+    if (!this.profiling.controls["userExpForm"].valid) {
       console.log(this.profiling);
       console.error("Invalid form values - step3");
+    } else {
+      console.log(this.profiling);
+      this.stepper.currentStep = this.stepper.currentStep + 1;
     }
+  }
+
+  resetStep3Errors() {
+    this.isStep3Invalid = {};
+    this.hasStep3Error = {};
+  }
+
+  setStep3Error(field: string, errorMessage: string) {
+    this.isStep3Invalid[field] = true;
+    this.hasStep3Error[field] = errorMessage;
   }
 
   processStep4() {
-    if (this.profiling.controls["userEduForm"].valid) {
-      console.log(this.profiling);
-      this.submit();
-    } else {
+    if (!this.profiling.controls["userEduForm"].valid) {
       console.log(this.profiling);
       console.error("Invalid form values - step4");
+    } else {
+      console.log(this.profiling);
+      this.submit();
     }
   }
 
-  gotoPrev() {
+  resetStep4Errors() {
+    this.isStep4Invalid = {};
+    this.hasStep4Error = {};
+  }
+
+  setStep4Error(field: string, errorMessage: string) {
+    this.isStep4Invalid[field] = true;
+    this.hasStep4Error[field] = errorMessage;
+  }
+
+  reqToPrevStep() {
     this.stepper.currentStep = this.stepper.currentStep - 1;
   }
 
-  isEmailExists() {
-    if (this._util.isValidEmail(this.profiling.value.userLoginInfo.email)) {
-      this.isFormValueInvalid.email = false;
-      this.checkingEmail = !this.checkingEmail;
-    } else {
-      this.isFormValueInvalid.email = true;
-      this.hasFormError.email = "Invalid Email";
+  reqToNextStep(currentStep: number) {
+    if (currentStep === 1) {
+      if (this.profiling.controls["userLoginInfo"].touched) {
+        this.processStep1();
+      } else if (this.profiling.controls["userLoginInfo"].untouched) {
+        this.fillStep1Error = true;
+      }
+    }
+    if (currentStep === 2) {
+      if (this.profiling.controls["userInfo"].touched) {
+        this.processStep2();
+      } else if (this.profiling.controls["userInfo"].untouched) {
+        this.fillStep2Error = true;
+      }
+    }
+    if (currentStep === 3) {
+      if (this.profiling.controls["userExpForm"].touched) {
+        this.processStep3();
+      } else if (this.profiling.controls["userExpForm"].untouched) {
+        console.log("Please provide your employment history.");
+      }
+    }
+    if (currentStep === 4) {
+      if (this.profiling.controls["userEduForm"].touched) {
+        this.processStep4();
+      } else if (this.profiling.controls["userEduForm"].untouched) {
+        console.log("Please provide your educational information.");
+      }
     }
   }
 
