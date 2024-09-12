@@ -36,6 +36,18 @@ export const FW_COMPANIES = [
     industries: "Accounting & Auditing, Management Consulting",
   },
   {
+    companyId: 46,
+    companyName: "FICO",
+    companyLogo: "fico",
+    industries: "Banking & Finance",
+  },
+  {
+    companyId: 47,
+    compannyName: "Infoblox",
+    companyLogo: "infoblox",
+    industries: "Network security",
+  },
+  {
     companyId: 41,
     companyName: "Infosys",
     companyLogo: "infosys",
@@ -45,8 +57,7 @@ export const FW_COMPANIES = [
     companyId: 42,
     companyName: "TCS",
     companyLogo: "tcs",
-    industries:
-      "Financial Services, Internet, Education & Training, BPO, IT Services & Consulting",
+    industries: "Financial Services, Internet, Education & Training, BPO, IT Services & Consulting",
   },
   {
     companyId: 17,

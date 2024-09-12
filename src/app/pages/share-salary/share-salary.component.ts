@@ -16,11 +16,12 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
   public gender: any;
   public employmentType: any;
   public officeLocation: any;
-  public department: any;
+  public jobRole: any;
   public fixedSalary: any;
   public variableSalary: any;
   public hasStocks: any;
   public salaryYear: any;
+  public offerType: any;
 
   public companySuggestions: any;
   public yearsOfExp: any;
@@ -36,7 +37,13 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
     gender: false,
     employmentType: false,
     officeLocation: false,
-    department: false,
+    jobRole: false,
+    fixedSalaryLakhs: false,
+    fixedSalaryThousands: false,
+    variableSalaryLakhs: false,
+    variableSalaryThousands: false,
+    salaryYear: false,
+    offerType: false,
   };
 
   constructor(private fb: FormBuilder) {
@@ -56,7 +63,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
       gender: ["", [Validators.required]],
       employmentType: ["", [Validators.required]],
       officeLocation: ["", [Validators.required]],
-      department: ["", [Validators.required]],
+      jobRole: ["", [Validators.required]],
       fixedSalaryLakhs: ["", [Validators.required]],
       fixedSalaryThousands: ["", [Validators.required]],
       variableSalaryLakhs: ["", [Validators.required]],
@@ -66,6 +73,7 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
       stockValThousands: [""],
       stockVestingPeriod: [""],
       salaryYear: ["", [Validators.required]],
+      offerType: ["", [Validators.required]],
     });
 
     this.salaryDetailing.controls["hasStocks"].valueChanges.subscribe((x) => {
@@ -150,7 +158,13 @@ export class ShareSalaryComponent implements OnInit, OnDestroy {
       "gender",
       "employmentType",
       "officeLocation",
-      "department",
+      "jobRole",
+      "fixedSalaryLakhs",
+      "fixedSalaryThousands",
+      "variableSalaryLakhs",
+      "variableSalaryThousands",
+      "salaryYear",
+      "offerType",
     ];
 
     controlsToValidate.forEach((controlName) => {

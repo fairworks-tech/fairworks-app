@@ -152,7 +152,7 @@
                 </div>
               </div>
               @if (isFormValueInvalid["employmentType"]) {
-                <div class="text-sm text-error">Employment type is required.</div>
+                <div class="text-sm text-error">Please select your employment type.</div>
               }
             </div>
             <div class="row">
@@ -163,22 +163,27 @@
                     <input class="fw-form-input" id="officeLocation" type="text" formControlName="officeLocation" />
                   </div>
                   @if (isFormValueInvalid["officeLocation"]) {
-                    <div class="text-sm text-error">Office location is required.</div>
+                    <div class="text-sm text-error">Please enter your office location.</div>
                   }
                 </div>
               </div>
               <div class="col">
                 <div class="fw-form-el-wrap-vertical">
-                  <label for="department">Department</label>
+                  <label for="jobRole">Job Role</label>
                   <div class="fw-form-el">
-                    <select class="fw-form-select" formControlName="department">
+                    <select class="fw-form-select" name="jobRole" formControlName="jobRole">
                       <optgroup label="Engineering - Software">
                         <option value="Data Science">Data Science</option>
                         <option value="DBA or Data warehousing">DBA or Data warehousing</option>
                         <option value="DevOps">DevOps</option>
                         <option value="Software Development">Software Development</option>
+                        <option value="Software Development">Frontend Development</option>
+                        <option value="Software Development">Backend Development</option>
+                        <option value="Software Development">Fullstack Development</option>
+                        <option value="Software Development">Mobile App Development</option>
                         <option value="Product Management">Product Management</option>
                         <option value="Project Management">Project Management</option>
+                        <option value="Team Management">Team Management</option>
                         <option value="Quality Assurance and Testing">Quality Assurance and Testing</option>
                         <option value="SRE">SRE</option>
                       </optgroup>
@@ -201,8 +206,8 @@
                       </optgroup>
                     </select>
                   </div>
-                  @if (isFormValueInvalid["department"]) {
-                    <div class="text-sm text-error">Department is required.</div>
+                  @if (isFormValueInvalid["jobRole"]) {
+                    <div class="text-sm text-error">Select a nearly matching job role.</div>
                   }
                 </div>
               </div>
@@ -211,7 +216,7 @@
               <label>Fixed Salary</label>
               <div class="fw-form-el-wrap">
                 <div class="fw-form-el">
-                  <select class="fw-form-select" formControlName="fixedSalaryLakhs">
+                  <select class="fw-form-select" name="fixedSalaryLakhs" formControlName="fixedSalaryLakhs">
                     <option value="" disabled selected>Select Lakhs</option>
                     @for (item of salaryValLakhs; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -219,7 +224,7 @@
                   </select>
                 </div>
                 <div class="fw-form-el">
-                  <select class="fw-form-select" formControlName="fixedSalaryThousands">
+                  <select class="fw-form-select" name="fixedSalaryThousands" formControlName="fixedSalaryThousands">
                     <option value="" disabled selected>Thousands</option>
                     @for (item of salaryValThousands; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -227,12 +232,15 @@
                   </select>
                 </div>
               </div>
+              @if (isFormValueInvalid["fixedSalaryLakhs"] || isFormValueInvalid["fixedSalaryThousands"]) {
+                <div class="text-sm text-error">Fixed salary is required.</div>
+              }
             </div>
             <div class="fw-form-el-wrap-vertical">
               <label>Variable Salary</label>
               <div class="fw-form-el-wrap">
                 <div class="fw-form-el">
-                  <select class="fw-form-select" formControlName="variableSalaryLakhs">
+                  <select class="fw-form-select" name="variableSalaryLakhs" formControlName="variableSalaryLakhs">
                     <option value="" disabled selected>Select Lakhs</option>
                     @for (item of salaryValLakhs; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -240,7 +248,11 @@
                   </select>
                 </div>
                 <div class="fw-form-el">
-                  <select class="fw-form-select" formControlName="variableSalaryThousands">
+                  <select
+                    class="fw-form-select"
+                    name="variableSalaryThousands"
+                    formControlName="variableSalaryThousands"
+                  >
                     <option value="" disabled selected>Thousands</option>
                     @for (item of salaryValThousands; track item) {
                       <option [value]="item.val">{{ item.text }}</option>
@@ -248,6 +260,9 @@
                   </select>
                 </div>
               </div>
+              @if (isFormValueInvalid["variableSalaryLakhs"] || isFormValueInvalid["variableSalaryThousands"]) {
+                <div class="text-sm text-error">Variable salary is required.</div>
+              }
             </div>
             <div class="fw-form-el-wrap-vertical">
               <label for="hasStocks">Receive any stock options?</label>
@@ -370,6 +385,42 @@
                   }
                 </select>
               </div>
+              @if (isFormValueInvalid["salaryYear"]) {
+                <div class="text-sm text-error">Salary year is required.</div>
+              }
+            </div>
+
+            <div class="fw-form-el-wrap-vertical">
+              <label for="gender">These salary details are from the perspective of a:</label>
+              <div class="fw-form-el">
+                <div class="fw-tabler">
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="newOffer"
+                      value="newOffer"
+                      name="offerType"
+                      formControlName="offerType"
+                    />
+                    <label class="tabler-button" for="male">New Offer</label>
+                  </div>
+                  <div class="tabler-item">
+                    <input
+                      type="radio"
+                      class="tabler-input"
+                      id="existingEmp"
+                      value="existingEmp"
+                      name="offerType"
+                      formControlName="offerType"
+                    />
+                    <label class="tabler-button" for="male">Existing Employee</label>
+                  </div>
+                </div>
+              </div>
+              @if (isFormValueInvalid["offerType"]) {
+                <div class="text-sm text-error">Salary type is required.</div>
+              }
             </div>
           </section>
         </form>
