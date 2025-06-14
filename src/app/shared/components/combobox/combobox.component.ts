@@ -1,5 +1,6 @@
 import { Component, Input, forwardRef } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "fw-combobox",
@@ -12,6 +13,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       useExisting: forwardRef(() => ComboboxComponent),
     },
   ],
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
+  standalone: true
 })
 export class ComboboxComponent implements ControlValueAccessor {
   showComboboxOptions = false;
@@ -19,8 +25,8 @@ export class ComboboxComponent implements ControlValueAccessor {
   result: any;
   selectedIndex: number = -1;
 
-  @Input() dataOptions: any;
-  @Input() dataKey: string;
+  @Input() dataOptions: any = [];
+  @Input() dataKey: string = '';
 
   renderText(item: any) {
     return item[this.dataKey];

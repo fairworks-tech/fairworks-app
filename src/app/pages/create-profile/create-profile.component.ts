@@ -1,7 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 import { UtilService } from "src/app/shared/services/utils.service";
+import { HeaderComponent } from "src/app/shared/components/header/header.component";
+import { ComboboxComponent } from "src/app/shared/components/combobox/combobox.component";
 
 import { FW_COUNTRIES } from "src/app/config/fw.countries";
 import { FW_PHONECODES } from "src/app/config/fw.phonecodes";
@@ -11,6 +15,14 @@ import { CreateProfileService } from "src/app/dataaccess/create-profile.service"
   selector: "app-create-profile",
   templateUrl: "./create-profile.component.html",
   styleUrl: "./create-profile.component.scss",
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HeaderComponent,
+    ComboboxComponent
+  ],
+  standalone: true
 })
 export class CreateProfileComponent implements OnInit, OnDestroy {
   public profiling!: FormGroup;

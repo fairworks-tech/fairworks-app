@@ -5,7 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { CreateProfileComponent } from "./pages/create-profile/create-profile.component";
 import { ShareSalaryComponent } from "./pages/share-salary/share-salary.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: "", redirectTo: "create-profile", pathMatch: "full" },
   { path: "create-profile", component: CreateProfileComponent },
   { path: "share-salary", component: ShareSalaryComponent },

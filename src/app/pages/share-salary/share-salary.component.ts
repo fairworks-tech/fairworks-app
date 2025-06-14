@@ -1,15 +1,27 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 import { FW_COMPANIES } from "src/app/config/fw.companies";
+import { HeaderComponent } from "src/app/shared/components/header/header.component";
+import { ComboboxComponent } from "src/app/shared/components/combobox/combobox.component";
 
 @Component({
   selector: "app-share-salary",
   templateUrl: "./share-salary.component.html",
   styleUrl: "./share-salary.component.scss",
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HeaderComponent,
+    ComboboxComponent
+  ],
+  standalone: true
 })
 export class ShareSalaryComponent implements OnInit, OnDestroy {
-  public salaryDetailing: FormGroup;
+  public salaryDetailing!: FormGroup;
   public company: any;
   public jobTitle: any;
   public totalExp: any;
