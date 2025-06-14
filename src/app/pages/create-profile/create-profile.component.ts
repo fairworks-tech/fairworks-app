@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, DestroyRef, inject } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { UtilService } from "src/app/shared/services/utils.service";
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
@@ -27,6 +28,7 @@ import { StepStatus } from "src/app/data-access/step-status.enum";
   standalone: true
 })
 export class CreateProfileComponent implements OnInit, OnDestroy {
+  private destroyRef = inject(DestroyRef);
   public profiling!: FormGroup;
   public expList!: FormArray;
   public eduList!: FormArray;
@@ -102,10 +104,10 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.resetStep1Errors();
-    this.resetStep2Errors();
-    this.resetStep3Errors();
-    this.resetStep4Errors();
+    this.resetStepErrors(1);
+    this.resetStepErrors(2);
+    this.resetStepErrors(3);
+    this.resetStepErrors(4);
 
     this.profiling = this.fb.group({
       userLoginInfo: this.fb.group({
@@ -148,30 +150,35 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
 
     // Subscribe to isCurrentJob changes for each experience form
     this.expList.controls.forEach((control, index) => {
-      control.get('isCurrentJob')?.valueChanges.subscribe(isCurrent => {
-        const endMonthControl = control.get('jobEndMonth');
-        const endYearControl = control.get('jobEndYear');
-        
-        if (isCurrent) {
-          endMonthControl?.clearValidators();
-          endYearControl?.clearValidators();
-        } else {
-          endMonthControl?.setValidators([Validators.required]);
-          endYearControl?.setValidators([Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]);
-        }
-        
-        endMonthControl?.updateValueAndValidity();
-        endYearControl?.updateValueAndValidity();
-      });
+      control.get('isCurrentJob')?.valueChanges
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(isCurrent => {
+          const endMonthControl = control.get('jobEndMonth');
+          const endYearControl = control.get('jobEndYear');
+          
+          if (isCurrent) {
+            endMonthControl?.clearValidators();
+            endYearControl?.clearValidators();
+          } else {
+            endMonthControl?.setValidators([Validators.required]);
+            endYearControl?.setValidators([Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]);
+          }
+          
+          endMonthControl?.updateValueAndValidity();
+          endYearControl?.updateValueAndValidity();
+        });
     });
 
-    this.userInfoForm.controls["country"].valueChanges.subscribe((change: any) => {
-      this.phoneCodeData.filter((o: any) => {
-        if (o["countryName"] === change) {
-          this.userInfoForm.controls["phoneCode"].setValue(o.dial);
-        }
+    // Update country subscription
+    this.userInfoForm.controls["country"].valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((change: any) => {
+        this.phoneCodeData.filter((o: any) => {
+          if (o["countryName"] === change) {
+            this.userInfoForm.controls["phoneCode"].setValue(o.dial);
+          }
+        });
       });
-    });
   }
 
   initExpForm(): FormGroup {
@@ -233,8 +240,19 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Helper method to set form error for any step
+  setStepError(stepNumber: number, field: string, errorMessage: string) {
+    const errorState = {
+      isInvalid: `isStep${stepNumber}Invalid`,
+      hasError: `hasStep${stepNumber}Error`
+    };
+
+    (this as any)[errorState.isInvalid][field] = true;
+    (this as any)[errorState.hasError][field] = errorMessage;
+  }
+
   processStep1() {
-    this.resetStep1Errors(); // Reset form errors
+    this.resetStepErrors(1); // Reset form errors
 
     const userLoginInfo = this.profiling.value.userLoginInfo;
 
@@ -252,14 +270,13 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
 
       for (const validation of passwordValidations) {
         if (!userLoginInfo.password.match(validation.regex)) {
-          this.setStep1Error("password", validation.error);
+          this.setStepError(1, "password", validation.error);
           return;
         }
       }
     } else if (userLoginInfo.password !== userLoginInfo.rePassword) {
-      this.setStep1Error("rePassword", "Passwords don't match");
+      this.setStepError(1, "rePassword", "Passwords don't match");
     } else {
-      console.log("Info from Step 1 - ", this.profiling);
       this.stepper.currentStep += 1;
     }
   }
@@ -267,23 +284,11 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   isValidEmail() {
     if (!this._util.isValidEmail(this.profiling.value.userLoginInfo.email)) {
       this.checkingEmail = !this.checkingEmail;
-      this.setStep1Error("email", "Invalid Email");
+      this.setStepError(1, "email", "Invalid Email");
     } else {
       this.isStep1Invalid["email"] = false;
       this.hasStep1Error["email"] = null;
     }
-  }
-
-  // Helper method to reset form errors
-  resetStep1Errors() {
-    this.isStep1Invalid = {};
-    this.hasStep1Error = {};
-  }
-
-  // Helper method to set form error
-  setStep1Error(field: string, errorMessage: string) {
-    this.isStep1Invalid[field] = true;
-    this.hasStep1Error[field] = errorMessage;
   }
 
   processStep2() {
@@ -291,70 +296,33 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
 
     if (!this.profiling.controls["userInfo"].valid) {
       if (userInfo.firstName === "") {
-        this.setStep2Error("firstName", "Please enter a valid first name.");
+        this.setStepError(2, "firstName", "Please enter a valid first name.");
       }
       if (userInfo.lastName === "") {
-        this.setStep2Error("lastName", "Please enter a valid last name.");
+        this.setStepError(2, "lastName", "Please enter a valid last name.");
       }
       if (userInfo.city === "") {
-        this.setStep2Error("city", "Please enter a valid city name.");
+        this.setStepError(2, "city", "Please enter a valid city name.");
       }
-      console.log(this.profiling);
-      console.error("Invalid form values - step2");
     } else {
-      console.log(this.profiling);
       this.stepper.currentStep = this.stepper.currentStep + 1;
     }
-  }
-
-  resetStep2Errors() {
-    this.isStep2Invalid = {};
-    this.hasStep2Error = {};
-  }
-
-  setStep2Error(field: string, errorMessage: string) {
-    this.isStep2Invalid[field] = true;
-    this.hasStep2Error[field] = errorMessage;
   }
 
   processStep3() {
     if (!this.profiling.controls["userExpForm"].valid) {
-      console.log(this.profiling);
-      console.error("Invalid form values - step3");
+      
     } else {
-      console.log(this.profiling);
       this.stepper.currentStep = this.stepper.currentStep + 1;
     }
   }
 
-  resetStep3Errors() {
-    this.isStep3Invalid = {};
-    this.hasStep3Error = {};
-  }
-
-  setStep3Error(field: string, errorMessage: string) {
-    this.isStep3Invalid[field] = true;
-    this.hasStep3Error[field] = errorMessage;
-  }
-
   processStep4() {
     if (!this.profiling.controls["userEduForm"].valid) {
-      console.log(this.profiling);
-      console.error("Invalid form values - step4");
+      
     } else {
-      console.log(this.profiling);
       this.submit();
     }
-  }
-
-  resetStep4Errors() {
-    this.isStep4Invalid = {};
-    this.hasStep4Error = {};
-  }
-
-  setStep4Error(field: string, errorMessage: string) {
-    this.isStep4Invalid[field] = true;
-    this.hasStep4Error[field] = errorMessage;
   }
 
   reqToPrevStep() {
@@ -362,34 +330,55 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
 
   reqToNextStep(currentStep: number) {
-    if (currentStep === 1) {
-      if (this.profiling.controls["userLoginInfo"].touched) {
-        this.processStep1();
-      } else if (this.profiling.controls["userLoginInfo"].untouched) {
-        this.fillStep1Error = true;
+    const stepConfig = {
+      1: {
+        control: 'userLoginInfo',
+        process: () => this.processStep1(),
+        errorFlag: 'fillStep1Error',
+        errorMessage: 'Please fill in your login information.'
+      },
+      2: {
+        control: 'userInfo',
+        process: () => this.processStep2(),
+        errorFlag: 'fillStep2Error',
+        errorMessage: 'Please fill in your personal information.'
+      },
+      3: {
+        control: 'userExpForm',
+        process: () => this.processStep3(),
+        errorMessage: 'Please provide your employment history.'
+      },
+      4: {
+        control: 'userEduForm',
+        process: () => this.processStep4(),
+        errorMessage: 'Please provide your educational information.'
       }
-    }
-    if (currentStep === 2) {
-      if (this.profiling.controls["userInfo"].touched) {
-        this.processStep2();
-      } else if (this.profiling.controls["userInfo"].untouched) {
-        this.fillStep2Error = true;
+    };
+
+    const step = stepConfig[currentStep as keyof typeof stepConfig];
+    if (!step) return;
+
+    const formControl = this.profiling.controls[step.control];
+    
+    if (formControl.touched) {
+      step.process();
+    } else {
+      if ('errorFlag' in step) {
+        (this as any)[step.errorFlag] = true;
       }
+      console.log(step.errorMessage);
     }
-    if (currentStep === 3) {
-      if (this.profiling.controls["userExpForm"].touched) {
-        this.processStep3();
-      } else if (this.profiling.controls["userExpForm"].untouched) {
-        console.log("Please provide your employment history.");
-      }
-    }
-    if (currentStep === 4) {
-      if (this.profiling.controls["userEduForm"].touched) {
-        this.processStep4();
-      } else if (this.profiling.controls["userEduForm"].untouched) {
-        console.log("Please provide your educational information.");
-      }
-    }
+  }
+  
+  // Helper method to reset form errors for any step
+  resetStepErrors(stepNumber: number) {
+    const errorState = {
+      isInvalid: `isStep${stepNumber}Invalid`,
+      hasError: `hasStep${stepNumber}Error`
+    };
+
+    (this as any)[errorState.isInvalid] = {};
+    (this as any)[errorState.hasError] = {};
   }
 
   submit() {
@@ -415,7 +404,16 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    // Reset all form state
+    this.profiling.reset();
+    
+    // Reset all step errors
+    this.resetStepErrors(1);
+    this.resetStepErrors(2);
+    this.resetStepErrors(3);
+    this.resetStepErrors(4);
+  }
 
   /**
    * The below code for future purpose and it is half-baked
