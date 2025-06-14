@@ -1,9 +1,23 @@
-<input type="text" [(ngModel)]="result" (focus)="comboElOnFocus($event)" (keyup)="comboElOnKeyup($event)" />
+<input 
+  type="text" 
+  [(ngModel)]="result" 
+  (focus)="comboElOnFocus($event)" 
+  (keyup)="comboElOnKeyup($event)"
+  role="combobox"
+  [attr.aria-expanded]="showComboboxOptions"
+  aria-controls="combobox-list"
+/>
 
 @if (showComboboxOptions) {
-  <ul class="fw-combobox-list">
-    @for (item of filteredList; track item) {
-      <li class="fw-combobox-item" (click)="onSelect(item)">
+  <ul class="fw-combobox-list" id="combobox-list" role="listbox">
+    @for (item of filteredList; track item; let i = $index) {
+      <li 
+        class="fw-combobox-item" 
+        [class.selected]="i === selectedIndex" 
+        (click)="onSelect(item)"
+        role="option"
+        [attr.aria-selected]="i === selectedIndex"
+      >
         {{ renderText(item) }}
       </li>
     }

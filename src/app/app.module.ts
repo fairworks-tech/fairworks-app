@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -13,13 +14,22 @@ import { ShareSalaryComponent } from "./pages/share-salary/share-salary.componen
 import { HeaderComponent } from "./shared/components/header/header.component";
 import { ComboboxComponent } from "./shared/components/combobox/combobox.component";
 
-export const FW_PAGES: any[] = [CreateProfileComponent, ShareSalaryComponent];
-
-export const FW_SHARED_COMPONENTS: any[] = [HeaderComponent, ComboboxComponent];
+const PAGES = [CreateProfileComponent, ShareSalaryComponent] as const;
+const SHARED_COMPONENTS = [HeaderComponent, ComboboxComponent] as const;
 
 @NgModule({
-  declarations: [AppComponent, FW_PAGES, FW_SHARED_COMPONENTS],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    ...PAGES,
+    ...SHARED_COMPONENTS
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

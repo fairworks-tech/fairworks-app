@@ -30,10 +30,15 @@
   }
   .fw-combobox-item {
     padding: 0 12px;
+    line-height: 32px;
     &:hover,
     &:focus {
       cursor: pointer;
       background-color: #d9dee2;
+    }
+    &.selected {
+      background-color: #e6e6e6;
+      font-weight: 500;
     }
   }
 }

@@ -17,6 +17,7 @@ export class ComboboxComponent implements ControlValueAccessor {
   showComboboxOptions = false;
   filteredList: any = [];
   result: any;
+  selectedIndex: number = -1;
 
   @Input() dataOptions: any;
   @Input() dataKey: string;
@@ -28,29 +29,50 @@ export class ComboboxComponent implements ControlValueAccessor {
   comboElOnFocus(event: any) {
     this.showComboboxOptions = true;
     this.filteredList = this.dataOptions;
+    this.selectedIndex = -1;
   }
 
   comboElOnKeyup(event: any) {
     this.showComboboxOptions = true;
 
-    // ToDo: Keyboard events to access combo dropdown options
-    if (event.key === "Enter") {
-    } else if (event.key === "ArrowUp") {
-    } else if (event.key === "ArrowDown") {
-    }
-
-    if (event?.target?.value != "") {
-      this.filteredList = this.dataOptions.filter((obj: any) => {
-        return obj[this.dataKey].toLowerCase().includes(event.target.value.toLowerCase());
-      });
-    } else {
-      this.filteredList = this.dataOptions;
+    switch (event.key) {
+      case 'Enter':
+        if (this.selectedIndex >= 0 && this.selectedIndex < this.filteredList.length) {
+          this.onSelect(this.filteredList[this.selectedIndex]);
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (this.selectedIndex > 0) {
+          this.selectedIndex--;
+        } else {
+          this.selectedIndex = this.filteredList.length - 1;
+        }
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        if (this.selectedIndex < this.filteredList.length - 1) {
+          this.selectedIndex++;
+        } else {
+          this.selectedIndex = 0;
+        }
+        break;
+      default:
+        if (event?.target?.value != "") {
+          this.filteredList = this.dataOptions.filter((obj: any) => {
+            return obj[this.dataKey].toLowerCase().includes(event.target.value.toLowerCase());
+          });
+        } else {
+          this.filteredList = this.dataOptions;
+        }
+        this.selectedIndex = -1;
     }
   }
 
   onSelect(item: any) {
     this.writeValue(item[this.dataKey]);
     this.showComboboxOptions = false;
+    this.selectedIndex = -1;
   }
 
   // this method sets the value programmatically

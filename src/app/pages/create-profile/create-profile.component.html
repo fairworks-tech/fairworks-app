@@ -211,6 +211,13 @@
                   </div>
 
                   <div class="fw-form-el-wrap">
+                    <div class="fw-form-checkbox">
+                      <input type="checkbox" id="isCurrentJob" formControlName="isCurrentJob" />
+                      <label for="isCurrentJob" tabindex="0" (keydown.enter)="toggleCurrentJob($any($event))">This is my current job</label>
+                    </div>
+                  </div>
+
+                  <div class="fw-form-el-wrap" *ngIf="!userExpItem.get('isCurrentJob')?.value">
                     <label for="jobEndDate">End Date</label>
                     <div class="fw-form-el">
                       <div class="fw-grouped-inputs">
@@ -364,12 +371,12 @@
             }
           </div>
           <div class="right">
-            @if (stepper.currentStep === stepper.maxStep) {
-              <button class="fw-form-prime-btn" (click)="reqToNextStep(stepper.currentStep)">Finish</button>
-            } @else {
-              <!-- Except step 4 -->
-              <button class="fw-form-blue-btn" (click)="reqToNextStep(stepper.currentStep)">Next</button>
-            }
+            <button 
+              [class.fw-form-prime-btn]="stepper.currentStep === stepper.maxStep"
+              [class.fw-form-blue-btn]="stepper.currentStep !== stepper.maxStep"
+              (click)="reqToNextStep(stepper.currentStep)">
+              {{ stepper.currentStep === stepper.maxStep ? 'Finish' : 'Next' }}
+            </button>
           </div>
         </div>
       </div>

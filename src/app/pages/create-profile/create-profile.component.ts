@@ -5,7 +5,7 @@ import { UtilService } from "src/app/shared/services/utils.service";
 
 import { FW_COUNTRIES } from "src/app/config/fw.countries";
 import { FW_PHONECODES } from "src/app/config/fw.phonecodes";
-import { filter } from "rxjs";
+import { CreateProfileService } from "src/app/dataaccess/create-profile.service";
 
 @Component({
   selector: "app-create-profile",
@@ -81,7 +81,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   helperText = {
     password:
       "Min 8 and max 20 characters. At least one lowercase, uppercase, number and any of the following special character !@#$%^&*",
-    endDate: "If this is your current job, provide the expected end date.",
+    endDate: "If this is not your current job, provide the end date.",
     completionDate: "If you are currently pursuing, provide the expected completion date.",
   };
 
@@ -92,6 +92,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     private fb: FormBuilder,
     public _util: UtilService,
+    private createProfileService: CreateProfileService,
   ) {
     this.countryList = FW_COUNTRIES;
     this.phoneCodeData = FW_PHONECODES;
@@ -144,6 +145,25 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
     this.eduList = this.profiling.get("userEduForm") as FormArray;
     this.userInfoForm = this.profiling.get("userInfo") as FormGroup;
 
+    // Subscribe to isCurrentJob changes for each experience form
+    this.expList.controls.forEach((control, index) => {
+      control.get('isCurrentJob')?.valueChanges.subscribe(isCurrent => {
+        const endMonthControl = control.get('jobEndMonth');
+        const endYearControl = control.get('jobEndYear');
+        
+        if (isCurrent) {
+          endMonthControl?.clearValidators();
+          endYearControl?.clearValidators();
+        } else {
+          endMonthControl?.setValidators([Validators.required]);
+          endYearControl?.setValidators([Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]);
+        }
+        
+        endMonthControl?.updateValueAndValidity();
+        endYearControl?.updateValueAndValidity();
+      });
+    });
+
     this.userInfoForm.controls["country"].valueChanges.subscribe((change: any) => {
       this.phoneCodeData.filter((o: any) => {
         if (o["countryName"] === change) {
@@ -162,6 +182,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
       locationType: ["", [Validators.required]],
       jobStartMonth: ["", [Validators.required]],
       jobStartYear: ["", [Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]],
+      isCurrentJob: [false],
       jobEndMonth: ["", [Validators.required]],
       jobEndYear: ["", [Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]],
       jobDesc: ["", [Validators.maxLength(500)]],
@@ -189,7 +210,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
       eduStartYear: ["", [Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]], // Year between 1900 and the current year
       eduEndMonth: ["", [Validators.required]],
       eduEndYear: ["", [Validators.required, Validators.min(1947), Validators.max(new Date().getFullYear())]], // Year between 1900 and the current year
-      grade: ["", [Validators.required, Validators.pattern("^[0-9]+(\\.[0-9]{1,2})?$")]], // Grade in GPA or percentage format
+      grade: ["", [Validators.pattern("^[0-9]+(\\.[0-9]{1,2})?$")]], // Grade in GPA or percentage format
     });
   }
 
@@ -371,7 +392,26 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log(this.profiling.value);
+    console.log('Form values - ', this.profiling.value);
+    this.createProfileService.createProfile(this.profiling.value).subscribe({
+      next: (response: any) => {
+        console.log('Profile created - ', response);
+        this.creatingProfile = false;
+      },
+      error: (error: any) => {
+        console.error('Error creating profile:', error);
+        this.creatingProfile = false;
+      }
+    });
+  }
+
+  toggleCurrentJob(event: any) {
+    event.preventDefault();
+    const checkbox = document.getElementById('isCurrentJob') as HTMLInputElement;
+    if (checkbox) {
+      checkbox.checked = !checkbox.checked;
+      checkbox.dispatchEvent(new Event('change'));
+    }
   }
 
   ngOnDestroy(): void {}
