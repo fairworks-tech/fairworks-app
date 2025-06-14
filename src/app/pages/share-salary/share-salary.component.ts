@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angula
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
-import { FW_COMPANIES } from "src/app/config/fw.companies";
+import { FW_COMPANIES } from "src/app/constants/fw.companies";
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
 import { ComboboxComponent } from "src/app/shared/components/combobox/combobox.component";
 

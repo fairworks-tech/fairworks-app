@@ -7,9 +7,11 @@ import { UtilService } from "src/app/shared/services/utils.service";
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
 import { ComboboxComponent } from "src/app/shared/components/combobox/combobox.component";
 
-import { FW_COUNTRIES } from "src/app/config/fw.countries";
-import { FW_PHONECODES } from "src/app/config/fw.phonecodes";
-import { CreateProfileService } from "src/app/dataaccess/create-profile.service";
+import { FW_COUNTRIES } from "src/app/constants/fw.countries";
+import { FW_PHONECODES } from "src/app/constants/fw.phonecodes";
+import { FW_MONTHS } from "src/app/constants/fw.months";
+import { CreateProfileService } from "src/app/data-access/create-profile.service";
+import { StepStatus } from "src/app/data-access/step-status.enum";
 
 @Component({
   selector: "app-create-profile",
@@ -34,47 +36,34 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   public selectedCountry: any;
   public startYear = new Date().getFullYear();
   public yearRange: any = [];
-  public monthRange: any = [
-    { id: "01", name: "January" },
-    { id: "02", name: "February" },
-    { id: "03", name: "March" },
-    { id: "04", name: "April" },
-    { id: "05", name: "May" },
-    { id: "06", name: "June" },
-    { id: "07", name: "July" },
-    { id: "08", name: "August" },
-    { id: "09", name: "September" },
-    { id: "10", name: "October" },
-    { id: "11", name: "November" },
-    { id: "12", name: "December" },
-  ];
+  public monthRange: any = FW_MONTHS;
 
   stepper = {
     currentStep: 1,
     maxStep: 4,
-    status: "clean", //clean, progress, complete
+    status: StepStatus.CLEAN,
   };
 
   stepConfig = {
     userLoginInfo: {
       index: 1,
       nextBtnClicked: false,
-      state: "clean", //clean, complete
+      state: StepStatus.CLEAN,
     },
     userInfo: {
       index: 2,
       nextBtnClicked: false,
-      state: "clean", //clean, complete
+      state: StepStatus.CLEAN,
     },
     userExpForm: {
       index: 3,
       nextBtnClicked: false,
-      state: "clean", //clean, complete
+      state: StepStatus.CLEAN,
     },
     userEduForm: {
       index: 4,
       nextBtnClicked: false,
-      state: "clean", //clean, complete
+      state: StepStatus.CLEAN,
     },
   };
   userInfoForm: any;
