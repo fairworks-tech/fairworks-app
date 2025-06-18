@@ -127,6 +127,7 @@ export class CreateProfileService {
     return new Observable(observer => {
       this.transformFormDataToPayload(profile)
         .then(payload => {
+          console.log('payload structure - ', payload);
           this.http.post<any>(this.apiUrl, payload)
             .subscribe({
               next: (response) => observer.next(response),

@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { UtilService } from "src/app/shared/services/utils.service";
+import { UtilsService } from "src/app/shared/services/utils.service";
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
 import { ComboboxComponent } from "src/app/shared/components/combobox/combobox.component";
 
@@ -94,7 +94,7 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   constructor(
     private elRef: ElementRef,
     private fb: FormBuilder,
-    public _util: UtilService,
+    public _util: UtilsService,
     private createProfileService: CreateProfileService,
   ) {
     this.countryList = FW_COUNTRIES;
@@ -382,7 +382,6 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log('Form values - ', this.profiling.value);
     this.createProfileService.createProfile(this.profiling.value).subscribe({
       next: (response: any) => {
         console.log('Profile created - ', response);

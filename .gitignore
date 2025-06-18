@@ -4,3 +4,7 @@
 .angular
 
 node_modules
+
+coverage
+
+dist

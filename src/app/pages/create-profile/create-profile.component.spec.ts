@@ -8,16 +8,22 @@ import { of, throwError } from 'rxjs';
 describe('CreateProfileComponent', () => {
   let component: CreateProfileComponent;
   let fixture: ComponentFixture<CreateProfileComponent>;
-  let utilService: jasmine.SpyObj<UtilService>;
-  let createProfileService: jasmine.SpyObj<CreateProfileService>;
+  let utilService: jest.Mocked<UtilService>;
+  let createProfileService: jest.Mocked<CreateProfileService>;
 
   beforeEach(async () => {
-    const utilServiceSpy = jasmine.createSpyObj('UtilService', ['isValidEmail']);
-    const createProfileServiceSpy = jasmine.createSpyObj('CreateProfileService', ['createProfile']);
+    const utilServiceSpy = {
+      isValidEmail: jest.fn()
+    };
+    const createProfileServiceSpy = {
+      createProfile: jest.fn()
+    };
 
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [CreateProfileComponent],
+      imports: [
+        ReactiveFormsModule,
+        CreateProfileComponent
+      ],
       providers: [
         FormBuilder,
         { provide: UtilService, useValue: utilServiceSpy },
@@ -25,8 +31,8 @@ describe('CreateProfileComponent', () => {
       ]
     }).compileComponents();
 
-    utilService = TestBed.inject(UtilService) as jasmine.SpyObj<UtilService>;
-    createProfileService = TestBed.inject(CreateProfileService) as jasmine.SpyObj<CreateProfileService>;
+    utilService = TestBed.inject(UtilService) as jest.Mocked<UtilService>;
+    createProfileService = TestBed.inject(CreateProfileService) as jest.Mocked<CreateProfileService>;
   });
 
   beforeEach(() => {
@@ -66,7 +72,7 @@ describe('CreateProfileComponent', () => {
         rePassword: 'Test@123'
       };
       component.profiling.get('userLoginInfo')?.patchValue(validLoginInfo);
-      utilService.isValidEmail.and.returnValue(['test@example.com'] as RegExpMatchArray);
+      utilService.isValidEmail.mockReturnValue(true);
       
       component.processStep1();
       expect(component.stepper.currentStep).toBe(2);
@@ -79,7 +85,7 @@ describe('CreateProfileComponent', () => {
         rePassword: 'weak'
       };
       component.profiling.get('userLoginInfo')?.patchValue(invalidLoginInfo);
-      utilService.isValidEmail.and.returnValue(null as unknown as RegExpMatchArray);
+      utilService.isValidEmail.mockReturnValue(false);
       
       component.processStep1();
       expect(component.stepper.currentStep).toBe(1);
@@ -90,7 +96,7 @@ describe('CreateProfileComponent', () => {
     it('should validate email format', () => {
       const emailControl = component.profiling.get('userLoginInfo.email');
       emailControl?.setValue('invalid-email');
-      utilService.isValidEmail.and.returnValue(null as unknown as RegExpMatchArray);
+      utilService.isValidEmail.mockReturnValue(false);
       
       component.isValidEmail();
       expect(component.isStep1Invalid['email']).toBeTruthy();
@@ -120,7 +126,7 @@ describe('CreateProfileComponent', () => {
   describe('Form Submission', () => {
     it('should submit form when all steps are valid', () => {
       const mockResponse = { success: true };
-      createProfileService.createProfile.and.returnValue(of(mockResponse));
+      createProfileService.createProfile.mockReturnValue(of(mockResponse));
 
       // Set valid form values
       const validFormData = {
@@ -170,7 +176,7 @@ describe('CreateProfileComponent', () => {
     });
 
     it('should handle submission error', () => {
-      createProfileService.createProfile.and.returnValue(throwError(() => new Error('Submission failed')));
+      createProfileService.createProfile.mockReturnValue(throwError(() => new Error('Submission failed')));
       
       component.submit();
       
@@ -186,8 +192,8 @@ describe('CreateProfileComponent', () => {
     });
 
     it('should reset step errors', () => {
-      component.setStep1Error('email', 'Invalid email');
-      component.resetStep1Errors();
+      component.setStepError(1, 'email', 'Invalid email');
+      component.resetStepErrors(1);
       expect(component.isStep1Invalid['email']).toBeFalsy();
       expect(component.hasStep1Error['email']).toBeNull();
     });
