@@ -632,7 +632,7 @@ $status-modal: #cdfdc3;
 
 * {
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Mulish", sans-serif;
   font-weight: 400;
   color: $text-standard;
   //color: #48495F;
@@ -680,7 +680,7 @@ p {
   margin-bottom: 1rem;
 }
 .text-sm {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 18px;
   color: $text-light;
 }
@@ -780,6 +780,7 @@ p {
   @extend %fw-form-el-common;
   line-height: 32px;
   height: 32px;
+  font-size: 0.875rem;
   color: #48495f;
   &:focus {
     border: 1px solid #121212;
@@ -789,7 +790,7 @@ p {
   @extend %fw-form-el-common;
   min-height: 100px;
   padding: 12px;
-  font-size: 13px;
+  font-size: 0.875rem;
   &:focus {
     border: 1px solid #121212;
   }
@@ -854,23 +855,23 @@ p {
 .fw-form-prime-btn {
   @extend %form-btn-common;
   border: none;
-  background-color: $prime-green;
+  background: linear-gradient(135deg, $prime-green-high, $prime-green);
   color: #ffffff;
   padding: 6px 24px;
   &:hover,
   &:focus {
-    background-color: $prime-green-high;
+    background: $prime-green-high;
   }
 }
 .fw-form-blue-btn {
   @extend %form-btn-common;
   border: none;
-  background-color: $prime-blue;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: #ffffff;
   padding: 6px 24px;
   &:hover,
   &:focus {
-    background-color: $prime-blue-high;
+    background: #3b82f6
   }
 }
 .fw-form-btn {
