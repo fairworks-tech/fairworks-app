@@ -1,16 +1,14 @@
-import { Component, ElementRef, OnDestroy, OnInit, DestroyRef, inject } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Component, OnDestroy, OnInit, DestroyRef, inject } from "@angular/core";
+import { FormsModule, FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { UtilsService } from "src/app/shared/services/utils.service";
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
 import { ComboboxComponent } from "src/app/shared/components/combobox/combobox.component";
 
-import { FW_COUNTRIES } from "src/app/constants/fw.countries";
-import { FW_PHONECODES } from "src/app/constants/fw.phonecodes";
 import { FW_MONTHS } from "src/app/constants/fw.months";
+import { Country, PublicDataService } from "src/app/data-access/public-data.service";
 import { CreateProfileService } from "src/app/data-access/create-profile.service";
 import { StepStatus } from "src/app/data-access/step-status.enum";
 
@@ -28,7 +26,7 @@ import { StepStatus } from "src/app/data-access/step-status.enum";
   standalone: true
 })
 export class CreateProfileComponent implements OnInit, OnDestroy {
-  private destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
   public profiling!: FormGroup;
   public expList!: FormArray;
   public eduList!: FormArray;
@@ -92,14 +90,11 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
   public creatingProfile = false;
 
   constructor(
-    private elRef: ElementRef,
-    private fb: FormBuilder,
+    private readonly fb: FormBuilder,
     public _util: UtilsService,
-    private createProfileService: CreateProfileService,
+    private readonly publicDataService: PublicDataService,
+    private readonly createProfileService: CreateProfileService,
   ) {
-    this.countryList = FW_COUNTRIES;
-    this.phoneCodeData = FW_PHONECODES;
-    this.phoneCodeList = [...new Set(FW_PHONECODES.map((item: any) => item["dial"]))];
     this.setYearRange();
   }
 
@@ -169,16 +164,44 @@ export class CreateProfileComponent implements OnInit, OnDestroy {
         });
     });
 
+    this.getPublicData();
+
     // Update country subscription
     this.userInfoForm.controls["country"].valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((change: any) => {
-        this.phoneCodeData.filter((o: any) => {
+        this.countryList.filter((o: any) => {
           if (o["countryName"] === change) {
             this.userInfoForm.controls["phoneCode"].setValue(o.dial);
           }
         });
       });
+  }
+
+  getPublicData() {
+    this.publicDataService.getCountries().subscribe({
+      next: (data: Country[]) => {
+        this.countryList = data.map(country => {
+          let dial = '';
+          if (country.idd) {
+            dial = country.idd.root;
+            if (country.idd.suffixes?.length === 1) {
+              dial += country.idd.suffixes[0];
+            }
+          }
+          return {
+            countryCode: country.cca2,
+            countryName: country.name.common,
+            countryflag: country.flags.png,
+            dial: dial,
+          };
+        });
+        this.countryList.sort((a: any, b: any) => a.countryName.localeCompare(b.countryName));
+      },
+      error: (error: any) => {
+        console.error("Error fetching countries:", error);
+      }
+    });
   }
 
   initExpForm(): FormGroup {

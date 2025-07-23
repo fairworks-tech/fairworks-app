@@ -110,8 +110,10 @@
                 <div class="fw-grouped-inputs">
                   <div class="fw-input-phonecode">
                     <select class="fw-form-select" name="phoneCode" id="phoneCode" formControlName="phoneCode">
-                      @for (code of phoneCodeList; track code) {
-                        <option [value]="code">{{ code }}</option>
+                      @for (country of countryList; track country) {
+                        <option [value]="country.dial">
+                          {{ country.dial }}
+                        </option>
                       }
                     </select>
                   </div>
