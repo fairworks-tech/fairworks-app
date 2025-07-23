@@ -6,6 +6,79 @@
     position: relative;
     display: flex;
     width: 30%;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+
+    .stepper-progress {
+      position: relative;
+      height: 2px;
+      background: #e0e0e0;
+      margin: 0 auto 2rem;
+      
+      .progress-bar {
+        position: absolute;
+        height: 100%;
+        background: #2196f3;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .stepper-steps {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+
+      .step {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex: 1;
+        position: relative;
+        gap: 1rem;
+
+        .step-number {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: #e0e0e0;
+          color: #757575;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        }
+
+        .step-label {
+          color: #757575;
+          font-size: 0.875rem;
+          transition: color 0.3s ease;
+        }
+
+        &.active {
+          .step-number {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border: none;
+            color: #fff
+          }
+          .step-label {
+            color: #2196f3;
+          }
+        }
+
+        &.completed {
+          .step-number {
+            background: #2196f3;
+            border-color: #2196f3;
+            color: #fff;
+          }
+          .step-label {
+            color: #2196f3;
+          }
+        }
+      }
+    }
   }
   .stepper-content {
     position: relative;

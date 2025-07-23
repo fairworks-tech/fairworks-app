@@ -2,7 +2,29 @@
 <div class="fw-page-container">
   <div class="fw-content-area">
     <div class="stepper-container">
-      <div class="stepper-nav"></div>
+      <div class="stepper-nav">
+        <div class="stepper-progress">
+          <div class="progress-bar" [style.width]="((stepper.currentStep - 1) / (stepper.maxStep - 1)) * 100 + '%'"></div>
+        </div>
+        <div class="stepper-steps">
+          <div class="step" [class.active]="stepper.currentStep >= 1" [class.completed]="stepper.currentStep > 1">
+            <div class="step-number">1</div>
+            <div class="step-label">Account</div>
+          </div>
+          <div class="step" [class.active]="stepper.currentStep >= 2" [class.completed]="stepper.currentStep > 2">
+            <div class="step-number">2</div>
+            <div class="step-label">Personal</div>
+          </div>
+          <div class="step" [class.active]="stepper.currentStep >= 3" [class.completed]="stepper.currentStep > 3">
+            <div class="step-number">3</div>
+            <div class="step-label">Experience</div>
+          </div>
+          <div class="step" [class.active]="stepper.currentStep >= 4" [class.completed]="stepper.currentStep > 4">
+            <div class="step-number">4</div>
+            <div class="step-label">Education</div>
+          </div>
+        </div>
+      </div>
       <div class="stepper-content">
         <form [formGroup]="profiling">
           <!-- step 1 -->
